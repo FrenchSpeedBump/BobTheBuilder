@@ -13,15 +13,10 @@
         private void CreateRooms()
         {
   
-            Room? outside = new("Outside", "You are standing outside the main entrance of the university. To the east is a large building, to the south is a computing lab, and to the west is the campus pub.");
-            Room? theatre = new("Theatre", "You find yourself inside a large lecture theatre. Rows of seats ascend up to the back, and there's a podium at the front. It's quite dark and quiet.");
-            Room? pub = new("Pub", "You've entered the campus pub. It's a cozy place, with a few students chatting over drinks. There's a bar near you and some pool tables at the far end.");
-            Room? lab = new("Lab", "You're in a computing lab. Desks with computers line the walls, and there's an office to the east. The hum of machines fills the room.");
-            //Room? office = new("Office", "You've entered what seems to be an administration office. There's a large desk with a computer on it, and some bookshelves lining one wall.");
             Room? house = new("House", "This is where we are going to build a house :)");
             Room? street_1 = new("Street_1", "A street leading to our house going into the city. Nothing but nature around us.");
             Room? street_main = new("Street_Main", "The main street ouf our town. The street has an office building on one side and a bank on the other");
-            Room? street_north = new("Street_North", "The north street has two shops: Bob's Materials and the Magic Tool Shop.");
+            Room? street_north = new("Street_North", "The north street has two shops: Bob's Materials and the Magic Tool Shop. Funily enoguh, the street doesn't face north.");
             Room? office = new("Office Building", "When you step into this old office building you are met with three construction company signs: Best Build, Big Build and Small Build");
             Room? bank = new("Bank", "A nice empty building where at the other side of the room a young teller is smiling at you");
             Room? materials = new("Bob's Materials", "Rows and rows of construction materials");
@@ -29,17 +24,37 @@
             Room? cons_1 = new("Best Build", "Constructions");
             Room? cons_2 = new("Big Build", "Constructions");
             Room? cons_3 = new("Small Build", "Constructions");
-            outside.SetExits(null, theatre, lab, pub); // North, East, South, West
+            Room? forest = new("Forest", "Just a bunch of trees and bushes. Nothing to do here.");
 
-            theatre.SetExit("west", outside);
+            //north east south west
+            //rooms should be connected in a way that if you go west you go back by going east
 
-            pub.SetExit("east", outside);
+            //road network
+            house.SetExit("west", street_1);
+            street_1.SetExits(forest, house, null, street_main);
+            street_main.SetExits(office, street_1, bank, street_north);
+            street_north.SetExits(tools, street_main, materials, null);
 
-            lab.SetExits(outside, office, null, null);
+            //street 1(next to the house)
+            forest.SetExit("south", street_1);
 
-            office.SetExit("west", lab);
+            //street_main
+            //office.SetExit("south", street_main);
+            // in the office the gointo(atr) command will let us enter a construction office untill then they will be used as normal rooms
+            office.SetExits(cons_2,cons_3,street_main,cons_1);
+            bank.SetExit("north", street_main);
 
-            currentRoom = outside;
+            //street_north
+            materials.SetExit("north", street_north);
+            tools.SetExit("south", street_north);
+
+            //office so it works before gointo is implemented
+            cons_1.SetExit("east", office);
+            cons_2.SetExit("south", office);
+            cons_3.SetExit("west", office);
+
+            currentRoom = house;
+
         }
 
         public void Play()
