@@ -28,7 +28,7 @@
 
             //north east south west
             //rooms should be connected in a way that if you go west you go back by going east
-
+            
             //road network
             house.SetExit("west", street_1);
             street_1.SetExits(forest, house, null, street_main);
@@ -119,7 +119,7 @@
                 }
             }
 
-            Console.WriteLine("Thank you for playing World of Zuul!");
+            Console.WriteLine("Thank you for playing Bob the Builder!");
         }
 
         private void Move(string direction)
@@ -138,16 +138,16 @@
 
         private static void PrintWelcome()
         {
-            Console.WriteLine("Welcome to the World of Zuul!");
-            Console.WriteLine("World of Zuul is a new, incredibly boring adventure game.");
+            Console.WriteLine("Welcome to the Bob the Builder!");
+            Console.WriteLine("Bob the Builder is a new, incredibly boring base building game.");
             PrintHelp();
             Console.WriteLine();
         }
 
         private static void PrintHelp()
         {
-            Console.WriteLine("You are lost. You are alone. You wander");
-            Console.WriteLine("around the university.");
+            Console.WriteLine("You just bought a plot of land. Now you have to build your dream house.");
+            Console.WriteLine("around the house.");
             Console.WriteLine();
             Console.WriteLine("Navigate by typing 'north', 'south', 'east', or 'west'.");
             Console.WriteLine("Type 'look' for more details.");
