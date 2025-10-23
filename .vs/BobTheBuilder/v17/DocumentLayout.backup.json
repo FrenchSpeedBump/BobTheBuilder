@@ -3,24 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\mariu\\source\\repos\\BobTheBuilder\\Bob\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\mariu\\source\\repos\\bobthebuilder\\bob\\bobthebuilder\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\mariu\\source\\repos\\bobthebuilder\\bob\\bobthebuilder\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\mariu\\source\\repos\\bobthebuilder\\bob\\bobthebuilder\\parser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\parser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\mariu\\source\\repos\\bobthebuilder\\bob\\bobthebuilder\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\mariu\\source\\repos\\bobthebuilder\\bob\\bobthebuilder\\commandwords.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\commandwords.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\mariu\\source\\repos\\bobthebuilder\\bob\\bobthebuilder\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\mariu\\source\\repos\\bobthebuilder\\bob\\bobthebuilder\\command.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\command.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\mariu\\source\\repos\\bobthebuilder\\bob\\bobthebuilder\\commandwords.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\commandwords.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\mariu\\source\\repos\\bobthebuilder\\bob\\bobthebuilder\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,26 +46,25 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "CommandWords.cs",
               "DocumentMoniker": "C:\\Users\\mariu\\source\\repos\\BobTheBuilder\\Bob\\BobTheBuilder\\CommandWords.cs",
               "RelativeDocumentMoniker": "BobTheBuilder\\CommandWords.cs",
               "ToolTip": "C:\\Users\\mariu\\source\\repos\\BobTheBuilder\\Bob\\BobTheBuilder\\CommandWords.cs",
               "RelativeToolTip": "BobTheBuilder\\CommandWords.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T12:26:47.329Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-21T12:26:47.329Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Game.cs",
               "DocumentMoniker": "C:\\Users\\mariu\\source\\repos\\BobTheBuilder\\Bob\\BobTheBuilder\\Game.cs",
               "RelativeDocumentMoniker": "BobTheBuilder\\Game.cs",
               "ToolTip": "C:\\Users\\mariu\\source\\repos\\BobTheBuilder\\Bob\\BobTheBuilder\\Game.cs",
               "RelativeToolTip": "BobTheBuilder\\Game.cs",
-              "ViewState": "AgIAAKsAAAAAAAAAAAAowL4AAABqAAAAAAAAAA==",
+              "ViewState": "AgIAAK8AAAAAAAAAAAAowMUAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-20T09:48:22.595Z",
               "EditorCaption": ""
@@ -85,29 +84,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\mariu\\source\\repos\\BobTheBuilder\\Bob\\BobTheBuilder\\Program.cs",
               "RelativeDocumentMoniker": "BobTheBuilder\\Program.cs",
               "ToolTip": "C:\\Users\\mariu\\source\\repos\\BobTheBuilder\\Bob\\BobTheBuilder\\Program.cs",
               "RelativeToolTip": "BobTheBuilder\\Program.cs",
-              "ViewState": "AgIAAEgAAAAAAAAAAAAAAFgAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAAAFMAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-20T08:20:08.833Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Command.cs",
               "DocumentMoniker": "C:\\Users\\mariu\\source\\repos\\BobTheBuilder\\Bob\\BobTheBuilder\\Command.cs",
               "RelativeDocumentMoniker": "BobTheBuilder\\Command.cs",
               "ToolTip": "C:\\Users\\mariu\\source\\repos\\BobTheBuilder\\Bob\\BobTheBuilder\\Command.cs",
               "RelativeToolTip": "BobTheBuilder\\Command.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-20T08:20:21.887Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-20T08:20:21.887Z"
             },
             {
               "$type": "Document",

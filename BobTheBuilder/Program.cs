@@ -76,12 +76,15 @@ to maintain modularity, extensibility, and maintainability.
 */
 
 
+using System.Text;
+
 namespace BobTheBuilder
 {
     public class Program
     {
         public static void Main()
         {
+            Console.OutputEncoding = Encoding.UTF8;
             Game game = new();
             game.Play();
         }
