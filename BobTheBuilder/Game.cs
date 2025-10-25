@@ -6,6 +6,7 @@
         private Room? currentRoom;
         private Room? previousRoom;
         private List<Room> allRooms = new();
+        private List<Room> discoveredRooms = new();
 
         public Game()
         {
@@ -119,6 +120,7 @@
                     case "south":
                     case "east":
                     case "west":
+                        discoveredRooms.Add(currentRoom);
                         Move(command.Name);
                         break;
 
@@ -141,7 +143,6 @@
                             Console.WriteLine("Go where?");
                             break;
                         }
-                        // Find room by short description and show directions
                         var target = FindRoomByName(command.SecondWord);
                         if (target != null && currentRoom != null)
                         {
@@ -151,6 +152,21 @@
                             Console.WriteLine("Unknown room");
                         break;
 
+                    case "travel":
+                        if (command.SecondWord == null)
+                        {
+                            Console.WriteLine("Travel where?");
+                            break;
+                        }
+                        var targetTravel = FindRoomByName(command.SecondWord);
+                        if (targetTravel != null)
+                        {
+                            Travel(targetTravel);
+                        }
+                        else
+                            Console.WriteLine("Unknown room");
+                        break;
+                            
                     default:
                         Console.WriteLine("I don't know what command.");
                         break;
@@ -170,6 +186,19 @@
             else
             {
                 Console.WriteLine($"You can't go {direction}!");
+            }
+        }
+        
+        private void Travel(Room targetRoom)
+        {
+            if (discoveredRooms.Contains(targetRoom))
+            {
+                previousRoom = currentRoom;
+                currentRoom = targetRoom;
+            }
+            else 
+            {
+                Console.WriteLine("Targeted location not yet discovered.");
             }
         }
 
@@ -244,13 +273,9 @@
             Console.WriteLine("Type 'quit' to exit the game.");
         }
 
-//FINDING FUNCTION FOR "GOTO" COMMAND
         private Room? FindRoomByName(string name)
         {
-            // Case-insensitive partial match
-            return allRooms.Find(room => 
-                room.ShortDescription.Replace(" ", "").Replace("_", "")
-                .Equals(name.Replace(" ", "").Replace("_", ""), StringComparison.OrdinalIgnoreCase));
+            return allRooms.Find(room => room.ShortDescription.Replace(" ", "").Replace("_", "").Equals(name.Replace(" ", "").Replace("_", ""), StringComparison.OrdinalIgnoreCase));
         }
     }
 }
