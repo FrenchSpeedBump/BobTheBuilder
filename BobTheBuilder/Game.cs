@@ -7,6 +7,7 @@
         private Room? previousRoom;
         private List<Room> allRooms = new();
         private List<Room> discoveredRooms = new();
+        private List<Room> insideOfficeRooms = new();
 
         public Game()
         {
@@ -33,11 +34,11 @@
             Room? tools = new("Magic Tool Shop", "A nice old man is very happy to tell you everything about a hammer");
             allRooms.Add(tools);
             Room? cons_1 = new("Best Build", "Constructions");
-            allRooms.Add(cons_1);
+            insideOfficeRooms.Add(cons_1);
             Room? cons_2 = new("Big Build", "Constructions");
-            allRooms.Add(cons_2);
+            insideOfficeRooms.Add(cons_2);
             Room? cons_3 = new("Small Build", "Constructions");
-            allRooms.Add(cons_3);
+            insideOfficeRooms.Add(cons_3);
             Room? forest = new("Forest", "Just a bunch of trees and bushes. Nothing to do here.");
             allRooms.Add(forest);
 
@@ -120,7 +121,10 @@
                     case "south":
                     case "east":
                     case "west":
-                        discoveredRooms.Add(currentRoom);
+                        if (currentRoom != null && !discoveredRooms.Contains(currentRoom))
+                        {
+                            discoveredRooms.Add(currentRoom);
+                        }
                         Move(command.Name);
                         break;
 
@@ -166,7 +170,32 @@
                         else
                             Console.WriteLine("Unknown room");
                         break;
-                            
+
+                    case "gointo":
+                        if (currentRoom != null && !currentRoom.ShortDescription.Equals("Office Building"))
+                        {
+                            Console.WriteLine("You can only go into the Office Building.");
+                            break;
+                        }
+                        if (command.SecondWord == null || command.ThirdWord == null)
+                        {
+                            Console.WriteLine("Go into what?");
+                            break;
+                        }
+                        else
+                        {
+                            var targetRoom = FindRoomByName(command.SecondWord, command.ThirdWord);
+                            if (targetRoom != null)
+                            {
+                                GoInto(targetRoom);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Unknown room");
+                            }
+                            break;
+                        }
+
                     default:
                         Console.WriteLine("I don't know what command.");
                         break;
@@ -188,7 +217,7 @@
                 Console.WriteLine($"You can't go {direction}!");
             }
         }
-        
+
         private void Travel(Room targetRoom)
         {
             if (discoveredRooms.Contains(targetRoom))
@@ -196,10 +225,16 @@
                 previousRoom = currentRoom;
                 currentRoom = targetRoom;
             }
-            else 
+            else
             {
                 Console.WriteLine("Targeted location not yet discovered.");
             }
+        }
+
+        private void GoInto(Room targetConstruction)
+        {
+            previousRoom = currentRoom;
+            currentRoom = targetConstruction;
         }
 
 
@@ -273,9 +308,13 @@
             Console.WriteLine("Type 'quit' to exit the game.");
         }
 
-        private Room? FindRoomByName(string name)
+        private Room? FindRoomByName(string name, string? name_2 = null)
         {
-            return allRooms.Find(room => room.ShortDescription.Replace(" ", "").Replace("_", "").Equals(name.Replace(" ", "").Replace("_", ""), StringComparison.OrdinalIgnoreCase));
+            if (name_2 == null)
+            {
+                return allRooms.Find(room => room.ShortDescription.Replace(" ", "").Replace("_", "").Equals(name.Replace(" ", "").Replace("_", ""), StringComparison.OrdinalIgnoreCase));
+            }
+            return insideOfficeRooms.Find(room => room.ShortDescription.Equals($"{name} {name_2}", StringComparison.OrdinalIgnoreCase));
         }
     }
 }
