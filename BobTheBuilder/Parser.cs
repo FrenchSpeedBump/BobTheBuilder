@@ -18,8 +18,11 @@ namespace BobTheBuilder
             {
                 return null;
             }
-
-            if (words.Length > 1)
+            if (words.Length == 3)
+            {
+                return new Command(words[0], words[1], words[2]);
+            }
+            if (words.Length == 2)
             {
                 return new Command(words[0], words[1]);
             }
