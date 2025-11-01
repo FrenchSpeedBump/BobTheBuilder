@@ -11,6 +11,7 @@
         public Game()
         {
             CreateRooms();
+            CreateItems();
         }
         
         private void CreateRooms()
@@ -31,7 +32,7 @@
 
             //north east south west
             //rooms should be connected in a way that if you go west you go back by going east
-            
+
             //road network
             house.SetExit("west", street_1);
             street_1.SetExits(forest, house, null, street_main);
@@ -46,7 +47,7 @@
             // in the office the gointo(atr) command will let us enter a construction office untill then they will be used as normal rooms
             /*office.SetExits(null, cons_3, street_main, cons_1);
             office.SetExit("north", cons_2);*/
-            
+
             bank.SetExits(street_main, null, null, materials);
 
             //street_north
@@ -63,9 +64,26 @@
 
         }
 
+        private void CreateItems()
+        {
+            Item? wood = new("Wood", "A pile of wooden planks.", 15);
+            Item? bricks = new("Bricks", "A stack of red bricks.", 20);
+            Item? hammer = new("Hammer", "A sturdy hammer for building.", 10);
+            Item? nails = new("Nails", "A box of small nails.", 5);
+
+            // Assign items to their respective shops
+            // Move this into Play() loop eventually
+            AssignItem("Bob's Materials", wood);
+            AssignItem("Bob's Materials", bricks);
+            AssignItem("Magic Tool Shop", hammer);
+            AssignItem("Magic Tool Shop", nails);
+        }
+
         public void Play()
         {
             Parser parser = new();
+
+            Player player = new();
 
             PrintWelcome();
 
@@ -98,6 +116,10 @@
                 {
                     case "look":
                         Console.WriteLine(currentRoom?.LongDescription);
+                        if (currentRoom is Shop lookShop)
+                        {
+                            lookShop.DisplayInventory();
+                        }
                         break;
 
                     case "back":
@@ -197,7 +219,6 @@
                         Console.WriteLine("Account balace: "+bank.getBalance());
                         Console.WriteLine("Total debt:" + bank.getTotalDebt());
                         break;
-
 
                     default:
                         Console.WriteLine("I don't know what command.");
@@ -360,6 +381,19 @@
                 }
             }
             return null; // Not found
+        }
+
+        private void AssignItem(string shopShortDescription, Item items) // Assign item to shop dynamically with this method, I think it will be handy later when we dig deeper into the turn based system
+        {
+            var room = allRooms.Find(r => r.ShortDescription.Equals(shopShortDescription, StringComparison.OrdinalIgnoreCase));
+            if (room is Shop shop)
+            {
+                shop.AddItem(items);
+            }
+            else
+            {
+                Console.WriteLine($"Shop '{shopShortDescription}' not found to add item '{items.Name}'.");
+            }
         }
     }
 }
