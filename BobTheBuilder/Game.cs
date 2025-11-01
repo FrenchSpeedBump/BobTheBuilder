@@ -12,12 +12,16 @@
         {
             CreateRooms();
             CreateItems();
+            CreateMaterials();
         }
         
         private void CreateRooms()
         {
   
             Room? house = new("House", "This is where we are going to build a house :)");
+
+            House? house = new("House", "This is where we are going to build a house :)");
+            allRooms.Add(house);
             Room? street_1 = new("Street_1", "A street leading to our house going into the city. Nothing but nature around us.");
             Room? street_main = new("Street_Main", "The main street ouf our town. The street has an office building on one side and a bank on the other"); 
             Room? street_north = new("Street_North", "The north street has two shops: Bob's Materials and the Magic Tool Shop. Funily enoguh, the street doesn't face north.");
@@ -201,23 +205,28 @@
 
                     case "loan":
                         if(currentRoom != bank)
+                    case "inventory": // Show player inventory
+                        player.DisplayInventory(); // Displays only items bcs you can't get materials to your inventory yet. If we want to implement buying materials we just delete the condition in "buy"
+                        break;
+
+                    case "buy":
+                        if (command.SecondWord == null)
                         {
                             Console.WriteLine("I can only do this in a bank.");
                         }
                         if (command.SecondWord == null)
                         {
-                            Console.WriteLine("How much would you like to loan?");
+                            ShopInventoryContents? contentsToBuy = buyShop.GetContents(command.SecondWord);
+                            if (contentsToBuy != null && contentsToBuy is Item) // checks whether the item is available for purchase for example if you try to purhcase material it will not work
+                            {
+                                player.BuyItem(contentsToBuy);
+                                buyShop.RemoveContents(contentsToBuy); // Remove the item from the shop inventory (also works only for items not materials)
+                            }
+                            else
+                            {
+                                Console.WriteLine("Item not found.");
+                            }
                         }
-                        bank.takeLoan(Convert.ToDouble(command.SecondWord));
-                        break;
-                    case "account":
-                        if (currentRoom != bank)
-                        {
-                            Console.WriteLine("I can only do this in a bank.");
-                        }
-                        Console.WriteLine("Account information:");
-                        Console.WriteLine("Account balace: "+bank.getBalance());
-                        Console.WriteLine("Total debt:" + bank.getTotalDebt());
                         break;
 
                     default:
@@ -388,11 +397,23 @@
             var room = allRooms.Find(r => r.ShortDescription.Equals(shopShortDescription, StringComparison.OrdinalIgnoreCase));
             if (room is Shop shop)
             {
-                shop.AddItem(items);
+                shop.AddContents(items);
             }
             else
             {
                 Console.WriteLine($"Shop '{shopShortDescription}' not found to add item '{items.Name}'.");
+            }
+        }
+        private void AssignMaterial(string shopShortDescription, Material material)
+        {
+            var room = allRooms.Find(r => r.ShortDescription.Equals(shopShortDescription, StringComparison.OrdinalIgnoreCase));
+            if (room is Shop shop)
+            {
+                shop.AddContents(material);
+            }
+            else
+            {
+                Console.WriteLine($"Shop '{shopShortDescription}' not found to add material '{material.Name}'.");
             }
         }
     }
