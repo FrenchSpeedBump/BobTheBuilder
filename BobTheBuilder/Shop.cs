@@ -3,31 +3,35 @@
     //Shop class with inventory variable, which will hold multiple item objects of type Item 
     public class Shop : Room
     {
-        public Dictionary<string, Item> Inventory { get; private set; } = new();
+        public Dictionary<string, ShopInventoryContents> Inventory { get; private set; } = new();
         public Shop(string shortDesc, string longDesc) : base(shortDesc, longDesc) // Made shop class inherit from Room, added inventory and relevant methods
         {
         }
-        public void AddItem(Item item)
+        public void AddContents(ShopInventoryContents contents) // Both these methods support both items and materials
         {
-            Inventory[item.Name] = item;
+            Inventory[contents.Name] = contents;
         }
-        public void RemoveItem(Item item)
+        public void RemoveContents(ShopInventoryContents contents) // Both these methods support both items and materials
         {
-            Inventory.Remove(item.Name);
+            Inventory.Remove(contents.Name);
         }
 
         public void DisplayInventory()
         {
             Console.WriteLine($"Inventory for {ShortDescription}:");
-            foreach (var item in Inventory.Values)
+            foreach (var item in Inventory.Values.OfType<Item>())
             {
                 Console.WriteLine($" - {item.Name}: {item.Description} Price: {item.Price}");
             }
+            foreach (var material in Inventory.Values.OfType<Material>())
+            {
+                Console.WriteLine($" - {material.Name}: {material.Description} Sustainability: {material.Sustainability}");
+            }
         }
-        public Item? GetItem(string itemName)
+        public ShopInventoryContents? GetContents(string contentsName) // Used in "buy" command, works for both item and material, but never used anywhere with material
         {
-            Inventory.TryGetValue(itemName, out var item);
-            return item;
+            Inventory.TryGetValue(contentsName, out var contents);
+            return contents;
         }
     }
 }

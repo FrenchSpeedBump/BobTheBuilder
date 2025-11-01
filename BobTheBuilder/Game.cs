@@ -13,12 +13,13 @@
         {
             CreateRooms();
             CreateItems();
+            CreateMaterials();
         }
 
         private void CreateRooms()
         {
 
-            Room? house = new("House", "This is where we are going to build a house :)");
+            House? house = new("House", "This is where we are going to build a house :)");
             allRooms.Add(house);
             Room? street_1 = new("Street_1", "A street leading to our house going into the city. Nothing but nature around us.");
             allRooms.Add(street_1);
@@ -79,17 +80,27 @@
 
         private void CreateItems()
         {
-            Item? wood = new("Wood", "A pile of wooden planks.", 15);
-            Item? bricks = new("Bricks", "A stack of red bricks.", 20);
-            Item? hammer = new("Hammer", "A sturdy hammer for building.", 10);
-            Item? nails = new("Nails", "A box of small nails.", 5);
+            Item? hammer = new("Hammer", "A sturdy hammer for building.", 0, 10);
+            Item? nails = new("Nails", "A box of small nails.", 0, 5);
 
             // Assign items to their respective shops
             // Move this into Play() loop eventually
-            AssignItem("Bob's Materials", wood);
-            AssignItem("Bob's Materials", bricks);
             AssignItem("Magic Tool Shop", hammer);
             AssignItem("Magic Tool Shop", nails);
+        }
+
+        private void CreateMaterials()
+        {
+            Material? wood = new("Wood", "A sturdy piece of wood.", 0.8, 0);
+            Material? bricks = new("Bricks", "A stack of red bricks.", 0.6, 0);
+            Material? concrete = new("Concrete", "A heavy block of concrete.", 0.4, 0);
+            Material? glass = new("Glass", "A transparent sheet of glass.", 0.5, 0);
+
+            // Also move this to Play() loop eventually
+            AssignMaterial("Bob's Materials", wood);
+            AssignMaterial("Bob's Materials", bricks);
+            AssignMaterial("Bob's Materials", concrete);
+            AssignMaterial("Bob's Materials", glass);
         }
 
         public void Play()
@@ -219,7 +230,7 @@
                         }
 
                     case "inventory": // Show player inventory
-                        player.DisplayInventory();
+                        player.DisplayInventory(); // Displays only items bcs you can't get materials to your inventory yet. If we want to implement buying materials we just delete the condition in "buy"
                         break;
 
                     case "buy":
@@ -230,11 +241,11 @@
                         }
                         if (currentRoom is Shop buyShop)
                         {
-                            Item? itemToBuy = buyShop.GetItem(command.SecondWord);
-                            if (itemToBuy != null)
+                            ShopInventoryContents? contentsToBuy = buyShop.GetContents(command.SecondWord);
+                            if (contentsToBuy != null && contentsToBuy is Item) // checks whether the item is available for purchase for example if you try to purhcase material it will not work
                             {
-                                player.BuyItem(itemToBuy);
-                                buyShop.RemoveItem(itemToBuy);
+                                player.BuyItem(contentsToBuy);
+                                buyShop.RemoveContents(contentsToBuy); // Remove the item from the shop inventory (also works only for items not materials)
                             }
                             else
                             {
@@ -369,11 +380,23 @@
             var room = allRooms.Find(r => r.ShortDescription.Equals(shopShortDescription, StringComparison.OrdinalIgnoreCase));
             if (room is Shop shop)
             {
-                shop.AddItem(items);
+                shop.AddContents(items);
             }
             else
             {
                 Console.WriteLine($"Shop '{shopShortDescription}' not found to add item '{items.Name}'.");
+            }
+        }
+        private void AssignMaterial(string shopShortDescription, Material material)
+        {
+            var room = allRooms.Find(r => r.ShortDescription.Equals(shopShortDescription, StringComparison.OrdinalIgnoreCase));
+            if (room is Shop shop)
+            {
+                shop.AddContents(material);
+            }
+            else
+            {
+                Console.WriteLine($"Shop '{shopShortDescription}' not found to add material '{material.Name}'.");
             }
         }
     }
