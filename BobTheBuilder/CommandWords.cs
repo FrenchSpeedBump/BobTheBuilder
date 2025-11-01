@@ -8,7 +8,7 @@ namespace BobTheBuilder
 {
     public class CommandWords
     {
-        public List<string> ValidCommands { get; } = new List<string> { "north", "east", "south", "west", "look", "back", "quit", "help", "map", "goto", "travel", "gointo" };
+        public List<string> ValidCommands { get; } = new List<string> { "north", "east", "south", "west", "look", "back", "quit", "help", "map", "goto", "travel", "gointo", "inventory", "buy" };
 
         public bool IsValidCommand(string command)
         {

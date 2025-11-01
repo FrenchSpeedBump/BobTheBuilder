@@ -12,11 +12,12 @@
         public Game()
         {
             CreateRooms();
+            CreateItems();
         }
-        
+
         private void CreateRooms()
         {
-  
+
             Room? house = new("House", "This is where we are going to build a house :)");
             allRooms.Add(house);
             Room? street_1 = new("Street_1", "A street leading to our house going into the city. Nothing but nature around us.");
@@ -29,22 +30,22 @@
             allRooms.Add(office);
             Room? bank = new("Bank", "A nice empty building where at the other side of the room a young teller is smiling at you");
             allRooms.Add(bank);
-            Room? materials = new("Bob's Materials", "Rows and rows of construction materials");
+            Shop? materials = new("Bob's Materials", "Rows and rows of construction materials");
             allRooms.Add(materials);
-            Room? tools = new("Magic Tool Shop", "A nice old man is very happy to tell you everything about a hammer");
+            Shop? tools = new("Magic Tool Shop", "A nice old man is very happy to tell you everything about a hammer");
             allRooms.Add(tools);
-            Room? cons_1 = new("Best Build", "Constructions");
+            Shop? cons_1 = new("Best Build", "Constructions");
             insideOfficeRooms.Add(cons_1);
-            Room? cons_2 = new("Big Build", "Constructions");
+            Shop? cons_2 = new("Big Build", "Constructions");
             insideOfficeRooms.Add(cons_2);
-            Room? cons_3 = new("Small Build", "Constructions");
+            Shop? cons_3 = new("Small Build", "Constructions");
             insideOfficeRooms.Add(cons_3);
             Room? forest = new("Forest", "Just a bunch of trees and bushes. Nothing to do here.");
             allRooms.Add(forest);
 
             //north east south west
             //rooms should be connected in a way that if you go west you go back by going east
-            
+
             //road network
             house.SetExit("west", street_1);
             street_1.SetExits(forest, house, null, street_main);
@@ -59,7 +60,7 @@
             // in the office the gointo(atr) command will let us enter a construction office untill then they will be used as normal rooms
             /*office.SetExits(null, cons_3, street_main, cons_1);
             office.SetExit("north", cons_2);*/
-            
+
             bank.SetExits(street_main, null, null, materials);
 
             //street_north
@@ -76,9 +77,26 @@
 
         }
 
+        private void CreateItems()
+        {
+            Item? wood = new("Wood", "A pile of wooden planks.", 15);
+            Item? bricks = new("Bricks", "A stack of red bricks.", 20);
+            Item? hammer = new("Hammer", "A sturdy hammer for building.", 10);
+            Item? nails = new("Nails", "A box of small nails.", 5);
+
+            // Assign items to their respective shops
+            // Move this into Play() loop eventually
+            AssignItem("Bob's Materials", wood);
+            AssignItem("Bob's Materials", bricks);
+            AssignItem("Magic Tool Shop", hammer);
+            AssignItem("Magic Tool Shop", nails);
+        }
+
         public void Play()
         {
             Parser parser = new();
+
+            Player player = new();
 
             PrintWelcome();
 
@@ -108,6 +126,10 @@
                 {
                     case "look":
                         Console.WriteLine(currentRoom?.LongDescription);
+                        if (currentRoom is Shop lookShop)
+                        {
+                            lookShop.DisplayInventory();
+                        }
                         break;
 
                     case "back":
@@ -195,6 +217,31 @@
                             }
                             break;
                         }
+
+                    case "inventory": // Show player inventory
+                        player.DisplayInventory();
+                        break;
+
+                    case "buy":
+                        if (command.SecondWord == null)
+                        {
+                            Console.WriteLine("Buy what?");
+                            break;
+                        }
+                        if (currentRoom is Shop buyShop)
+                        {
+                            Item? itemToBuy = buyShop.GetItem(command.SecondWord);
+                            if (itemToBuy != null)
+                            {
+                                player.BuyItem(itemToBuy);
+                                buyShop.RemoveItem(itemToBuy);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Item not found.");
+                            }
+                        }
+                        break;
 
                     default:
                         Console.WriteLine("I don't know what command.");
@@ -315,6 +362,19 @@
                 return allRooms.Find(room => room.ShortDescription.Replace(" ", "").Replace("_", "").Equals(name.Replace(" ", "").Replace("_", ""), StringComparison.OrdinalIgnoreCase));
             }
             return insideOfficeRooms.Find(room => room.ShortDescription.Equals($"{name} {name_2}", StringComparison.OrdinalIgnoreCase));
+        }
+
+        private void AssignItem(string shopShortDescription, Item items) // Assign item to shop dynamically with this method, I think it will be handy later when we dig deeper into the turn based system
+        {
+            var room = allRooms.Find(r => r.ShortDescription.Equals(shopShortDescription, StringComparison.OrdinalIgnoreCase));
+            if (room is Shop shop)
+            {
+                shop.AddItem(items);
+            }
+            else
+            {
+                Console.WriteLine($"Shop '{shopShortDescription}' not found to add item '{items.Name}'.");
+            }
         }
     }
 }
