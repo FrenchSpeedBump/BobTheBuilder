@@ -85,7 +85,7 @@ namespace BobTheBuilder.Tests
             var commandWords = new CommandWords();
 
             // Assert
-            Assert.Equal(14, commandWords.ValidCommands.Count); // 4 directions + 10 other commands
+            Assert.Equal(20, commandWords.ValidCommands.Count); // 4 directions + 16 other commands (quest system, banking, etc.)
         }
     }
 }

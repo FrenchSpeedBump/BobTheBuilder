@@ -29,7 +29,7 @@ namespace BobTheBuilder.Tests
         {
             // Arrange
             var shop = new Shop("Magic Tool Shop", "A shop selling tools");
-            var item = new Item("Hammer", "A sturdy hammer", 0, 10);
+            var item = new Item("Hammer", "A sturdy hammer", 0, 0.8, 10);
 
             // Act
             shop.AddContents(item);
@@ -44,7 +44,7 @@ namespace BobTheBuilder.Tests
         {
             // Arrange
             var shop = new Shop("Bob's Materials", "A materials shop");
-            var material = new Material("Wood", "A piece of wood", 0.8, 0);
+            var material = new Material("Wood", "A piece of wood", 0.8, 0.7, 5);
 
             // Act
             shop.AddContents(material);
@@ -59,7 +59,7 @@ namespace BobTheBuilder.Tests
         {
             // Arrange
             var shop = new Shop("Magic Tool Shop", "A shop selling tools");
-            var item = new Item("Hammer", "A sturdy hammer", 0, 10);
+            var item = new Item("Hammer", "A sturdy hammer", 0, 0.8, 10);
             shop.AddContents(item);
 
             // Act
@@ -74,7 +74,7 @@ namespace BobTheBuilder.Tests
         {
             // Arrange
             var shop = new Shop("Magic Tool Shop", "A shop selling tools");
-            var hammer = new Item("Hammer", "A sturdy hammer", 0, 10);
+            var hammer = new Item("Hammer", "A sturdy hammer", 0, 0.8, 10);
             shop.AddContents(hammer);
 
             // Act
@@ -103,8 +103,8 @@ namespace BobTheBuilder.Tests
         {
             // Arrange
             var shop = new Shop("Magic Tool Shop", "A shop selling tools");
-            var hammer = new Item("Hammer", "A sturdy hammer", 0, 10);
-            var nails = new Item("Nails", "A box of nails", 0, 5);
+            var hammer = new Item("Hammer", "A sturdy hammer", 0, 0.8, 10);
+            var nails = new Item("Nails", "A box of nails", 0, 0.5, 5);
 
             // Act
             shop.AddContents(hammer);
@@ -121,8 +121,8 @@ namespace BobTheBuilder.Tests
         {
             // Arrange
             var shop = new Shop("General Store", "A store with everything");
-            var hammer = new Item("Hammer", "A sturdy hammer", 0, 10);
-            var wood = new Material("Wood", "A piece of wood", 0.8, 0);
+            var hammer = new Item("Hammer", "A sturdy hammer", 0, 0.8, 10);
+            var wood = new Material("Wood", "A piece of wood", 0.8, 0.7, 5);
 
             // Act
             shop.AddContents(hammer);
