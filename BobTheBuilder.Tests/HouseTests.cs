@@ -29,7 +29,7 @@ namespace BobTheBuilder.Tests
         {
             // Arrange
             var house = new House("House", "This is where we are going to build a house");
-            var wood = new Material("Wood", "A piece of wood", 0.8, 0);
+            var wood = new Material("Wood", "A piece of wood", 0.8, 0.7, 5);
 
             // Act
             house.UsedMaterials["Wood"] = wood;
@@ -44,9 +44,9 @@ namespace BobTheBuilder.Tests
         {
             // Arrange
             var house = new House("House", "This is where we are going to build a house");
-            var wood = new Material("Wood", "A piece of wood", 0.8, 0);
-            var bricks = new Material("Bricks", "A stack of bricks", 0.6, 0);
-            var concrete = new Material("Concrete", "A block of concrete", 0.4, 0);
+            var wood = new Material("Wood", "A piece of wood", 0.8, 0.7, 5);
+            var bricks = new Material("Bricks", "A stack of bricks", 0.6, 0.8, 3);
+            var concrete = new Material("Concrete", "A block of concrete", 0.4, 0.9, 8);
 
             // Act
             house.UsedMaterials["Wood"] = wood;
