@@ -11,7 +11,7 @@ namespace BobTheBuilder
         double accountBalance;
         double totalDebt;
         double monthlyRepayment;
-
+        
         public Bank(string shortDesc,string longDesc)
             : base(shortDesc, longDesc)
         {
@@ -26,7 +26,7 @@ namespace BobTheBuilder
         public bool takeMoney(double amount)
         {
             if (amount < 0 || amount>accountBalance) 
-            {
+        {
                 return false;//card declined
             }
             accountBalance -= amount;
