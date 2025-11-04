@@ -6,10 +6,13 @@
         public string LongDescription { get; private set; }
         public Dictionary<string, Room> Exits { get; private set; } = new();
 
+        bool discovered;
+
         public Room(string shortDesc, string longDesc)
         {
             ShortDescription = shortDesc;
             LongDescription = longDesc;
+            discovered = false;
         }
 
         public void SetExits(Room? north, Room? east, Room? south, Room? west)
