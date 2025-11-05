@@ -10,7 +10,7 @@ namespace BobTheBuilder.Tests
 
             // Assert
             Assert.Equal("Bob", player.Name);
-            Assert.Equal(200, player.Money);
+            Assert.Equal(100, player.Money);
             Assert.Empty(player.Inventory);
         }
 
@@ -19,7 +19,7 @@ namespace BobTheBuilder.Tests
         {
             // Arrange
             var player = new Player();
-            var item = new Item("Hammer", "A sturdy hammer", 0, 0.8, 10);
+            var item = new Item("Hammer", "A sturdy hammer", 0, 10);
 
             // Act
             player.AddItem(item);
@@ -34,7 +34,7 @@ namespace BobTheBuilder.Tests
         {
             // Arrange
             var player = new Player();
-            var item = new Item("Hammer", "A sturdy hammer", 0, 0.8, 10);
+            var item = new Item("Hammer", "A sturdy hammer", 0, 10);
             player.AddItem(item);
 
             // Act
@@ -49,13 +49,13 @@ namespace BobTheBuilder.Tests
         {
             // Arrange
             var player = new Player();
-            var item = new Item("Hammer", "A sturdy hammer", 0, 0.8, 10);
+            var item = new Item("Hammer", "A sturdy hammer", 0, 10);
 
             // Act
             player.BuyItem(item);
 
             // Assert
-            Assert.Equal(190, player.Money);
+            Assert.Equal(90, player.Money);
             Assert.Single(player.Inventory);
             Assert.Contains(item, player.Inventory);
         }
@@ -65,13 +65,13 @@ namespace BobTheBuilder.Tests
         {
             // Arrange
             var player = new Player();
-            var expensiveItem = new Item("Gold Hammer", "A very expensive hammer", 0, 0.9, 250);
+            var expensiveItem = new Item("Gold Hammer", "A very expensive hammer", 0, 150);
 
             // Act
             player.BuyItem(expensiveItem);
 
             // Assert
-            Assert.Equal(200, player.Money); // Money unchanged
+            Assert.Equal(100, player.Money); // Money unchanged
             Assert.Empty(player.Inventory); // Item not added
         }
 
@@ -80,7 +80,7 @@ namespace BobTheBuilder.Tests
         {
             // Arrange
             var player = new Player();
-            var item = new Item("Expensive Item", "Costs all the money", 0, 0.8, 200);
+            var item = new Item("Expensive Item", "Costs all the money", 0, 100);
 
             // Act
             player.BuyItem(item);
@@ -95,8 +95,8 @@ namespace BobTheBuilder.Tests
         {
             // Arrange
             var player = new Player();
-            var hammer = new Item("Hammer", "A sturdy hammer", 0, 0.8, 10);
-            var nails = new Item("Nails", "A box of nails", 0, 0.5, 5);
+            var hammer = new Item("Hammer", "A sturdy hammer", 0, 10);
+            var nails = new Item("Nails", "A box of nails", 0, 5);
 
             // Act
             player.AddItem(hammer);
