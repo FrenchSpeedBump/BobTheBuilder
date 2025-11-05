@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BobTheBuilder.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+89d4d2a67da20ac072c767fcc82daf5ca7ea7a51")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9e275c868a0b32c67d5846371b7bb59ea80bb3d4")]
 [assembly: System.Reflection.AssemblyProductAttribute("BobTheBuilder.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BobTheBuilder.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
