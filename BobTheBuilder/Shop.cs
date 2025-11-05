@@ -1,37 +1,31 @@
-﻿namespace BobTheBuilder
+﻿
+namespace BobTheBuilder
 {
     //Shop class with inventory variable, which will hold multiple item objects of type Item 
-    public class Shop : Room
+    public class Shop
     {
-        public Dictionary<string, ShopInventoryContents> Inventory { get; private set; } = new();
-        public Shop(string shortDesc, string longDesc) : base(shortDesc, longDesc) // Made shop class inherit from Room, added inventory and relevant methods
+        public string ShortDescription { get; private set; }
+        public string LongDescription { get; private set; }
+        public Room? Exit { get; private set; }
+        public Dictionary<string, Item> Inventory { get; private set; } = new();
+        public Shop(string shortDesc, string longDesc)
         {
+            ShortDescription = shortDesc;
+            LongDescription = longDesc;
         }
-        public void AddContents(ShopInventoryContents contents) // Both these methods support both items and materials
+        //no direction is set for shop exit since we only have 1 exit, ideally we would have an exit command that simply returns to previous room
+        public void SetExit(Room exit)
         {
-            Inventory[contents.Name] = contents;
+            Exit = exit;
         }
-        public void RemoveContents(ShopInventoryContents contents) // Both these methods support both items and materials
+        public void AddItem(Item item)
         {
-            Inventory.Remove(contents.Name);
+            Inventory[item.Name] = item;
+        }
+        public void RemoveItem(Item item)
+        {
+            Inventory.Remove(item.Name);
         }
 
-        public void DisplayInventory()
-        {
-            Console.WriteLine($"Inventory for {ShortDescription}:");
-            foreach (var item in Inventory.Values.OfType<Item>())
-            {
-                Console.WriteLine($" - {item.Name}: {item.Description} Price: {item.Price}");
-            }
-            foreach (var material in Inventory.Values.OfType<Material>())
-            {
-                Console.WriteLine($" - {material.Name}: {material.Description} Sustainability: {material.Sustainability}");
-            }
-        }
-        public ShopInventoryContents? GetContents(string contentsName) // Used in "buy" command, works for both item and material, but never used anywhere with material
-        {
-            Inventory.TryGetValue(contentsName, out var contents);
-            return contents;
-        }
     }
 }
