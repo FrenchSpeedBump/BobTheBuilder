@@ -6,13 +6,11 @@
         public string Description { get; private set; }
         public double Price { get; private set; }
         public double Sustainability { get; private set; }
-        public double Quality { get; private set; } // Durability/strength rating (0.0 - 1.0)
-        protected ShopInventoryContents(string name, string description, double sustainability, double quality, double price)
+        protected ShopInventoryContents(string name, string description, double sustainability, double price)
         {
             Name = name;
             Description = description;
             Sustainability = sustainability;
-            Quality = quality;
             Price = price;
         }
     }
@@ -23,14 +21,14 @@
 */
     public class Item : ShopInventoryContents
     {
-        public Item(string name, string description, double sustainability, double quality, double price) : base(name, description, sustainability, quality, price)
+        public Item(string name, string description, double sustainability, double price) : base(name, description, sustainability, price)
         {
         }
     }
 
     public class Material : ShopInventoryContents
     {
-        public Material(string name, string description, double sustainability, double quality, double price) : base(name, description, sustainability, quality, price)
+        public Material(string name, string description, double sustainability, double price) : base(name, description, sustainability, price)
         {
         }
     }
