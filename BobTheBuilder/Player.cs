@@ -1,6 +1,6 @@
 namespace BobTheBuilder
 {
-    public class Player
+    public class Player//can inventory be a separate class?
     {
         public string Name = "Bob";
         public double Money = 100; // This can be modified, need to still implement the banking system

@@ -42,9 +42,47 @@ namespace BobTheBuilder
         }
         public void takeLoan(double amount)
         {
-            accountBalance += amount;
-            totalDebt += amount;
+            if(amount < 1000)
+            {
+                totalDebt += amount + amount*0.025;
+                monthlyRepayment = totalDebt / 2;
+                accountBalance += amount;
+            }
+            else if(amount <5000)
+            {
+                totalDebt += amount + amount * 0.05;
+                monthlyRepayment = totalDebt / 4;
+                accountBalance += amount;
+            }
+            else if (amount <= 8000)
+            {
+                totalDebt += amount + amount * 0.08;
+                monthlyRepayment = totalDebt / 6;
+                accountBalance += amount;
+            }
+            else
+            {
+                Console.WriteLine("This is too big of an ammount.");
+            }
+            
 
+        }
+        public double getMonthlyRepayment()
+        {
+            return monthlyRepayment;
+        }
+        public void calculateRepayment()
+        {
+            if(totalDebt==0)
+            {
+                monthlyRepayment = 0;
+            }
+            else
+            {
+                accountBalance -= monthlyRepayment;
+                totalDebt -= monthlyRepayment;
+            }
+                
         }
     }
 }

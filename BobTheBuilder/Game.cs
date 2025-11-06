@@ -1,11 +1,12 @@
-﻿namespace BobTheBuilder
+﻿using System;
+
+namespace BobTheBuilder
 {
     public class Game
     {
         private Minimap minimap = new();
         private Room? currentRoom;
         private Room? previousRoom;
-        private List<Room> allRooms = new();
         private List<Room> discoveredRooms = new();
         private List<Room> insideOfficeRooms = new();
         private Bank? bank;
@@ -47,7 +48,8 @@
             forest.SetExits(null, null, street_1, office);
 
             //street_main
-            office.SetExits(null, forest, street_main, tools);
+            //office.SetExits(cons_2, cons_3, street_main, cons_1);
+            office.SetExits(null, null, street_main, null);
             // in the office the gointo(atr) command will let us enter a construction office untill then they will be used as normal rooms
             /*office.SetExits(null, cons_3, street_main, cons_1);
             office.SetExit("north", cons_2);*/
@@ -59,11 +61,12 @@
             tools.SetExits(null, office, street_north, null);
 
             //office so it works before gointo is implemented
-            /*cons_1.SetExit("east", office);
+            cons_1.SetExit("east", office);
             cons_2.SetExit("south", office);
-            cons_3.SetExit("west", office);*/
+            cons_3.SetExit("west", office);
 
             currentRoom = house;
+            house.discovered = true;
             minimap.MapRooms(house);
 
         }
@@ -99,170 +102,187 @@
 
             Player player = new();
 
+            PrintWelcomeImage();
+            LoadingBar();
+            Console.Clear();
             PrintWelcome();
-
-            bool continuePlaying = true;
-            while (continuePlaying)
+            
+            int day = 1;
+            while (day<10)
             {
+                bool continuePlaying = true;
+                bank.calculateRepayment();
+                Console.WriteLine("==============|Day {0}|==============",day);
                 Console.WriteLine("===================================");
-                Console.WriteLine("Money = "+bank.getBalance());
+                Console.WriteLine("Money = " + bank.getBalance());
                 Console.WriteLine("===================================");
-                Console.WriteLine(currentRoom?.ShortDescription);
-                Console.Write("> ");
-
-                string? input = Console.ReadLine();
-
-                if (string.IsNullOrEmpty(input))
+                while (continuePlaying)
                 {
-                    Console.WriteLine("Please enter a command.");
-                    continue;
-                }
-
-                Command? command = parser.GetCommand(input);
-
-                if (command == null)
-                {
-                    Console.WriteLine("I don't know that command.");
-                    continue;
-                }
-
-                switch(command.Name)
-                {
-                    case "look":
-                        Console.WriteLine(currentRoom?.LongDescription);
-                        if (currentRoom is Shop lookShop)
-                        {
-                            lookShop.DisplayInventory();
-                        }
-                        break;
-
-                    case "back":
-                        if (previousRoom == null)
-                            Console.WriteLine("You can't go back from here!");
-                        else
-                            currentRoom = previousRoom;
-                        break;
-
-                    case "north":
-                    case "south":
-                    case "east":
-                    case "west":
-                        if (currentRoom != null && !discoveredRooms.Contains(currentRoom))
-                        {
-                            discoveredRooms.Add(currentRoom);
-                        }
-                        Move(command.Name);
-                        break;
-
-                    case "quit":
-                        continuePlaying = false;
-                        break;
-
-                    case "help":
-                        PrintHelp();
-                        break;
                     
-                    case "map":
-                        if (currentRoom != null)
-                            minimap.Display(currentRoom);
-                        break;
-                            
-                    case "goto"://maybe change name so its not similar to gointo
-                        if (command.SecondWord == null)
-                        {
-                            Console.WriteLine("Go where?");
-                            break;
-                        }
-                        var target = FindRoomByName(command.SecondWord);
-                        if (target != null && currentRoom != null)
-                        {
-                            Console.WriteLine($"Direction: {minimap.GetDirectionTo(currentRoom, target)}");
-                        }
-                        else
-                            Console.WriteLine("Unknown room");
-                        break;
+                    Console.WriteLine(currentRoom?.ShortDescription);
+                    Console.Write("> ");
 
-                    case "travel":
-                        if (command.SecondWord == null)
-                        {
-                            Console.WriteLine("Travel where?");
-                            break;
-                        }
-                        var targetTravel = FindRoomByName(command.SecondWord);
-                        if (targetTravel != null)
-                        {
-                            Travel(targetTravel);
-                        }
-                        else
-                            Console.WriteLine("Unknown room");
-                        break;
+                    string? input = Console.ReadLine();
 
-                    case "gointo"://now you can enter a neighbouring room by typing in it's name without knowing the direction
-                        string direction = IsNeighbour(command.SecondWord);
-                        if (command.SecondWord == null)
-                        {
-                            Console.WriteLine("You need to specify where to go");
-                        }
-                        else if (direction != "")
-                        {
-                            Move(direction);
-                        }
-                        else
-                        {
-                            Console.WriteLine("I can't see that room anywhere!");
-                        }
-                        break;
+                    if (string.IsNullOrEmpty(input))
+                    {
+                        Console.WriteLine("Please enter a command.");
+                        continue;
+                    }
 
-                    case "loan":
-                        if(currentRoom != bank)
-                        {
-                            Console.WriteLine("I can only do this in a bank.");
-                        }
-                        if (command.SecondWord == null)
-                        {
-                            Console.WriteLine("How much would you like to loan?");
-                        }
-                        bank.takeLoan(Convert.ToDouble(command.SecondWord));
-                        break;
-                    case "account":
-                        if (currentRoom != bank)
-                        {
-                            Console.WriteLine("I can only do this in a bank.");
-                        }
-                        Console.WriteLine("Account information:");
-                        Console.WriteLine("Account balace: "+bank.getBalance());
-                        Console.WriteLine("Total debt:" + bank.getTotalDebt());
-                        break;
-                    case "inventory": // Show player inventory
-                        player.DisplayInventory(); // Displays only items bcs you can't get materials to your inventory yet. If we want to implement buying materials we just delete the condition in "buy"
-                        break;
+                    Command? command = parser.GetCommand(input);
 
-                    case "buy":
-                        if (command.SecondWord == null)
-                        {
-                            Console.WriteLine("Buy what?");
-                            break;
-                        }
-                        if (currentRoom is Shop buyShop)
-                        {
-                            ShopInventoryContents? contentsToBuy = buyShop.GetContents(command.SecondWord);
-                            if (contentsToBuy != null && contentsToBuy is Item) // checks whether the item is available for purchase for example if you try to purhcase material it will not work
+                    if (command == null)
+                    {
+                        Console.WriteLine("I don't know that command.");
+                        continue;
+                    }
+
+                    switch (command.Name)
+                    {
+                        case "look":
+                            Console.WriteLine(currentRoom?.LongDescription);
+                            if (currentRoom is Shop lookShop)
                             {
-                                player.BuyItem(contentsToBuy);
-                                buyShop.RemoveContents(contentsToBuy); // Remove the item from the shop inventory (also works only for items not materials)
+                                lookShop.DisplayInventory();
+                            }
+                            break;
+
+                        case "back":
+                            if (previousRoom == null)
+                                Console.WriteLine("You can't go back from here!");
+                            else
+                                currentRoom = previousRoom;
+                            break;
+
+                        case "north":
+                        case "south":
+                        case "east":
+                        case "west":
+                            if (currentRoom != null && !discoveredRooms.Contains(currentRoom))
+                            {
+                                discoveredRooms.Add(currentRoom);
+                            }
+                            Move(command.Name);
+                            break;
+
+                        case "quit":
+                            continuePlaying = false;
+                            break;
+
+                        case "help":
+                            PrintHelp();
+                            break;
+
+                        case "map":
+                            if (currentRoom != null)
+                                minimap.Display(currentRoom);
+                            break;
+
+                        case "goto"://maybe change name so its not similar to gointo
+                            if (command.SecondWord == null)
+                            {
+                                Console.WriteLine("Go where?");
+                                break;
+                            }
+                            var target = FindRoomByName(command.SecondWord);
+                            if (target != null && currentRoom != null)
+                            {
+                                Console.WriteLine($"Direction: {minimap.GetDirectionTo(currentRoom, target)}");
+                            }
+                            else
+                                Console.WriteLine("Unknown room");
+                            break;
+
+                        case "travel":
+                            if (command.SecondWord == null)
+                            {
+                                Console.WriteLine("Travel where?");
+                                break;
+                            }
+                            var targetTravel = FindRoomByName(command.SecondWord);
+                            if (targetTravel != null)
+                            {
+                                Travel(targetTravel);
+                            }
+                            else
+                                Console.WriteLine("Unknown room");
+                            break;
+
+                        case "gointo"://now you can enter a neighbouring room by typing in it's name without knowing the direction
+                            string direction = IsNeighbour(command.SecondWord);
+                            if (command.SecondWord == null)
+                            {
+                                Console.WriteLine("You need to specify where to go");
+                            }
+                            else if (direction != "")
+                            {
+                                Move(direction);
                             }
                             else
                             {
-                                Console.WriteLine("Item not found.");
+                                Console.WriteLine("I can't see that room anywhere!");
                             }
-                        }
-                        break;
+                            break;
 
-                    default:
-                        Console.WriteLine("I don't know what command.");
-                        break;
+                        case "loan"://loan money
+                            if (currentRoom != bank)
+                            {
+                                Console.WriteLine("I can only do this in a bank.");
+                                break;
+                            }
+                            if (command.SecondWord == null)
+                            {
+                                Console.WriteLine("How much would you like to loan?");
+                            }
+                            bank.takeLoan(Convert.ToDouble(command.SecondWord));
+                            break;
+                        case "account"://display account info
+                            if (currentRoom != bank)
+                            {
+                                Console.WriteLine("I can only do this in a bank.");
+                                break;
+                            }
+                            Console.WriteLine("Account information:");
+                            Console.WriteLine("Account balace: " + bank.getBalance());
+                            Console.WriteLine("Total debt: " + bank.getTotalDebt());
+                            Console.WriteLine("Monthly repayment: " + bank.getMonthlyRepayment());
+                            break;
+                        case "inventory": // Show player inventory
+                            player.DisplayInventory(); // Displays only items bcs you can't get materials to your inventory yet. If we want to implement buying materials we just delete the condition in "buy"
+                            break;
+
+                        case "buy"://buy stuff
+                            if (command.SecondWord == null)
+                            {
+                                Console.WriteLine("Buy what?");
+                                break;
+                            }
+                            if (currentRoom is Shop buyShop)
+                            {
+                                ShopInventoryContents? contentsToBuy = buyShop.GetContents(command.SecondWord);
+                                if (contentsToBuy != null && contentsToBuy is Item) // checks whether the item is available for purchase for example if you try to purhcase material it will not work
+                                {
+                                    player.BuyItem(contentsToBuy);
+                                    buyShop.RemoveContents(contentsToBuy); // Remove the item from the shop inventory (also works only for items not materials)
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Item not found.");
+                                }
+                            }
+                            break;
+
+                        default:
+                            Console.WriteLine("I don't know what command.");
+                            break;
+                    }
+                    
                 }
+                day++;
+                    Console.Clear();
             }
+            
 
             Console.WriteLine("Thank you for playing Bob the Builder!");
         }
@@ -273,6 +293,8 @@
             {
                 previousRoom = currentRoom;
                 currentRoom = currentRoom?.Exits[direction];
+                if (!currentRoom.discovered)
+                    currentRoom.discovered=true;
             }
             else
             {
@@ -309,8 +331,7 @@
             currentRoom = targetConstruction;
         }
 
-
-        private static void PrintWelcome()//this needs to be moved to a separate file and just be called 
+        private void PrintWelcomeImage()
         {
             Console.WriteLine("⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿");
             Console.WriteLine("⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⣛⣩⣭⣭⣭⣭⣭⣭⡄⢲⣤⣤⣭⣙⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿");
@@ -363,6 +384,9 @@
             Console.WriteLine("⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣏⠀⠈⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠟⣛⠉⠀⣐⣤⣶⣿⣿⣷⣦⣥⣄⣒⣤⣀⠀⠨⠉⠛⠻⠿⠿⠿⠿⠿⠿⠿⠿⠿⠟⠛⠛⠋⠐⣸⣿⣿⣿⣿⣿⣿⣿");
             Console.WriteLine("⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣀⠀⠤⠈⢉⣉⠛⠛⠛⠛⣉⣉⠉⠩⠄⠀⢂⣉⣥⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣦⣴⣶⣶⣖⡒⠒⠒⠒⢒⣦⣤⣉⣤⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿");
             Console.WriteLine("⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣶⡶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ \n");
+        }
+        private static void PrintWelcome()//this needs to be moved to a separate file and just be called 
+        {
             Console.WriteLine("                 ||================================||");
             Console.WriteLine("                 ||   Welcome to Bob the Builder!  ||");
             Console.WriteLine("                 ||================================||\n");
@@ -384,6 +408,10 @@
             Console.WriteLine("Type 'goto' to plot a direction to another room.");
             Console.WriteLine("Type 'gointo' to enter a neighbouring room by it's name.");
             Console.WriteLine("Type 'travel' to travel to any discovered room by it's name.");
+            Console.WriteLine("Type 'loan <amount>' in a bank to take out a loan");
+            Console.WriteLine("Type 'account' in a bank to check your account details");
+            Console.WriteLine("Type 'inventory' to list your inventory");
+            Console.WriteLine("Type 'buy <item>' in a shop to buy an item");
         }
 
         private Room? FindRoomByName(string name)//BFS for finding target room
@@ -423,7 +451,7 @@
 
         private void AssignItem(string shopShortDescription, Item items) // Assign item to shop dynamically with this method, I think it will be handy later when we dig deeper into the turn based system
         {
-            var room = allRooms.Find(r => r.ShortDescription.Equals(shopShortDescription, StringComparison.OrdinalIgnoreCase));
+            var room = FindRoomByName(shopShortDescription);
             if (room is Shop shop)
             {
                 shop.AddContents(items);
@@ -435,7 +463,7 @@
         }
         private void AssignMaterial(string shopShortDescription, Material material)
         {
-            var room = allRooms.Find(r => r.ShortDescription.Equals(shopShortDescription, StringComparison.OrdinalIgnoreCase));
+            var room = FindRoomByName(shopShortDescription);
             if (room is Shop shop)
             {
                 shop.AddContents(material);
@@ -444,6 +472,21 @@
             {
                 Console.WriteLine($"Shop '{shopShortDescription}' not found to add material '{material.Name}'.");
             }
+        }
+        
+        private void LoadingBar()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("=================================LOADING=================================");
+            string bar = "";
+            for (int i=0;i<73;i++)
+            {
+                Console.Write("\r{0}", bar);
+                bar += "█";
+                Thread.Sleep(50);
+            }
+            Console.ForegroundColor = ConsoleColor.White;
+
         }
     }
 }
