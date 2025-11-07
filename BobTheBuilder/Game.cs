@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 
 namespace BobTheBuilder
 {
@@ -9,7 +10,7 @@ namespace BobTheBuilder
         private Room? previousRoom;
         private List<Room> discoveredRooms = new();
         private List<Room> insideOfficeRooms = new();
-        private Bank? bank;
+        private Bank bank = null!;
 
 
         public Game()
@@ -21,12 +22,12 @@ namespace BobTheBuilder
         
         private void CreateRooms()
         {
-  
+
             House? house = new("House", "This is where we are going to build a house :)");
             Room? street_1 = new("Street_1", "A street leading to our house going into the city. Nothing but nature around us.");
             Room? street_main = new("Street_Main", "The main street ouf our town. The street has an office building on one side and a bank on the other"); 
             Room? street_north = new("Street_North", "The north street has two shops: Bob's Materials and the Magic Tool Shop. Funily enoguh, the street doesn't face north.");
-            Room? office = new("Office Building", "When you step into this old office building you are met with three construction company signs: Best Build, Big Build and Small Build");         
+            Room? office = new("Office Building", "When you step into this old office building you are met with three construction company signs: Best Build, Big Build and Small Build");
             bank = new("Bank", "A nice empty building where at the other side of the room a young teller is smiling at you");
             Shop? materials = new("Bob's Materials", "Rows and rows of construction materials");
             Shop? tools = new("Magic Tool Shop", "A nice old man is very happy to tell you everything about a hammer");
@@ -84,10 +85,10 @@ namespace BobTheBuilder
 
         private void CreateMaterials()
         {
-            Material? wood = new("Wood", "A sturdy piece of wood.", 0.8, 0);
-            Material? bricks = new("Bricks", "A stack of red bricks.", 0.6, 0);
-            Material? concrete = new("Concrete", "A heavy block of concrete.", 0.4, 0);
-            Material? glass = new("Glass", "A transparent sheet of glass.", 0.5, 0);
+            Material? wood = new("Wood", "A sturdy piece of wood.", 0.8, 20);
+            Material? bricks = new("Bricks", "A stack of red bricks.", 0.6, 15);
+            Material? concrete = new("Concrete", "A heavy block of concrete.", 0.4, 10);
+            Material? glass = new("Glass", "A transparent sheet of glass.", 0.5, 5);
 
             // Also move this to Play() loop eventually
             AssignMaterial("Bob's Materials", wood);
@@ -111,10 +112,10 @@ namespace BobTheBuilder
             while (day<10)
             {
                 bool continuePlaying = true;
-                bank.calculateRepayment();
+                bank?.calculateRepayment();
                 Console.WriteLine("==============|Day {0}|==============",day);
                 Console.WriteLine("===================================");
-                Console.WriteLine("Money = " + bank.getBalance());
+                Console.WriteLine("Money = " + bank!.getBalance());
                 Console.WriteLine("===================================");
                 while (continuePlaying)
                 {
@@ -210,18 +211,21 @@ namespace BobTheBuilder
                             break;
 
                         case "gointo"://now you can enter a neighbouring room by typing in it's name without knowing the direction
-                            string direction = IsNeighbour(command.SecondWord);
-                            if (command.SecondWord == null)
+                            if (command.SecondWord != null)
                             {
+                                string direction = IsNeighbour(command.SecondWord);
+                                if (command.SecondWord == null)
+                                {
                                 Console.WriteLine("You need to specify where to go");
-                            }
-                            else if (direction != "")
-                            {
+                                }
+                                else if (direction != "")
+                                {
                                 Move(direction);
-                            }
-                            else
-                            {
+                                }
+                                else
+                                {
                                 Console.WriteLine("I can't see that room anywhere!");
+                                }
                             }
                             break;
 
@@ -235,7 +239,7 @@ namespace BobTheBuilder
                             {
                                 Console.WriteLine("How much would you like to loan?");
                             }
-                            bank.takeLoan(Convert.ToDouble(command.SecondWord));
+                            bank!.takeLoan(Convert.ToDouble(command.SecondWord));
                             break;
                         case "account"://display account info
                             if (currentRoom != bank)
@@ -244,9 +248,9 @@ namespace BobTheBuilder
                                 break;
                             }
                             Console.WriteLine("Account information:");
-                            Console.WriteLine("Account balace: " + bank.getBalance());
-                            Console.WriteLine("Total debt: " + bank.getTotalDebt());
-                            Console.WriteLine("Monthly repayment: " + bank.getMonthlyRepayment());
+                            Console.WriteLine("Account balance: " + bank!.getBalance());
+                            Console.WriteLine("Total debt: " + bank!.getTotalDebt());
+                            Console.WriteLine("Monthly repayment: " + bank!.getMonthlyRepayment());
                             break;
                         case "inventory": // Show player inventory
                             player.DisplayInventory(); // Displays only items bcs you can't get materials to your inventory yet. If we want to implement buying materials we just delete the condition in "buy"
@@ -261,9 +265,9 @@ namespace BobTheBuilder
                             if (currentRoom is Shop buyShop)
                             {
                                 ShopInventoryContents? contentsToBuy = buyShop.GetContents(command.SecondWord);
-                                if (contentsToBuy != null && contentsToBuy is Item) // checks whether the item is available for purchase for example if you try to purhcase material it will not work
+                                if (contentsToBuy != null)
                                 {
-                                    player.BuyItem(contentsToBuy);
+                                    bank!.BuyItem(contentsToBuy);
                                     buyShop.RemoveContents(contentsToBuy); // Remove the item from the shop inventory (also works only for items not materials)
                                 }
                                 else
@@ -293,8 +297,8 @@ namespace BobTheBuilder
             {
                 previousRoom = currentRoom;
                 currentRoom = currentRoom?.Exits[direction];
-                if (!currentRoom.discovered)
-                    currentRoom.discovered=true;
+                if (!currentRoom!.discovered)
+                    currentRoom!.discovered=true;
             }
             else
             {
@@ -303,7 +307,7 @@ namespace BobTheBuilder
         }
         private string IsNeighbour(string room)
         {
-            foreach (var direction in currentRoom?.Exits)
+            foreach (var direction in currentRoom!.Exits)
             {
                 if (direction.Value.ShortDescription == room)
                 {
@@ -427,8 +431,8 @@ namespace BobTheBuilder
             var visited = new HashSet<Room>();
             var queue = new Queue<Room>();
 
-            queue.Enqueue(currentRoom);
-            visited.Add(currentRoom);
+            queue.Enqueue(currentRoom!);
+            visited.Add(currentRoom!);
 
             while (queue.Count > 0)
             {

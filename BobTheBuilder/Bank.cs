@@ -73,7 +73,7 @@ namespace BobTheBuilder
         }
         public void calculateRepayment()
         {
-            if(totalDebt==0)
+            if (totalDebt == 0)
             {
                 monthlyRepayment = 0;
             }
@@ -82,7 +82,29 @@ namespace BobTheBuilder
                 accountBalance -= monthlyRepayment;
                 totalDebt -= monthlyRepayment;
             }
-                
+
+        }
+        public void AddItem(ShopInventoryContents contents)
+        {
+            Player.Inventory.Add(contents);
+        }
+
+        public void RemoveItem(ShopInventoryContents contents)
+        {
+            Player.Inventory.Remove(contents);
+        }
+        public void BuyItem(ShopInventoryContents contents)
+        {
+            if (accountBalance >= contents.Price)
+            {
+                accountBalance -= contents.Price;
+                AddItem(contents);
+                Console.WriteLine($"Bought {contents.Name} for {contents.Price}.");
+            }
+            else
+            {
+                Console.WriteLine("Not enough money.");
+            }
         }
     }
 }
