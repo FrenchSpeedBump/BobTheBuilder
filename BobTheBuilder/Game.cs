@@ -186,7 +186,7 @@ namespace BobTheBuilder
                                 Console.WriteLine("Go where?");
                                 break;
                             }
-                            var target = FindRoomByName(command.SecondWord);
+                            var target = FindRoomByName(command.SecondWord, command.ThirdWord, command.FourthWord);
                             if (target != null && currentRoom != null)
                             {
                                 Console.WriteLine($"Direction: {minimap.GetDirectionTo(currentRoom, target)}");
@@ -201,7 +201,7 @@ namespace BobTheBuilder
                                 Console.WriteLine("Travel where?");
                                 break;
                             }
-                            var targetTravel = FindRoomByName(command.SecondWord);
+                            var targetTravel = FindRoomByName(command.SecondWord, command.ThirdWord, command.FourthWord);
                             if (targetTravel != null)
                             {
                                 Travel(targetTravel);
@@ -309,7 +309,7 @@ namespace BobTheBuilder
         {
             foreach (var direction in currentRoom!.Exits)
             {
-                if (direction.Value.ShortDescription == room)
+                if (Normalize(direction.Value.ShortDescription) == Normalize(room))
                 {
                     return direction.Key;
                 }
@@ -418,11 +418,21 @@ namespace BobTheBuilder
             Console.WriteLine("Type 'buy <item>' in a shop to buy an item");
         }
 
-        private Room? FindRoomByName(string name)//BFS for finding target room
+        private Room? FindRoomByName(string? secondWord)
         {
-            string target = name.Replace(" ", "").Replace("_", "").Replace("-", "").ToLowerInvariant();//simplifying target
+            return FindRoomByName(secondWord, null, null);
+        }
 
-            if (target=="north" || target=="east" || target=="south" || target=="south")//if just direction going to direction
+        private Room? FindRoomByName(string? secondWord, string? thirdWord)
+        {
+            return FindRoomByName(secondWord, thirdWord, null);
+        }
+
+        private Room? FindRoomByName(string? secondWord, string? thirdWord, string? fourthWord)//BFS for finding target room
+        {
+            string target = Normalize(secondWord) + Normalize(thirdWord) + Normalize(fourthWord);
+
+            if (target == "north" || target == "east" || target == "south" || target == "west")//if just direction going to direction
             {
                 Move(target);
                 return null;
@@ -438,7 +448,7 @@ namespace BobTheBuilder
             {
                 var current = queue.Dequeue();
 
-                if (current.ShortDescription.Replace(" ", "").Replace("_", "").Replace("-", "").ToLowerInvariant() == target)
+                if (Normalize(current.ShortDescription) == target)
                     return current;
 
                 foreach (var neighbor in current.Exits.Values)
@@ -451,6 +461,23 @@ namespace BobTheBuilder
                 }
             }
             return null; // Not found
+        }
+
+        private static string Normalize(string? s)
+        {
+            if (string.IsNullOrEmpty(s))
+                return string.Empty;
+
+            // remove common separators/punctuation that users might type differently
+            return s.Trim()
+                    .Replace(" ", "")
+                    .Replace("_", "")
+                    .Replace("-", "")
+                    .Replace("'", "")
+                    .Replace("\"", "")
+                    .Replace(".", "")
+                    .Replace(",", "")
+                    .ToLowerInvariant();
         }
 
         private void AssignItem(string shopShortDescription, Item items) // Assign item to shop dynamically with this method, I think it will be handy later when we dig deeper into the turn based system
