@@ -26,6 +26,10 @@ namespace BobTheBuilder
             {
                 return new Command(words[0], words[1]);
             }
+            if (words.Length == 4)
+            {
+                return new Command(words[0], words[1], words[2], words[3]);
+            }
 
             return new Command(words[0]);
         }

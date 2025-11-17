@@ -28,7 +28,7 @@
                 Console.WriteLine($" - {material.Name}: {material.Description} Sustainability: {material.Sustainability}");
             }
         }
-        public ShopInventoryContents? GetContents(string contentsName) // Used in "buy" command, works for both item and material, but never used anywhere with material
+        public ShopInventoryContents? GetContents(string contentsName) // Used in "buy" command
         {
             Inventory.TryGetValue(contentsName, out var contents);
             return contents;
