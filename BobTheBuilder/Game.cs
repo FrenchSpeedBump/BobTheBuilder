@@ -1,6 +1,4 @@
-﻿using System;
-using System.Security.Cryptography.X509Certificates;
-
+﻿
 namespace BobTheBuilder
 {
     public class Game
@@ -58,6 +56,8 @@ namespace BobTheBuilder
             GameUI.PrintWelcome();
             
             int day = 1;
+            int phase = 1;
+
             while (day<10)
             {
                 bool continuePlaying = true;
@@ -95,6 +95,37 @@ namespace BobTheBuilder
                             if (currentRoom is Shop lookShop)
                             {
                                 lookShop.DisplayInventory();
+                            }
+                            if (currentRoom is ConstructionBuilding consBuilding)
+                            {
+                                consBuilding.GetQuestByPhase(phase);
+                            }
+
+                            break;
+
+                        case "accept":
+                            if (currentRoom is ConstructionBuilding consBuildingAccept)
+                            {
+                                if (command.SecondWord == null)
+                                {
+                                    Console.WriteLine("Accept which quest?");
+                                    break;
+                                }
+                                else
+                                {
+                                    if (consBuildingAccept.AcceptQuest(Convert.ToInt32(command.SecondWord)))
+                                    {
+                                        Console.WriteLine("Quest completed!");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Could not complete quest.");
+
+                                    }
+                                } 
+                            } else
+                            {
+                                Console.WriteLine("You can only accept quests in a construction building.");
                             }
                             break;
 
@@ -277,24 +308,7 @@ namespace BobTheBuilder
                 Console.WriteLine("Targeted location not yet discovered.");
             }
         }
-
-        private void GoInto(Room targetConstruction)
-        {
-            previousRoom = currentRoom;
-            currentRoom = targetConstruction;
-        }
-
         
-        private Room? FindRoomByName(string? secondWord)
-        {
-            return FindRoomByName(secondWord, null, null);
-        }
-
-        private Room? FindRoomByName(string? secondWord, string? thirdWord)
-        {
-            return FindRoomByName(secondWord, thirdWord, null);
-        }
-
         private Room? FindRoomByName(string? secondWord, string? thirdWord, string? fourthWord)//BFS for finding target room
         {
             string target = Normalize(secondWord) + Normalize(thirdWord) + Normalize(fourthWord);
@@ -349,7 +363,7 @@ namespace BobTheBuilder
 
         private void AssignItem(string shopShortDescription, Item items) // Assign item to shop dynamically with this method, I think it will be handy later when we dig deeper into the turn based system
         {
-            var room = FindRoomByName(shopShortDescription);
+            var room = FindRoomByName(shopShortDescription, null, null);
             if (room is Shop shop)
             {
                 shop.AddContents(items);
@@ -361,7 +375,7 @@ namespace BobTheBuilder
         }
         private void AssignMaterial(string shopShortDescription, Material material)
         {
-            var room = FindRoomByName(shopShortDescription);
+            var room = FindRoomByName(shopShortDescription, null, null);
             if (room is Shop shop)
             {
                 shop.AddContents(material);
