@@ -184,6 +184,10 @@ namespace BobTheBuilder
                             var targetTravel = FindRoomByName(command.SecondWord, command.ThirdWord, command.FourthWord);
                             if (targetTravel != null)
                             {
+                                if (currentRoom != null && !discoveredRooms.Contains(currentRoom))
+                                {
+                                discoveredRooms.Add(currentRoom);
+                                }
                                 Travel(targetTravel);
                             }
                             else
@@ -233,7 +237,7 @@ namespace BobTheBuilder
                             Console.WriteLine("Monthly repayment: " + bank!.getMonthlyRepayment());
                             break;
                         case "inventory": // Show player inventory
-                            player.DisplayInventory(); // Displays only items bcs you can't get materials to your inventory yet. If we want to implement buying materials we just delete the condition in "buy"
+                            player.DisplayInventory();
                             break;
 
                         case "buy"://buy stuff
@@ -244,11 +248,10 @@ namespace BobTheBuilder
                             }
                             if (currentRoom is Shop buyShop)
                             {
-                                ShopInventoryContents? contentsToBuy = buyShop.GetContents(command.SecondWord);
+                                ShopInventoryContents? contentsToBuy = buyShop.GetContents(GameInit.Normalize(command.SecondWord));
                                 if (contentsToBuy != null)
                                 {
-                                    bank!.BuyItem(contentsToBuy);
-                                    buyShop.RemoveContents(contentsToBuy); // Remove the item from the shop inventory (also works only for items not materials)
+                                    player.BuyItem(contentsToBuy);
                                 }
                                 else
                                 {
@@ -296,7 +299,7 @@ namespace BobTheBuilder
             }
             return "";
         }
-        private void Travel(Room targetRoom)//add discovered trait to rooms
+        private void Travel(Room targetRoom)
         {
             if (discoveredRooms.Contains(targetRoom))
             {
@@ -341,7 +344,7 @@ namespace BobTheBuilder
                     }
                 }
             }
-            return null; // Not found
+            return null;
         }
 
         private static string Normalize(string? s)
@@ -361,7 +364,7 @@ namespace BobTheBuilder
                     .ToLowerInvariant();
         }
 
-        private void AssignItem(string shopShortDescription, Item items) // Assign item to shop dynamically with this method, I think it will be handy later when we dig deeper into the turn based system
+        private void AssignItem(string shopShortDescription, Item items)
         {
             var room = FindRoomByName(shopShortDescription, null, null);
             if (room is Shop shop)

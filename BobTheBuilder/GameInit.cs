@@ -31,11 +31,11 @@ namespace BobTheBuilder
             street_main.SetExits(alley, street_1, bank, street_north);
             alley.SetExits(office, null, street_main, null);
             street_north.SetExits(tools, street_main, materials, null);
-            forest.SetExits(null, null, street_1, office);
+            forest.SetExits(null, null, street_1, null);
             office.SetExits(cons_2, cons_3, alley, cons_1);
-            bank.SetExits(street_main, null, null, materials);
-            materials.SetExits(street_north, bank, null, null);
-            tools.SetExits(null, office, street_north, null);
+            bank.SetExits(street_main, null, null, null);
+            materials.SetExits(street_north, null, null, null);
+            tools.SetExits(null, null, street_north, null);
             cons_1.SetExit("east", office);
             cons_2.SetExit("south", office);
             cons_3.SetExit("west", office);

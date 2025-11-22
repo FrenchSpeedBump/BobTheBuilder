@@ -21,8 +21,8 @@ namespace BobTheBuilder
 
         public List<Quest> GetQuestsCons2()
         {
-            List<ShopInventoryContents> requirements = new();
-            requirements.Add( new Material("Wood", "A sturdy piece of wood.", 0.8, 20));
+            List<string> requirements = new();
+            requirements.Add("Wood");
             
 
             questsCons2.Add(new Quest("Dig Foundation", "You will have to pay the construction office to dig.", requirements, 1, 100));

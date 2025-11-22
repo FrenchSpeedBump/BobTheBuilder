@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BobTheBuilder
+﻿namespace BobTheBuilder
 {
     public class Bank : Room
     {
-        double accountBalance;
-        double totalDebt;
-        double monthlyRepayment;
+        public static double accountBalance;
+        public double totalDebt;
+        public double monthlyRepayment;
 
         public Bank(string shortDesc,string longDesc)
             : base(shortDesc, longDesc)
@@ -83,28 +77,6 @@ namespace BobTheBuilder
                 totalDebt -= monthlyRepayment;
             }
 
-        }
-        public void AddItem(ShopInventoryContents contents)
-        {
-            Player.Inventory.Add(contents);
-        }
-
-        public void RemoveItem(ShopInventoryContents contents)
-        {
-            Player.Inventory.Remove(contents);
-        }
-        public void BuyItem(ShopInventoryContents contents)
-        {
-            if (accountBalance >= contents.Price)
-            {
-                accountBalance -= contents.Price;
-                AddItem(contents);
-                Console.WriteLine($"Bought {contents.Name} for {contents.Price}.");
-            }
-            else
-            {
-                Console.WriteLine("Not enough money.");
-            }
         }
     }
 }

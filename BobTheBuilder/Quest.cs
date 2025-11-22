@@ -14,11 +14,11 @@ namespace BobTheBuilder
 
         public int phase { get; private set; }
 
-        List<ShopInventoryContents> requirements = new();
+        public List<string> requirements = new();
         public int price { get; private set; }
 
 
-        public Quest(string shortDescription, string longDescription, List<ShopInventoryContents>? requirements , int phase, int price) 
+        public Quest(string shortDescription, string longDescription, List<string>? requirements , int phase, int price) 
         {
             this.shortDescription = shortDescription;
             this.longDescription = longDescription;
@@ -34,18 +34,20 @@ namespace BobTheBuilder
         public bool checkRequirements(List<ShopInventoryContents> inventory)
         {
 
-            List<ShopInventoryContents> tempList = new List<ShopInventoryContents>();
-            tempList = requirements;
+            List<string> tempList = new List<string>(requirements);
 
-            foreach (ShopInventoryContents req in tempList)
+            foreach (ShopInventoryContents item in inventory)
             {
-
-                foreach (ShopInventoryContents item in inventory)
+                foreach (string req in tempList)
                 {
+                    if (item.Name == req)
+                    {
+                        tempList.Remove(req);
+                        break;
+                    }
                 }
             }
-
-            return false;
+            return tempList.Count == 0;
         }
     }
 }
