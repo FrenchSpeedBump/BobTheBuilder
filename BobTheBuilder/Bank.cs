@@ -2,7 +2,7 @@
 {
     public class Bank : Room
     {
-        public static double accountBalance;
+        public double accountBalance;
         public double totalDebt;
         public double monthlyRepayment;
 

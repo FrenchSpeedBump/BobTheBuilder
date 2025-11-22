@@ -3,7 +3,7 @@
     public class ConstructionBuilding : Shop
     {
         List<Quest> quests = new List<Quest>();
-        List<Quest> currentQuests = new List<Quest>();
+        public List<Quest> currentQuests = new List<Quest>();
 
         public ConstructionBuilding(string shortDesc, string longDesc, List<Quest> quests) : base(shortDesc, longDesc)
         {
@@ -42,8 +42,16 @@
             }
         }
 
-        public bool AcceptQuest(int questId)
+        public bool AcceptQuest(int questId, int phase, Player player)
         {
+            currentQuests.Clear();
+            foreach (Quest quest in quests) // Ensures that only quests matching the current phase are considered, without this you couldn't accept quest before looking
+            {
+                if (quest.phase == phase)
+                {
+                    currentQuests.Add(quest);
+                }
+            }
             if (questId < 0 || questId >= currentQuests.Count)
             {
                 Console.WriteLine("Invalid quest ID.");
@@ -51,8 +59,28 @@
             }
             Quest myQuest = currentQuests[questId];
 
-            return myQuest.checkRequirements(Player.Inventory);
+            return myQuest.checkRequirements(player.Inventory);
 
+        }
+        public void QuestItemRemover(int questId, Player player)
+        {
+            Quest myQuest = currentQuests[questId];
+            foreach (string req in myQuest.requirements)
+            {
+                foreach (ShopInventoryContents item in player.Inventory)
+                {
+                    if (item.Name == req)
+                    {
+                        player.RemoveItem(item);
+                        break;
+                    }
+                }
+            }
+        }
+        public void MoneyDeduction(int questId, Bank bank)
+        {
+            Quest myQuest = currentQuests[questId];
+            bank.accountBalance -= myQuest.price;
         }
     }
 }
