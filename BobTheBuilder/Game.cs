@@ -7,7 +7,6 @@ namespace BobTheBuilder
         private Room? currentRoom;
         private Room? previousRoom;
         private List<Room> discoveredRooms = new();
-        private List<Room> insideOfficeRooms = new();
         private Bank bank = null!;
 
 
@@ -113,9 +112,12 @@ namespace BobTheBuilder
                                 }
                                 else
                                 {
-                                    if (consBuildingAccept.AcceptQuest(Convert.ToInt32(command.SecondWord)))
+                                    if (consBuildingAccept.AcceptQuest(Convert.ToInt32(command.SecondWord), phase, player))
                                     {
                                         Console.WriteLine("Quest completed!");
+                                        consBuildingAccept.QuestItemRemover(Convert.ToInt32(command.SecondWord), player);
+                                        consBuildingAccept.MoneyDeduction(Convert.ToInt32(command.SecondWord), bank);
+                                        phase++;
                                     }
                                     else
                                     {
@@ -248,10 +250,10 @@ namespace BobTheBuilder
                             }
                             if (currentRoom is Shop buyShop)
                             {
-                                ShopInventoryContents? contentsToBuy = buyShop.GetContents(GameInit.Normalize(command.SecondWord));
+                                ShopInventoryContents? contentsToBuy = buyShop.GetContents(command.SecondWord);
                                 if (contentsToBuy != null)
                                 {
-                                    player.BuyItem(contentsToBuy);
+                                    player.BuyItem(contentsToBuy, bank);
                                 }
                                 else
                                 {

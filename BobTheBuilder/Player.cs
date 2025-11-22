@@ -3,7 +3,7 @@ namespace BobTheBuilder
     public class Player//can inventory be a separate class?
     {
         public string Name = "Bob";
-        public static List<ShopInventoryContents> Inventory = new List<ShopInventoryContents>();
+        public List<ShopInventoryContents> Inventory = new List<ShopInventoryContents>();
         
         public void DisplayInventory()
         {
@@ -16,18 +16,18 @@ namespace BobTheBuilder
 
         public void AddItem(ShopInventoryContents contents)
         {
-            Player.Inventory.Add(contents);
+            Inventory.Add(contents);
         }
 
         public void RemoveItem(ShopInventoryContents contents)
         {
-            Player.Inventory.Remove(contents);
+            Inventory.Remove(contents);
         }
-        public void BuyItem(ShopInventoryContents contents)
+        public void BuyItem(ShopInventoryContents contents, Bank bank)
         {
-            if (Bank.accountBalance >= contents.Price)
+            if (bank.accountBalance >= contents.Price)
             {
-                Bank.accountBalance -= contents.Price;
+                bank.accountBalance -= contents.Price;
                 AddItem(contents);
                 Console.WriteLine($"Bought {contents.Name} for {contents.Price}.");
             }
