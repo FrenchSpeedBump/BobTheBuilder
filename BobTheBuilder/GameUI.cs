@@ -87,6 +87,7 @@
             Console.WriteLine("Type 'account' in a bank to check your account details");
             Console.WriteLine("Type 'inventory' to list your inventory");
             Console.WriteLine("Type 'buy <item>' in a shop to buy an item");
+            //next day
         }
 
         public static void LoadingBar()
