@@ -1,5 +1,4 @@
-﻿
-namespace BobTheBuilder
+﻿namespace BobTheBuilder
 {
     public class Game
     {

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace BobTheBuilder
+﻿namespace BobTheBuilder
 {
     public class GameInit
     {
