@@ -2,10 +2,10 @@
 {
     public abstract class ShopInventoryContents
     {
-        public string Name { get; private set; }
-        public string Description { get; private set; }
-        public double Price { get; private set; }
-        public double Sustainability { get; private set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public double Price { get; set; }
+        public double Sustainability { get; set; }
         protected ShopInventoryContents(string name, string description, double sustainability, double price)
         {
             Name = name;

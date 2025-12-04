@@ -6,11 +6,11 @@
 
         public string longDescription { get; private set; }
 
-        public bool isCompleted { get; private set; }
+        public bool isCompleted { get; set; }
 
         public int phase { get; private set; }
 
-        public List<string> requirements = new();
+        public List<string> requirements {get; private set; } = new();
         public int price { get; private set; }
 
 
