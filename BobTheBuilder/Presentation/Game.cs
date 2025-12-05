@@ -97,11 +97,12 @@
                             Console.WriteLine(currentRoom?.LongDescription);
                             if (currentRoom is Shop lookShop)
                             {
-                                lookShop.DisplayInventory();
+                                ShopUI.DisplayInventory(lookShop);
                             }
                             if (currentRoom is ConstructionBuilding consBuilding)
                             {
-                                consBuilding.GetQuestByPhase(phase);
+                                List<Quest> quests = consBuilding.GetQuestByPhase(phase);
+                                ConstructionUI.DisplayQuests(quests);
                             }
 
                             break;
@@ -164,24 +165,9 @@
 
                         case "map":
                             if (currentRoom != null)
-                                minimap.Display(currentRoom);
+                                MinimapUI.DisplayMinimap(minimap, currentRoom, minimap.roomPositions);
                             break;
-
-                        case "goto"://maybe change name so its not similar to gointo
-                            if (command.SecondWord == null)
-                            {
-                                Console.WriteLine("Go where?");
-                                break;
-                            }
-                            var target = FindRoomByName(command.SecondWord, command.ThirdWord, command.FourthWord);
-                            if (target != null && currentRoom != null)
-                            {
-                                Console.WriteLine($"Direction: {minimap.GetDirectionTo(currentRoom, target)}");
-                            }
-                            else
-                                Console.WriteLine("Unknown room");
-                            break;
-
+                            
                         case "travel":
                             if (command.SecondWord == null)
                             {
@@ -230,7 +216,10 @@
                             {
                                 Console.WriteLine("How much would you like to loan?");
                             }
-                            bank!.takeLoan(Convert.ToDouble(command.SecondWord));
+                            if (!bank!.takeLoan(Convert.ToDouble(command.SecondWord)))
+                            {
+                                Console.WriteLine("Loan request denied.");
+                            }
                             break;
                         case "account"://display account info
                             if (currentRoom != bank)
@@ -244,7 +233,7 @@
                             Console.WriteLine("Monthly repayment: " + bank!.getMonthlyRepayment());
                             break;
                         case "inventory": // Show player inventory
-                            player.DisplayInventory();
+                            PlayerUI.DisplayInventory(player);
                             break;
 
                         case "buy"://buy stuff
@@ -258,7 +247,14 @@
                                 ShopInventoryContents? contentsToBuy = buyShop.GetContents(command.SecondWord);
                                 if (contentsToBuy != null)
                                 {
-                                    player.BuyItem(contentsToBuy, bank);
+                                    if(player.BuyItem(contentsToBuy, bank))
+                                    {
+                                        Console.WriteLine($"Bought {contentsToBuy.Name} for {contentsToBuy.Price}.");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Not enough money.");
+                                    }
                                 }
                                 else
                                 {
