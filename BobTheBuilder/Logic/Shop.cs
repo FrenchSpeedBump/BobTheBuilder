@@ -3,7 +3,7 @@
     //Shop class with inventory variable, which will hold multiple item objects of type Item 
     public class Shop : Room
     {
-        public Dictionary<string, ShopInventoryContents> Inventory { get; private set; } = new();
+        public Dictionary<string, ShopInventoryContents> Inventory { get; set; } = new();
         public Shop(string shortDesc, string longDesc) : base(shortDesc, longDesc) // Made shop class inherit from Room, added inventory and relevant methods
         {
         }

@@ -5,12 +5,10 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
-        public double Sustainability { get; set; }
-        protected ShopInventoryContents(string name, string description, double sustainability, double price)
+        protected ShopInventoryContents(string name, string description, double price)
         {
             Name = name;
             Description = description;
-            Sustainability = sustainability;
             Price = price;
         }
     }
@@ -21,15 +19,17 @@
 */
     public class Item : ShopInventoryContents
     {
-        public Item(string name, string description, double sustainability, double price) : base(name, description, sustainability, price)
+        public Item(string name, string description, double price) : base(name, description, price)
         {
         }
     }
 
     public class Material : ShopInventoryContents
     {
-        public Material(string name, string description, double sustainability, double price) : base(name, description, sustainability, price)
+        public double sustainability;
+        public Material(string name, string description, double sustainability, double price) : base(name, description, price)
         {
+            this.sustainability = sustainability;
         }
     }
 

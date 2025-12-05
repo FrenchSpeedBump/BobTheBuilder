@@ -2,23 +2,22 @@
 {
     public class Quest
     {
-        public string shortDescription { get; private set; }
+        public string shortDescription { get; }
 
-        public string longDescription { get; private set; }
+        public string longDescription { get; }
 
         public bool isCompleted { get; set; }
 
-        public int phase { get; private set; }
+        public int phase { get; }
 
-        public List<string> requirements {get; private set; } = new();
-        public int price { get; private set; }
+        public List<Material> requirements {get; private set; } = new();
+        public int price { get; }
 
-
-        public Quest(string shortDescription, string longDescription, List<string>? requirements , int phase, int price) 
+        public Quest(string shortDescription, string longDescription, List<Material>? requirements , int phase, int price) 
         {
             this.shortDescription = shortDescription;
             this.longDescription = longDescription;
-            this.isCompleted = false;
+            isCompleted = false;
             if (requirements != null)
             {
                 this.requirements = requirements;
@@ -30,13 +29,13 @@
         public bool checkRequirements(List<ShopInventoryContents> inventory)
         {
 
-            List<string> tempList = new List<string>(requirements);
+            List<Material> tempList = requirements;
 
             foreach (ShopInventoryContents item in inventory)
             {
-                foreach (string req in tempList)
+                foreach (Material req in tempList)
                 {
-                    if (item.Name == req)
+                    if (item.Name == req.Name)
                     {
                         tempList.Remove(req);
                         break;
