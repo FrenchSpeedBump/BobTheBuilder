@@ -1,5 +1,3 @@
-using System.Dynamic;
-
 namespace BobTheBuilder
 {
     public class Statistics
@@ -70,7 +68,7 @@ namespace BobTheBuilder
             List<double> prices = new();
             foreach(Material material in quest.requirements)
             {
-                prices.Add(material.Price); // Fixed: Capital P
+                prices.Add(material.Price);
             }
             return prices.Sum()+quest.price;
         }

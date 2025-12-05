@@ -17,21 +17,21 @@ namespace BobTheBuilder
                     var room = roomPositions.FirstOrDefault(kvp => kvp.Value == (x, y)).Key;
                     if(room==null)
                     {
-                        Console.Write("   ");
+                        Console.Write("     ");  // 5 spaces to match room width
                     }
                     else
                     {
                         if (room == currentRoom)
-                            Console.Write("[{0}]", room.ShortDescription.Substring(0, 3));  // Player position
+                            Console.Write("[{0}]", room.ShortDescription.Substring(0, 3));  // Player position (5 chars)
                         else
                         {
                             if (room.discovered)
                             {
-                                Console.Write(" {0} ", room.ShortDescription.Substring(0, 3));  // Visited room
+                                Console.Write(" {0} ", room.ShortDescription.Substring(0, 3));  // Visited room (5 chars)
                             }
                             else
                             {
-                                Console.Write(" ??? ");
+                                Console.Write(" ??? ");  // Undiscovered (5 chars)
                             }
                                 
                         }

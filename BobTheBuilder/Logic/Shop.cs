@@ -16,18 +16,6 @@
             Inventory.Remove(contents.Name);
         }
 
-        public void DisplayInventory()
-        {
-            Console.WriteLine($"Inventory for {ShortDescription}:");
-            foreach (Item item in Inventory.Values.OfType<Item>())
-            {
-                Console.WriteLine($" - {item.Name}: {item.Description} Price: {item.Price}");
-            }
-            foreach (Material material in Inventory.Values.OfType<Material>())
-            {
-                Console.WriteLine($" - {material.Name}: {material.Description} Sustainability: {material.Sustainability} Price: {material.Price}");
-            }
-        }
         public ShopInventoryContents? GetContents(string contentsName) // Used in "buy" command
         {
             Inventory.TryGetValue(contentsName, out var contents);

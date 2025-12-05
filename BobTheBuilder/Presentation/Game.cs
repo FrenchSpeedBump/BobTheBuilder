@@ -97,7 +97,7 @@
                             Console.WriteLine(currentRoom?.LongDescription);
                             if (currentRoom is Shop lookShop)
                             {
-                                lookShop.DisplayInventory();
+                                ShopUI.DisplayInventory(lookShop);
                             }
                             if (currentRoom is ConstructionBuilding consBuilding)
                             {
@@ -233,7 +233,7 @@
                             Console.WriteLine("Monthly repayment: " + bank!.getMonthlyRepayment());
                             break;
                         case "inventory": // Show player inventory
-                            player.DisplayInventory();
+                            PlayerUI.DisplayInventory(player);
                             break;
 
                         case "buy"://buy stuff
@@ -247,7 +247,14 @@
                                 ShopInventoryContents? contentsToBuy = buyShop.GetContents(command.SecondWord);
                                 if (contentsToBuy != null)
                                 {
-                                    player.BuyItem(contentsToBuy, bank);
+                                    if(player.BuyItem(contentsToBuy, bank))
+                                    {
+                                        Console.WriteLine($"Bought {contentsToBuy.Name} for {contentsToBuy.Price}.");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Not enough money.");
+                                    }
                                 }
                                 else
                                 {
