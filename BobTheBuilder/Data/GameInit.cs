@@ -63,6 +63,7 @@
         public List<(string shopShortDescription, Item item)> CreateItems()
         {
             List<(string, Item)> list = new();
+            //Item new(string name, string description, double price)
             Item hammer = new("Hammer", "A sturdy hammer for building.", 10);
             Item nails = new("Nails", "A box of small nails.", 5);
 
@@ -75,10 +76,13 @@
         public List<(string shopShortDescription, Material material)> CreateMaterials()
         {
             List<(string, Material)> list = new();
-            Material wood = new("Wood", "A sturdy piece of wood.", 0.8, 20);
-            Material bricks = new("Bricks", "A stack of red bricks.", 0.7, 15);
-            Material concrete = new("Concrete", "A heavy block of concrete.", 0.6, 10);
-            Material glass = new("Glass", "A transparent sheet of glass.", 0.5, 5);
+
+            //Material new(string name, string description, double sustainability, double quality, double price)
+
+            Material wood = new("Wood", "A sturdy piece of wood.", 0.8, 0.8, 20);
+            Material bricks = new("Bricks", "A stack of red bricks.", 0.7, 0.7, 15);
+            Material concrete = new("Concrete", "A heavy block of concrete.", 0.6, 0.6, 10);
+            Material glass = new("Glass", "A transparent sheet of glass.", 0.5, 0.5, 5);
 
             list.Add(("Bob's Materials", wood));
             list.Add(("Bob's Materials", bricks));

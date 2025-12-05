@@ -26,10 +26,12 @@
 
     public class Material : ShopInventoryContents
     {
-        public double sustainability;
-        public Material(string name, string description, double sustainability, double price) : base(name, description, price)
+        public double Sustainability;
+        public double Quality;
+        public Material(string name, string description, double sustainability, double quality, double price) : base(name, description, price)
         {
-            this.sustainability = sustainability;
+            this.Sustainability = sustainability;
+            this.Quality = quality;
         }
     }
 

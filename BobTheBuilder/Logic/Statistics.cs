@@ -1,9 +1,11 @@
+using System.Dynamic;
+
 namespace BobTheBuilder
 {
     public class Statistics
     {
         private List<double> sustainabilityScores = new();
-        private List<int> qualityScores = new();
+        private List<double> qualityScores = new();
         private double totalMoneySpent = 0;
         private int questsCompleted = 0;
     
@@ -11,8 +13,8 @@ namespace BobTheBuilder
         public void RecordQuestCompletion(Quest quest)
         {
             sustainabilityScores.Add(GetQuestSustainability(quest));
-            //qualityScores.Add(qualityScore);
-            //totalMoneySpent += cost;
+            qualityScores.Add(GetQuestQuality(quest));
+            totalMoneySpent += GetQuestTotalPrice(quest);
             questsCompleted++;
         }
     
@@ -50,9 +52,27 @@ namespace BobTheBuilder
             List<double> scores = new();
             foreach(Material material in quest.requirements)
             {
-                scores.Add(material.sustainability);
+                scores.Add(material.Sustainability);
             }
             return scores.Average();
+        }
+        public double GetQuestQuality(Quest quest)
+        {
+            List<double> scores = new();
+            foreach(Material material in quest.requirements)
+            {
+                scores.Add(material.Quality);
+            }
+            return scores.Average();
+        }
+        public double GetQuestTotalPrice(Quest quest)
+        {
+            List<double> prices = new();
+            foreach(Material material in quest.requirements)
+            {
+                prices.Add(material.Price); // Fixed: Capital P
+            }
+            return prices.Sum()+quest.price;
         }
     }
 }
