@@ -19,7 +19,7 @@ namespace BobTheBuilder
         // Getters for calculated stats
         public double GetAverageSustainability()
         {
-            if (questsCompleted > 0)
+            if (questsCompleted > 0 && sustainabilityScores.Count > 0)
             {
                 return sustainabilityScores.Average();
             }

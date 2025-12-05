@@ -20,7 +20,7 @@
 
         public List<Quest> GetQuestsCons2()
         {
-            List<Material> requirements = new() { new Material("Wood", "A sturdy piece of wood.", 0.8, 20), new Material("Nails", "Strong nails for construction.", 0.9, 50)};
+            List<Material> requirements = new() { new Material("Wood", "A sturdy piece of wood.", 0.8, 20)};
             
 
             questsCons2.Add(new Quest("Dig Foundation", "You will have to pay the construction office to dig.", requirements, 1, 100));

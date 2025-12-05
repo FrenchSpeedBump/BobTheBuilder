@@ -19,13 +19,13 @@
         public void DisplayInventory()
         {
             Console.WriteLine($"Inventory for {ShortDescription}:");
-            foreach (var item in Inventory.Values.OfType<Item>())
+            foreach (Item item in Inventory.Values.OfType<Item>())
             {
                 Console.WriteLine($" - {item.Name}: {item.Description} Price: {item.Price}");
             }
-            foreach (var material in Inventory.Values.OfType<Material>())
+            foreach (Material material in Inventory.Values.OfType<Material>())
             {
-                Console.WriteLine($" - {material.Name}: {material.Description} Sustainability: {material.Sustainability} Price: {material.Price}");
+                Console.WriteLine($" - {material.Name}: {material.Description} Sustainability: {material.sustainability} Price: {material.Price}");
             }
         }
         public ShopInventoryContents? GetContents(string contentsName) // Used in "buy" command

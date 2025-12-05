@@ -88,13 +88,6 @@
         }
         public Quest GetQuestInfo(int questId, int phase)
         {
-            foreach (Quest quest in quests)
-            {
-                if (quest.phase == phase)
-                {
-                    currentQuests.Add(quest);
-                }
-            }
             Quest myQuest = currentQuests[questId];
             return myQuest;
         }

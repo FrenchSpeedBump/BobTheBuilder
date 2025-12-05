@@ -10,7 +10,7 @@
 
         public int phase { get; }
 
-        public List<Material> requirements {get; private set; } = new();
+        public List<Material> requirements {get; set; } = new();
         public int price { get; }
 
         public Quest(string shortDescription, string longDescription, List<Material>? requirements , int phase, int price) 
@@ -29,7 +29,7 @@
         public bool checkRequirements(List<ShopInventoryContents> inventory)
         {
 
-            List<Material> tempList = requirements;
+            List<Material> tempList = new List<Material>(requirements);
 
             foreach (ShopInventoryContents item in inventory)
             {
