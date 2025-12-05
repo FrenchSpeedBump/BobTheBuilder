@@ -11,22 +11,22 @@
 
         public Game()
         {
-            var gameInit = new GameInit();
+            GameInit gameInit = new GameInit();
 
             // get all rooms, items and materials
-            var rooms = gameInit.CreateRooms();
-            var items = gameInit.CreateItems();
-            var materials = gameInit.CreateMaterials();
+            Dictionary<string, Room> rooms = gameInit.CreateRooms();
+            List<(string shopShortDescription, Item item)> items = gameInit.CreateItems();
+            List<(string shopShortDescription, Material material)> materials = gameInit.CreateMaterials();
 
             // wire up starting room and bank using the same normalization
-            if (rooms.TryGetValue(GameInit.Normalize("House"), out var houseRoom))
+            if (rooms.TryGetValue(GameInit.Normalize("House"), out Room? houseRoom))
             {
                 currentRoom = houseRoom;
                 houseRoom.discovered = true;
                 minimap.MapRooms(houseRoom);
             }
 
-            if (rooms.TryGetValue(GameInit.Normalize("Bank"), out var bankRoom) && bankRoom is Bank b)
+            if (rooms.TryGetValue(GameInit.Normalize("Bank"), out Room? bankRoom) && bankRoom is Bank b)
             {
                 bank = b;
             }
@@ -46,6 +46,8 @@
 
             Player player = new();
 
+            Statistics stats = new();
+
             // UI features now handled through GameUI static class, which should contain all UI related methods
 
             GameUI.PrintWelcomeImage();
@@ -64,6 +66,9 @@
                 Console.WriteLine("===================================");
                 Console.WriteLine("Money = " + bank!.getBalance());
                 Console.WriteLine("===================================");
+                StatisticsUI.DisplayStats(stats, day);
+
+
                 while (continuePlaying)
                 {
                     
@@ -116,6 +121,7 @@
                                         Console.WriteLine("Quest completed!");
                                         consBuildingAccept.QuestItemRemover(Convert.ToInt32(command.SecondWord), player);
                                         consBuildingAccept.MoneyDeduction(Convert.ToInt32(command.SecondWord), bank);
+                                        stats.RecordQuestCompletion(consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase));
                                         phase++;
                                     }
                                     else

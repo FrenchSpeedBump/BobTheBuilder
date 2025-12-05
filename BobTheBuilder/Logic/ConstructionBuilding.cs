@@ -28,9 +28,9 @@
                     Console.WriteLine("Requirements:");
                     if (quest.requirements.Count > 0)
                     {
-                        foreach (string req in quest.requirements)
+                        foreach (Material req in quest.requirements)
                         {
-                            Console.Write(req + " ");
+                            Console.Write(req.Name + " ");
                         }
                         Console.WriteLine();
                     }
@@ -58,6 +58,10 @@
                 return false;
             }
             Quest myQuest = currentQuests[questId];
+            if (myQuest.checkRequirements(player.Inventory))
+            {
+                myQuest.isCompleted = true;
+            }
 
             return myQuest.checkRequirements(player.Inventory);
 
@@ -65,11 +69,11 @@
         public void QuestItemRemover(int questId, Player player)
         {
             Quest myQuest = currentQuests[questId];
-            foreach (string req in myQuest.requirements)
+            foreach (Material req in myQuest.requirements)
             {
                 foreach (ShopInventoryContents item in player.Inventory)
                 {
-                    if (item.Name == req)
+                    if (item.Name == req.Name)
                     {
                         player.RemoveItem(item);
                         break;
@@ -81,6 +85,11 @@
         {
             Quest myQuest = currentQuests[questId];
             bank.accountBalance -= myQuest.price;
+        }
+        public Quest GetQuestInfo(int questId, int phase)
+        {
+            Quest myQuest = currentQuests[questId];
+            return myQuest;
         }
     }
 }
