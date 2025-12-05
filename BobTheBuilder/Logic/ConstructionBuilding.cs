@@ -15,7 +15,7 @@
             return quests;
         }
 
-        public void GetQuestByPhase(int phase)
+        public List<Quest> GetQuestByPhase(int phase)
         {
             currentQuests.Clear();
 
@@ -24,28 +24,15 @@
                 if (quest.phase == phase)
                 {
                     currentQuests.Add(quest);
-                    Console.WriteLine(quest.shortDescription+ " " + quest.longDescription+ " "+ quest.price);
-                    Console.WriteLine("Requirements:");
-                    if (quest.requirements.Count > 0)
-                    {
-                        foreach (Material req in quest.requirements)
-                        {
-                            Console.Write(req.Name + " ");
-                        }
-                        Console.WriteLine();
-                    }
-                    else
-                    {
-                        Console.WriteLine("No requirements.");
-                    }
                 }
             }
+            return new List<Quest>(currentQuests);
         }
-
         public bool AcceptQuest(int questId, int phase, Player player)
         {
             currentQuests.Clear();
-            foreach (Quest quest in quests) // Ensures that only quests matching the current phase are considered, without this you couldn't accept quest before looking
+
+            foreach (Quest quest in quests)
             {
                 if (quest.phase == phase)
                 {
@@ -54,7 +41,6 @@
             }
             if (questId < 0 || questId >= currentQuests.Count)
             {
-                Console.WriteLine("Invalid quest ID.");
                 return false;
             }
             Quest myQuest = currentQuests[questId];
