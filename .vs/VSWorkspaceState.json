@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\BobTheBuilder",
+    "\\BobTheBuilder\\Data",
+    "\\BobTheBuilder\\Logic",
+    "\\BobTheBuilder\\Presentation"
   ],
-  "SelectedNode": "\\BobTheBuilder.sln (BobTheBuilder.sln)",
+  "SelectedNode": "\\BobTheBuilder\\Data\\QuestInit.cs",
   "PreviewInSolutionExplorer": false
 }
