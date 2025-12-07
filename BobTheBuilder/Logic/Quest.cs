@@ -10,10 +10,11 @@
 
         public int phase { get; }
 
-        public List<Material> requirements {get; set; } = new();
+        public List<Material> requirements { get; set; } = new();
+        public List<string> miniQuests { get; set; } = new();
         public int price { get; }
 
-        public Quest(string shortDescription, string longDescription, List<Material>? requirements , int phase, int price) 
+        public Quest(string shortDescription, string longDescription, List<Material>? requirements , int phase, int price, List<string>? miniQuests = null) 
         {
             this.shortDescription = shortDescription;
             this.longDescription = longDescription;
@@ -21,6 +22,10 @@
             if (requirements != null)
             {
                 this.requirements = requirements;
+            }
+            if (miniQuests != null)
+            {
+                this.miniQuests = miniQuests;
             }
             this.phase = phase;
             this.price = price;
