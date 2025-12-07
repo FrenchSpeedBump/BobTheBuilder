@@ -25,7 +25,7 @@
             }
             foreach (var material in Inventory.Values.OfType<Material>())
             {
-                Console.WriteLine($" - {material.Name}: {material.Description} Sustainability: {material.Sustainability}");
+                Console.WriteLine($" - {material.Name}: {material.Description} Sustainability: {material.Sustainability} Price: {material.Price}");
             }
         }
         public ShopInventoryContents? GetContents(string contentsName) // Used in "buy" command

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Security.Cryptography.X509Certificates;
-
+﻿
 namespace BobTheBuilder
 {
     public class Game
@@ -9,7 +7,6 @@ namespace BobTheBuilder
         private Room? currentRoom;
         private Room? previousRoom;
         private List<Room> discoveredRooms = new();
-        private List<Room> insideOfficeRooms = new();
         private Bank bank = null!;
 
 
@@ -58,6 +55,8 @@ namespace BobTheBuilder
             GameUI.PrintWelcome();
             
             int day = 1;
+            int phase = 1;
+
             while (day<10)
             {
                 bool continuePlaying = true;
@@ -95,6 +94,40 @@ namespace BobTheBuilder
                             if (currentRoom is Shop lookShop)
                             {
                                 lookShop.DisplayInventory();
+                            }
+                            if (currentRoom is ConstructionBuilding consBuilding)
+                            {
+                                consBuilding.GetQuestByPhase(phase);
+                            }
+
+                            break;
+
+                        case "accept":
+                            if (currentRoom is ConstructionBuilding consBuildingAccept)
+                            {
+                                if (command.SecondWord == null)
+                                {
+                                    Console.WriteLine("Accept which quest?");
+                                    break;
+                                }
+                                else
+                                {
+                                    if (consBuildingAccept.AcceptQuest(Convert.ToInt32(command.SecondWord), phase, player))
+                                    {
+                                        Console.WriteLine("Quest completed!");
+                                        consBuildingAccept.QuestItemRemover(Convert.ToInt32(command.SecondWord), player);
+                                        consBuildingAccept.MoneyDeduction(Convert.ToInt32(command.SecondWord), bank);
+                                        phase++;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Could not complete quest.");
+
+                                    }
+                                } 
+                            } else
+                            {
+                                Console.WriteLine("You can only accept quests in a construction building.");
                             }
                             break;
 
@@ -153,6 +186,10 @@ namespace BobTheBuilder
                             var targetTravel = FindRoomByName(command.SecondWord, command.ThirdWord, command.FourthWord);
                             if (targetTravel != null)
                             {
+                                if (currentRoom != null && !discoveredRooms.Contains(currentRoom))
+                                {
+                                discoveredRooms.Add(currentRoom);
+                                }
                                 Travel(targetTravel);
                             }
                             else
@@ -202,7 +239,7 @@ namespace BobTheBuilder
                             Console.WriteLine("Monthly repayment: " + bank!.getMonthlyRepayment());
                             break;
                         case "inventory": // Show player inventory
-                            player.DisplayInventory(); // Displays only items bcs you can't get materials to your inventory yet. If we want to implement buying materials we just delete the condition in "buy"
+                            player.DisplayInventory();
                             break;
 
                         case "buy"://buy stuff
@@ -216,8 +253,7 @@ namespace BobTheBuilder
                                 ShopInventoryContents? contentsToBuy = buyShop.GetContents(command.SecondWord);
                                 if (contentsToBuy != null)
                                 {
-                                    bank!.BuyItem(contentsToBuy);
-                                    buyShop.RemoveContents(contentsToBuy); // Remove the item from the shop inventory (also works only for items not materials)
+                                    player.BuyItem(contentsToBuy, bank);
                                 }
                                 else
                                 {
@@ -265,7 +301,7 @@ namespace BobTheBuilder
             }
             return "";
         }
-        private void Travel(Room targetRoom)//add discovered trait to rooms
+        private void Travel(Room targetRoom)
         {
             if (discoveredRooms.Contains(targetRoom))
             {
@@ -277,24 +313,7 @@ namespace BobTheBuilder
                 Console.WriteLine("Targeted location not yet discovered.");
             }
         }
-
-        private void GoInto(Room targetConstruction)
-        {
-            previousRoom = currentRoom;
-            currentRoom = targetConstruction;
-        }
-
         
-        private Room? FindRoomByName(string? secondWord)
-        {
-            return FindRoomByName(secondWord, null, null);
-        }
-
-        private Room? FindRoomByName(string? secondWord, string? thirdWord)
-        {
-            return FindRoomByName(secondWord, thirdWord, null);
-        }
-
         private Room? FindRoomByName(string? secondWord, string? thirdWord, string? fourthWord)//BFS for finding target room
         {
             string target = Normalize(secondWord) + Normalize(thirdWord) + Normalize(fourthWord);
@@ -327,7 +346,7 @@ namespace BobTheBuilder
                     }
                 }
             }
-            return null; // Not found
+            return null;
         }
 
         private static string Normalize(string? s)
@@ -347,9 +366,9 @@ namespace BobTheBuilder
                     .ToLowerInvariant();
         }
 
-        private void AssignItem(string shopShortDescription, Item items) // Assign item to shop dynamically with this method, I think it will be handy later when we dig deeper into the turn based system
+        private void AssignItem(string shopShortDescription, Item items)
         {
-            var room = FindRoomByName(shopShortDescription);
+            var room = FindRoomByName(shopShortDescription, null, null);
             if (room is Shop shop)
             {
                 shop.AddContents(items);
@@ -361,7 +380,7 @@ namespace BobTheBuilder
         }
         private void AssignMaterial(string shopShortDescription, Material material)
         {
-            var room = FindRoomByName(shopShortDescription);
+            var room = FindRoomByName(shopShortDescription, null, null);
             if (room is Shop shop)
             {
                 shop.AddContents(material);

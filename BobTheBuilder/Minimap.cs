@@ -85,8 +85,7 @@ namespace BobTheBuilder
             }
             Console.WriteLine("==================\n");
         }
-
-        //THIS IS LIKE 95% SO IDK IF WE SHOULD IMPLEMENT IT
+        
         public string GetDirectionTo(Room fromRoom, Room targetRoom)
         {
             if (fromRoom == null || !roomPositions.ContainsKey(fromRoom) || !roomPositions.ContainsKey(targetRoom))
