@@ -1,5 +1,4 @@
-﻿
-namespace BobTheBuilder
+﻿namespace BobTheBuilder
 {
     public class QuestInit
     {
@@ -21,8 +20,7 @@ namespace BobTheBuilder
 
         public List<Quest> GetQuestsCons2()
         {
-            List<string> requirements = new();
-            requirements.Add("Wood");
+            List<Material> requirements = new() { new Material("Wood", "A sturdy piece of wood.", 0.8, 0.5, 20)};
             
 
             questsCons2.Add(new Quest("Dig Foundation", "You will have to pay the construction office to dig.", requirements, 1, 100));

@@ -2,15 +2,13 @@
 {
     public abstract class ShopInventoryContents
     {
-        public string Name { get; private set; }
-        public string Description { get; private set; }
-        public double Price { get; private set; }
-        public double Sustainability { get; private set; }
-        protected ShopInventoryContents(string name, string description, double sustainability, double price)
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public double Price { get; set; }
+        protected ShopInventoryContents(string name, string description, double price)
         {
             Name = name;
             Description = description;
-            Sustainability = sustainability;
             Price = price;
         }
     }
@@ -21,15 +19,19 @@
 */
     public class Item : ShopInventoryContents
     {
-        public Item(string name, string description, double sustainability, double price) : base(name, description, sustainability, price)
+        public Item(string name, string description, double price) : base(name, description, price)
         {
         }
     }
 
     public class Material : ShopInventoryContents
     {
-        public Material(string name, string description, double sustainability, double price) : base(name, description, sustainability, price)
+        public double Sustainability;
+        public double Quality;
+        public Material(string name, string description, double sustainability, double quality, double price) : base(name, description, price)
         {
+            this.Sustainability = sustainability;
+            this.Quality = quality;
         }
     }
 

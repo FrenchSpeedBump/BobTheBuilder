@@ -1,5 +1,4 @@
-﻿
-namespace BobTheBuilder
+﻿namespace BobTheBuilder
 {
     public class Game
     {
@@ -12,22 +11,22 @@ namespace BobTheBuilder
 
         public Game()
         {
-            var gameInit = new GameInit();
+            GameInit gameInit = new GameInit();
 
             // get all rooms, items and materials
-            var rooms = gameInit.CreateRooms();
-            var items = gameInit.CreateItems();
-            var materials = gameInit.CreateMaterials();
+            Dictionary<string, Room> rooms = gameInit.CreateRooms();
+            List<(string shopShortDescription, Item item)> items = gameInit.CreateItems();
+            List<(string shopShortDescription, Material material)> materials = gameInit.CreateMaterials();
 
             // wire up starting room and bank using the same normalization
-            if (rooms.TryGetValue(GameInit.Normalize("House"), out var houseRoom))
+            if (rooms.TryGetValue(GameInit.Normalize("House"), out Room? houseRoom))
             {
                 currentRoom = houseRoom;
                 houseRoom.discovered = true;
                 minimap.MapRooms(houseRoom);
             }
 
-            if (rooms.TryGetValue(GameInit.Normalize("Bank"), out var bankRoom) && bankRoom is Bank b)
+            if (rooms.TryGetValue(GameInit.Normalize("Bank"), out Room? bankRoom) && bankRoom is Bank b)
             {
                 bank = b;
             }
@@ -47,6 +46,8 @@ namespace BobTheBuilder
 
             Player player = new();
 
+            Statistics stats = new();
+
             // UI features now handled through GameUI static class, which should contain all UI related methods
 
             GameUI.PrintWelcomeImage();
@@ -65,6 +66,9 @@ namespace BobTheBuilder
                 Console.WriteLine("===================================");
                 Console.WriteLine("Money = " + bank!.getBalance());
                 Console.WriteLine("===================================");
+                StatisticsUI.DisplayStats(stats, day);
+
+
                 while (continuePlaying)
                 {
                     
@@ -93,11 +97,12 @@ namespace BobTheBuilder
                             Console.WriteLine(currentRoom?.LongDescription);
                             if (currentRoom is Shop lookShop)
                             {
-                                lookShop.DisplayInventory();
+                                ShopUI.DisplayInventory(lookShop);
                             }
                             if (currentRoom is ConstructionBuilding consBuilding)
                             {
-                                consBuilding.GetQuestByPhase(phase);
+                                List<Quest> quests = consBuilding.GetQuestByPhase(phase);
+                                ConstructionUI.DisplayQuests(quests);
                             }
 
                             break;
@@ -117,6 +122,7 @@ namespace BobTheBuilder
                                         Console.WriteLine("Quest completed!");
                                         consBuildingAccept.QuestItemRemover(Convert.ToInt32(command.SecondWord), player);
                                         consBuildingAccept.MoneyDeduction(Convert.ToInt32(command.SecondWord), bank);
+                                        stats.RecordQuestCompletion(consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase));
                                         phase++;
                                     }
                                     else
@@ -159,24 +165,9 @@ namespace BobTheBuilder
 
                         case "map":
                             if (currentRoom != null)
-                                minimap.Display(currentRoom);
+                                MinimapUI.DisplayMinimap(minimap, currentRoom, minimap.roomPositions);
                             break;
-
-                        case "goto"://maybe change name so its not similar to gointo
-                            if (command.SecondWord == null)
-                            {
-                                Console.WriteLine("Go where?");
-                                break;
-                            }
-                            var target = FindRoomByName(command.SecondWord, command.ThirdWord, command.FourthWord);
-                            if (target != null && currentRoom != null)
-                            {
-                                Console.WriteLine($"Direction: {minimap.GetDirectionTo(currentRoom, target)}");
-                            }
-                            else
-                                Console.WriteLine("Unknown room");
-                            break;
-
+                            
                         case "travel":
                             if (command.SecondWord == null)
                             {
@@ -225,7 +216,10 @@ namespace BobTheBuilder
                             {
                                 Console.WriteLine("How much would you like to loan?");
                             }
-                            bank!.takeLoan(Convert.ToDouble(command.SecondWord));
+                            if (!bank!.takeLoan(Convert.ToDouble(command.SecondWord)))
+                            {
+                                Console.WriteLine("Loan request denied.");
+                            }
                             break;
                         case "account"://display account info
                             if (currentRoom != bank)
@@ -239,7 +233,7 @@ namespace BobTheBuilder
                             Console.WriteLine("Monthly repayment: " + bank!.getMonthlyRepayment());
                             break;
                         case "inventory": // Show player inventory
-                            player.DisplayInventory();
+                            PlayerUI.DisplayInventory(player);
                             break;
 
                         case "buy"://buy stuff
@@ -253,7 +247,14 @@ namespace BobTheBuilder
                                 ShopInventoryContents? contentsToBuy = buyShop.GetContents(command.SecondWord);
                                 if (contentsToBuy != null)
                                 {
-                                    player.BuyItem(contentsToBuy, bank);
+                                    if(player.BuyItem(contentsToBuy, bank))
+                                    {
+                                        Console.WriteLine($"Bought {contentsToBuy.Name} for {contentsToBuy.Price}.");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Not enough money.");
+                                    }
                                 }
                                 else
                                 {
