@@ -7,6 +7,7 @@
         private Room? previousRoom;
         private List<Room> discoveredRooms = new();
         private Bank bank = null!;
+        private Presentation.UI.HouseUI myHouse;
 
 
         public Game()
@@ -104,7 +105,10 @@
                                 List<Quest> quests = consBuilding.GetQuestByPhase(phase);
                                 ConstructionUI.DisplayQuests(quests);
                             }
-
+                            if (currentRoom is House house)
+                            {
+                                showHouse();
+                            }
                             break;
 
                         case "accept":
@@ -390,6 +394,14 @@
             {
                 Console.WriteLine($"Shop '{shopShortDescription}' not found to add material '{material.Name}'.");
             }
+        }
+
+        private void showHouse()
+        {
+            Presentation.UI.HouseUI my = new Presentation.UI.HouseUI();
+            Console.Write(my.setRoof(3));
+            Console.Write(my.setWalls(4));
+            Console.Write(my.setFoundation(3));
         }
         
 

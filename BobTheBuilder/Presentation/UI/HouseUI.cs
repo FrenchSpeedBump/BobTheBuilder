@@ -1,6 +1,6 @@
 ﻿namespace BobTheBuilder.Presentation.UI
 {
-    internal class HouseUI
+    public class HouseUI
     {
         //foundations
         string NoFoundation = "≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈\n";
@@ -9,13 +9,17 @@
         string BrickFoundation = "≈≈≈≈≈≈≈▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒≈≈≈≈≈≈≈\r\n       ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒       \n";
 
         //walls
-        string WoodWall = "  ________________________________ \r\n()________________________________)\r\n()________________________________)\r\n()___╔═╦═╗_____╔═══╗_____╔═╦═╗____)\r\n()___╠═╬═╣_____║░░░║_____╠═╬═╣____)\r\n()___╚═╩═╝_____║▄  ║_____╚═╩═╝____)\r\n()_____________║   ║______________)\r\n()_____________║   ║______________)\n";
-        string ConcreteWall = "███████████████████████████████████\r\n███████████████████████████████████\r\n█████╔═╦═╗█████╔═══╗█████╔═╦═╗█████\r\n█████╠═╬═╣█████║░░░║█████╠═╬═╣█████\r\n█████╚═╩═╝█████║▄  ║█████╚═╩═╝█████\r\n███████████████║   ║███████████████\r\n███████████████║   ║███████████████\n";
-        string BrickWall = "▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓\r\n▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓\r\n▓▒▒▒▒╔═╦═╗▒▒▒▒▒╔═══╗▒▒▒▒▒╔═╦═╗▒▒▒▒▓\r\n▓▒▒▒▒╠═╬═╣▒▒▒▒▒║░░░║▒▒▒▒▒╠═╬═╣▒▒▒▒▓\r\n▓▒▒▒▒╚═╩═╝▒▒▒▒▒║▄  ║▒▒▒▒▒╚═╩═╝▒▒▒▒▓\r\n▓▒▒▒▒▓▓▓▓▓▒▒▒▒▒║   ║▒▒▒▒▒▓▓▓▓▓▒▒▒▒▓\r\n▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒║   ║▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓\n";
-        string WoodShinglesWall = "\n";
+        string WoodWall = "       ()________________________________) \r\n       ()________________________________)\r\n       ()________________________________)\r\n       ()___╔═╦═╗_____╔═══╗_____╔═╦═╗____)\r\n       ()___╠═╬═╣_____║░░░║_____╠═╬═╣____)\r\n       ()___╚═╩═╝_____║▄  ║_____╚═╩═╝____)\r\n       ()_____________║   ║______________)\r\n       ()_____________║   ║______________)\n";
+        string ConcreteWall = "       ███████████████████████████████████\r\n       ███████████████████████████████████\r\n       █████╔═╦═╗█████╔═══╗█████╔═╦═╗█████\r\n       █████╠═╬═╣█████║░░░║█████╠═╬═╣█████\r\n       █████╚═╩═╝█████║▄  ║█████╚═╩═╝█████\r\n       ███████████████║   ║███████████████\r\n       ███████████████║   ║███████████████\n";
+        string BrickWall = "       ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓\r\n       ▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓\r\n       ▓▒▒▒▒╔═╦═╗▒▒▒▒▒╔═══╗▒▒▒▒▒╔═╦═╗▒▒▒▒▓\r\n       ▓▒▒▒▒╠═╬═╣▒▒▒▒▒║░░░║▒▒▒▒▒╠═╬═╣▒▒▒▒▓\r\n       ▓▒▒▒▒╚═╩═╝▒▒▒▒▒║▄  ║▒▒▒▒▒╚═╩═╝▒▒▒▒▓\r\n       ▓▒▒▒▒▓▓▓▓▓▒▒▒▒▒║   ║▒▒▒▒▒▓▓▓▓▓▒▒▒▒▓\r\n       ▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒║   ║▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓\n";
+        string WoodShinglesWall = "       █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌\r\n       █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌\r\n       █▀▀▀▀╔═╦═╗▀▀▀▀▀╔═══╗▀▀▀▀▀╔═╦═╗▀▀▀▀▌\r\n       █▀▀▀▀╠═╬═╣▀▀▀▀▀║░░░║▀▀▀▀▀╠═╬═╣▀▀▀▀▌\r\n       █▀▀▀▀╚═╩═╝▀▀▀▀▀║▄  ║▀▀▀▀▀╚═╩═╝▀▀▀▀▌\r\n       █▀▀▀▀▀▀▀▀▀▀▀▀▀▀║   ║▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌\r\n       █▀▀▀▀▀▀▀▀▀▀▀▀▀▀║   ║▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌\n";
+
         //roofs
+        string WoodRoof = "           ()-=-=-=-=-=-=-=-=-=-=-=-=)           \r\n          ()-=-=-=-=-=-=-=-=-=-=-=-=-=)          \r\n         ()-=-=-=-=-=-=-=-=-=-=-=-=-=-=)         \r\n        ()-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=)        \r\n       ()-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=)       \n";
+        string ConcreteRoof = "       █                                 █       \r\n       ███████████████████████████████████       \n";
+        string TyleRoof = "               nununununununununun               \r\n             nununununununununununun             \r\n           nununununununununununununun           \r\n         nununununununununununununununun         \r\n       nununununununununununununnununununn       \n";
 
-
+        //my version
         string ASCIIFoundation;
         string ASCIIWalls;
         string ASCIIRoof;
@@ -26,7 +30,88 @@
             ASCIIWalls = "";
             ASCIIRoof = "";
         }
-
+        public string setFoundation(int foundation)
+        {
+            if (foundation == 0)
+            {
+                return NoFoundation;
+            }
+            else if (foundation == 1)
+            {
+                return WoodFoundation;
+            }
+            else if (foundation == 2)
+            {
+                return ConcreteFoundation;
+            }
+            else if (foundation == 3)
+            {
+                return BrickFoundation;
+            }
+            else
+            {
+                return NoFoundation;
+            }
+        }
+        public string getFoundation()
+        {
+            return ASCIIFoundation;
+        }
+        public string setWalls(int walls)
+        {
+            if (walls == 0)
+            {
+                return " \r\n \r\n \r\n \r\n \r\n \r\n \n";
+            }
+            else if (walls == 1)
+            {
+                return WoodWall;
+            }
+            else if (walls == 2)
+            {
+                return ConcreteWall;
+            }
+            else if (walls == 3)
+            {
+                return BrickWall;
+            }
+            else
+            {
+                return WoodShinglesWall;
+            }
+        }
+        public string getWalls()
+        {
+            return ASCIIWalls;
+        }
+        public string setRoof(int roof)
+        {
+            if (roof == 0)
+            {
+                return " \r\n \r\n \r\n \r\n \n";
+            }
+            else if (roof == 1)
+            {
+                return WoodRoof;
+            }
+            else if (roof == 2)
+            {
+                return ConcreteRoof;
+            }
+            else if (roof == 3)
+            {
+                return TyleRoof;
+            }
+            else
+            {
+                return " \r\n \r\n \r\n \r\n \n";
+            }
+        }
+        public string getRoof()
+        {
+            return ASCIIRoof;
+        }
+        /*
         public void setFoundation(int foundation)
         {
             if (foundation == 0)
@@ -62,51 +147,52 @@
             }
             else if (walls == 1)
             {
-                ASCIIWalls = WoodFoundation;
+                ASCIIWalls = WoodWall;
             }
             else if (walls == 2)
             {
-                ASCIIWalls = ConcreteFoundation;
+                ASCIIWalls = ConcreteWall;
             }
             else if (walls == 3)
             {
-                ASCIIWalls = BrickFoundation;
+                ASCIIWalls = BrickWall;
             }
             else
             {
-                ASCIIWalls = NoFoundation;
+                ASCIIWalls = WoodShinglesWall;
             }
         }
         public string getWalls()
         {
             return ASCIIWalls;
         }
-        public void setRoof(int foundation)
+        public void setRoof(int roof)
         {
-            if (foundation == 0)
+            if (roof == 0)
             {
-                ASCIIFoundation = NoFoundation;
+                ASCIIRoof = "\n";
             }
-            else if (foundation == 1)
+            else if (roof == 1)
             {
-                ASCIIFoundation = WoodFoundation;
+                ASCIIRoof = WoodRoof;
             }
-            else if (foundation == 2)
+            else if (roof == 2)
             {
-                ASCIIFoundation = ConcreteFoundation;
+                ASCIIRoof = ConcreteRoof;
             }
-            else if (foundation == 3)
+            else if (roof == 3)
             {
-                ASCIIFoundation = BrickFoundation;
+                ASCIIRoof = TyleRoof;
             }
             else
             {
-                ASCIIFoundation = NoFoundation;
+                ASCIIRoof = "\n";
             }
         }
         public string getRoof()
         {
-            return ASCIIFoundation;
+            return ASCIIRoof;
         }
+        */
     }
 }
