@@ -7,6 +7,9 @@
         private Room? previousRoom;
         private List<Room> discoveredRooms = new();
         private Bank bank = null!;
+        private House? house;
+        private DisasterManager disasterManager = new();
+        private Random rng = new();
 
 
         public Game()
@@ -24,6 +27,8 @@
                 currentRoom = houseRoom;
                 houseRoom.discovered = true;
                 minimap.MapRooms(houseRoom);
+                if (houseRoom is House h)
+                    house = h;
             }
 
             if (rooms.TryGetValue(GameInit.Normalize("Bank"), out var bankRoom) && bankRoom is Bank b)
@@ -59,11 +64,22 @@
             while (day<10)
             {
                 bool continuePlaying = true;
+                bool gameOver = false;
                 bank?.calculateRepayment();
                 Console.WriteLine("==============|Day {0}|==============",day);
                 Console.WriteLine("===================================");
                 Console.WriteLine("Money = " + bank!.getBalance());
                 Console.WriteLine("===================================");
+                if (house != null)
+                {
+                    bool survived = disasterManager.TryTrigger(day, house, rng, msg => Console.WriteLine(msg));
+                    if (!survived)
+                    {
+                        Console.WriteLine("Your house collapsed. Game over.");
+                        gameOver = true;
+                        continuePlaying = false;
+                    }
+                }
                 while (continuePlaying)
                 {
                     
@@ -241,6 +257,37 @@
                             player.DisplayInventory();
                             break;
 
+                        case "build":
+                            if (house == null)
+                            {
+                                Console.WriteLine("You don't have a house to build on.");
+                                break;
+                            }
+                            if (command.SecondWord == null || command.ThirdWord == null)
+                            {
+                                Console.WriteLine("Build what part with which material? Usage: build <foundation|floors|walls|roof> <material>");
+                                break;
+                            }
+                            string part = Normalize(command.SecondWord);
+                            string materialName = Normalize(command.ThirdWord);
+                            if (!IsValidPart(part))
+                            {
+                                Console.WriteLine("Invalid part. Choose foundation, floors, walls, or roof.");
+                                break;
+                            }
+                            var material = player.Inventory
+                                .OfType<Material>()
+                                .FirstOrDefault(m => Normalize(m.Name) == materialName);
+                            if (material == null)
+                            {
+                                Console.WriteLine("You don't have that material.");
+                                break;
+                            }
+                            house.UsedMaterials[part] = material;
+                            player.RemoveItem(material);
+                            Console.WriteLine($"Built {command.SecondWord} with {material.Name}.");
+                            break;
+
                         case "buy"://buy stuff
                             if (command.SecondWord == null)
                             {
@@ -268,7 +315,9 @@
                     
                 }
                 day++;
-                    Console.Clear();
+                Console.Clear();
+                if (gameOver)
+                    break;
             }
             
 
@@ -363,6 +412,10 @@
                     .Replace(".", "")
                     .Replace(",", "")
                     .ToLowerInvariant();
+        }
+        private static bool IsValidPart(string part)
+        {
+            return part == "foundation" || part == "floors" || part == "walls" || part == "roof";
         }
 
         private void AssignItem(string shopShortDescription, Item items)

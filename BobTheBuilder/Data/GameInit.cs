@@ -75,10 +75,10 @@
         public List<(string shopShortDescription, Material material)> CreateMaterials()
         {
             var list = new List<(string, Material)>();
-            Material wood = new("Wood", "A sturdy piece of wood.", 0.8, 20);
-            Material bricks = new("Bricks", "A stack of red bricks.", 0.6, 15);
-            Material concrete = new("Concrete", "A heavy block of concrete.", 0.4, 10);
-            Material glass = new("Glass", "A transparent sheet of glass.", 0.5, 5);
+            Material wood = new("Wood", "A sturdy piece of wood.", 0.8, 20, 0.2, 0.1, 0.4, 0.3);
+            Material bricks = new("Bricks", "A stack of red bricks.", 0.6, 15, 0.7, 0.8, 0.7, 0.5);
+            Material concrete = new("Concrete", "A heavy block of concrete.", 0.4, 10, 0.9, 0.9, 0.9, 0.8);
+            Material glass = new("Glass", "A transparent sheet of glass.", 0.5, 5, 0.3, 0.2, 0.2, 0.2);
 
             list.Add(("Bob's Materials", wood));
             list.Add(("Bob's Materials", bricks));

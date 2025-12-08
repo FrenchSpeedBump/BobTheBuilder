@@ -28,8 +28,25 @@
 
     public class Material : ShopInventoryContents
     {
-        public Material(string name, string description, double sustainability, double price) : base(name, description, sustainability, price)
+        public double FloodResist { get; set; }      // Resistance to flooding (0-1)
+        public double FireResist { get; set; }       // Resistance to fire (0-1)
+        public double WindResist { get; set; }       // Resistance to hurricanes/wind (0-1)
+        public double QuakeResist { get; set; }      // Resistance to earthquakes (0-1)
+
+        public Material(
+            string name,
+            string description,
+            double sustainability,
+            double price,
+            double floodResist = 0,
+            double fireResist = 0,
+            double windResist = 0,
+            double quakeResist = 0) : base(name, description, sustainability, price)
         {
+            FloodResist = floodResist;
+            FireResist = fireResist;
+            WindResist = windResist;
+            QuakeResist = quakeResist;
         }
     }
 
