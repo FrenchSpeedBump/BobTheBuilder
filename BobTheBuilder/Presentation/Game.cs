@@ -7,6 +7,7 @@
         private Room? previousRoom;
         private List<Room> discoveredRooms = new();
         private Bank bank = null!;
+        public House house = null!;
 
 
         public Game()
@@ -24,6 +25,7 @@
                 currentRoom = houseRoom;
                 houseRoom.discovered = true;
                 minimap.MapRooms(houseRoom);
+                house = (House)rooms["House"];
             }
 
             if (rooms.TryGetValue(GameInit.Normalize("Bank"), out Room? bankRoom) && bankRoom is Bank b)
@@ -104,7 +106,8 @@
                                 List<Quest> quests = consBuilding.GetQuestByPhase(phase);
                                 ConstructionUI.DisplayQuests(quests);
                             }
-                            if (currentRoom is House house)
+
+                            if (currentRoom is House)
                             {
                                 showHouse();
                             }
@@ -126,6 +129,7 @@
                                         consBuildingAccept.QuestItemRemover(Convert.ToInt32(command.SecondWord), player);
                                         consBuildingAccept.MoneyDeduction(Convert.ToInt32(command.SecondWord), bank);
                                         stats.RecordQuestCompletion(consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase));
+                                        house.RecordMaterials(consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase));
                                         phase++;
                                     }
                                     else

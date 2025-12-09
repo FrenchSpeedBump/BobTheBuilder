@@ -5,9 +5,24 @@ namespace BobTheBuilder
         int foundation {  get; set; }
         int walls {  get; set; }
         int roof {  get; set; }
-        public Dictionary<string, Material> UsedMaterials { get; } = new Dictionary<string, Material>();
+        public List<Material> UsedMaterials { get; set; } = new List<Material>();
         public House(string shortDesc, string longDesc) : base(shortDesc, longDesc)
         {
+        }
+
+        public void RecordMaterials(Quest quest)
+        {
+            UsedMaterials.AddRange(GetMaterials(quest));
+        }
+
+        public List<Material> GetMaterials(Quest quest)
+        {
+            List<Material> materials = new();
+            foreach(Material material in quest.requirements)
+            {
+                materials.Add(material);
+            }
+            return materials;
         }
     }
 }
