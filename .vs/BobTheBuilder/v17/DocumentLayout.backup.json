@@ -1,34 +1,74 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\david\\source\\repos\\BobTheBuilder\\",
+  "WorkspaceRootPath": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\david\\source\\repos\\bobthebuilder\\bobthebuilder\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\alexz\\documents\\github\\bobthebuilder\\bobthebuilder\\logic\\house.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\logic\\house.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\david\\source\\repos\\bobthebuilder\\bobthebuilder\\quest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\quest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\alexz\\documents\\github\\bobthebuilder\\bobthebuilder\\logic\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\logic\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\david\\source\\repos\\bobthebuilder\\bobthebuilder\\constructionbuilding.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\constructionbuilding.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\alexz\\documents\\github\\bobthebuilder\\bobthebuilder\\logic\\naturaldisaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\logic\\naturaldisaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\david\\source\\repos\\bobthebuilder\\bobthebuilder\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\alexz\\documents\\github\\bobthebuilder\\bobthebuilder\\logic\\constructionbuilding.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\logic\\constructionbuilding.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\david\\source\\repos\\bobthebuilder\\bobthebuilder\\questinit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\questinit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\alexz\\documents\\github\\bobthebuilder\\bobthebuilder\\logic\\shop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\logic\\shop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\david\\source\\repos\\bobthebuilder\\bobthebuilder\\gameinit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\gameinit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\alexz\\documents\\github\\bobthebuilder\\bobthebuilder\\presentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\presentation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\david\\source\\repos\\bobthebuilder\\bobthebuilder\\commandwords.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\commandwords.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\alexz\\documents\\github\\bobthebuilder\\bobthebuilder\\logic\\minimap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\logic\\minimap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\alexz\\documents\\github\\bobthebuilder\\bobthebuilder\\logic\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\logic\\item.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\alexz\\documents\\github\\bobthebuilder\\bobthebuilder\\logic\\bank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\logic\\bank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\alexz\\documents\\github\\bobthebuilder\\bobthebuilder\\logic\\command.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\logic\\command.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\alexz\\documents\\github\\bobthebuilder\\bobthebuilder\\logic\\commandwords.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\logic\\commandwords.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\alexz\\documents\\github\\bobthebuilder\\bobthebuilder\\data\\gameinit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\data\\gameinit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\alexz\\documents\\github\\bobthebuilder\\bobthebuilder\\data\\questinit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\data\\questinit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\alexz\\documents\\github\\bobthebuilder\\bobthebuilder\\logic\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\logic\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\alexz\\documents\\github\\bobthebuilder\\bobthebuilder\\logic\\quest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\logic\\quest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\alexz\\documents\\github\\bobthebuilder\\bobthebuilder\\logic\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\logic\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|c:\\users\\alexz\\documents\\github\\bobthebuilder\\bobthebuilder\\logic\\parser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F53520-756B-449A-8940-959F0B7184FD}|BobTheBuilder\\BobTheBuilder.csproj|solutionrelative:bobthebuilder\\logic\\parser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +78,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,93 +90,223 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CommandWords.cs",
-              "DocumentMoniker": "C:\\Users\\david\\source\\repos\\BobTheBuilder\\BobTheBuilder\\CommandWords.cs",
-              "RelativeDocumentMoniker": "BobTheBuilder\\CommandWords.cs",
-              "ToolTip": "C:\\Users\\david\\source\\repos\\BobTheBuilder\\BobTheBuilder\\CommandWords.cs",
-              "RelativeToolTip": "BobTheBuilder\\CommandWords.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAADfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-20T13:00:13.379Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": ".gitignore",
-              "DocumentMoniker": "C:\\Users\\david\\source\\repos\\BobTheBuilder\\BobTheBuilder\\.gitignore",
-              "RelativeDocumentMoniker": "BobTheBuilder\\.gitignore",
-              "ToolTip": "C:\\Users\\david\\source\\repos\\BobTheBuilder\\BobTheBuilder\\.gitignore",
-              "RelativeToolTip": "BobTheBuilder\\.gitignore",
-              "ViewState": "AgIAAEgBAAAAAAAAAAAYwGgBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-11-20T10:55:06.4Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "QuestInit.cs",
-              "DocumentMoniker": "C:\\Users\\david\\source\\repos\\BobTheBuilder\\BobTheBuilder\\QuestInit.cs",
-              "RelativeDocumentMoniker": "BobTheBuilder\\QuestInit.cs",
-              "ToolTip": "C:\\Users\\david\\source\\repos\\BobTheBuilder\\BobTheBuilder\\QuestInit.cs",
-              "RelativeToolTip": "BobTheBuilder\\QuestInit.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBkAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-20T10:54:30.549Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "GameInit.cs",
-              "DocumentMoniker": "C:\\Users\\david\\source\\repos\\BobTheBuilder\\BobTheBuilder\\GameInit.cs",
-              "RelativeDocumentMoniker": "BobTheBuilder\\GameInit.cs",
-              "ToolTip": "C:\\Users\\david\\source\\repos\\BobTheBuilder\\BobTheBuilder\\GameInit.cs",
-              "RelativeToolTip": "BobTheBuilder\\GameInit.cs",
-              "ViewState": "AgIAAEQAAAAAAAAAAAAowE4AAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-20T10:50:16.571Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "Game.cs",
-              "DocumentMoniker": "C:\\Users\\david\\source\\repos\\BobTheBuilder\\BobTheBuilder\\Game.cs",
-              "RelativeDocumentMoniker": "BobTheBuilder\\Game.cs",
-              "ToolTip": "C:\\Users\\david\\source\\repos\\BobTheBuilder\\BobTheBuilder\\Game.cs",
-              "RelativeToolTip": "BobTheBuilder\\Game.cs",
-              "ViewState": "AgIAAGcAAAAAAAAAAAArwGoAAAAcAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Game.cs",
+              "RelativeDocumentMoniker": "BobTheBuilder\\Logic\\Game.cs",
+              "ToolTip": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Game.cs",
+              "RelativeToolTip": "BobTheBuilder\\Logic\\Game.cs",
+              "ViewState": "AgIAAD8BAAAAAAAAAAA1wA0BAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-20T10:46:52.179Z",
+              "WhenOpened": "2025-12-09T10:17:36.116Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ConstructionBuilding.cs",
-              "DocumentMoniker": "C:\\Users\\david\\source\\repos\\BobTheBuilder\\BobTheBuilder\\ConstructionBuilding.cs",
-              "RelativeDocumentMoniker": "BobTheBuilder\\ConstructionBuilding.cs",
-              "ToolTip": "C:\\Users\\david\\source\\repos\\BobTheBuilder\\BobTheBuilder\\ConstructionBuilding.cs",
-              "RelativeToolTip": "BobTheBuilder\\ConstructionBuilding.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAgwCwAAAAJAAAAAAAAAA==",
+              "Title": "NaturalDisaster.cs",
+              "DocumentMoniker": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\NaturalDisaster.cs",
+              "RelativeDocumentMoniker": "BobTheBuilder\\Logic\\NaturalDisaster.cs",
+              "ToolTip": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\NaturalDisaster.cs",
+              "RelativeToolTip": "BobTheBuilder\\Logic\\NaturalDisaster.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAYwF4AAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-20T10:45:40.836Z",
+              "WhenOpened": "2025-12-09T10:16:14.015Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Quest.cs",
-              "DocumentMoniker": "C:\\Users\\david\\source\\repos\\BobTheBuilder\\BobTheBuilder\\Quest.cs",
-              "RelativeDocumentMoniker": "BobTheBuilder\\Quest.cs",
-              "ToolTip": "C:\\Users\\david\\source\\repos\\BobTheBuilder\\BobTheBuilder\\Quest.cs",
-              "RelativeToolTip": "BobTheBuilder\\Quest.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAQwCgAAAANAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Presentation\\Program.cs",
+              "RelativeDocumentMoniker": "BobTheBuilder\\Presentation\\Program.cs",
+              "ToolTip": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Presentation\\Program.cs",
+              "RelativeToolTip": "BobTheBuilder\\Presentation\\Program.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-20T09:59:45.719Z",
+              "WhenOpened": "2025-12-08T19:02:26.474Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Shop.cs",
+              "DocumentMoniker": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Shop.cs",
+              "RelativeDocumentMoniker": "BobTheBuilder\\Logic\\Shop.cs",
+              "ToolTip": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Shop.cs",
+              "RelativeToolTip": "BobTheBuilder\\Logic\\Shop.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T11:55:03.7Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CommandWords.cs",
+              "DocumentMoniker": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\CommandWords.cs",
+              "RelativeDocumentMoniker": "BobTheBuilder\\Logic\\CommandWords.cs",
+              "ToolTip": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\CommandWords.cs",
+              "RelativeToolTip": "BobTheBuilder\\Logic\\CommandWords.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T11:54:54.423Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Bank.cs",
+              "DocumentMoniker": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Bank.cs",
+              "RelativeDocumentMoniker": "BobTheBuilder\\Logic\\Bank.cs",
+              "ToolTip": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Bank.cs",
+              "RelativeToolTip": "BobTheBuilder\\Logic\\Bank.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAQwAMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T10:50:34.894Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Minimap.cs",
+              "DocumentMoniker": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Minimap.cs",
+              "RelativeDocumentMoniker": "BobTheBuilder\\Logic\\Minimap.cs",
+              "ToolTip": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Minimap.cs",
+              "RelativeToolTip": "BobTheBuilder\\Logic\\Minimap.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T11:54:58.502Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Room.cs",
+              "DocumentMoniker": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Room.cs",
+              "RelativeDocumentMoniker": "BobTheBuilder\\Logic\\Room.cs",
+              "ToolTip": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Room.cs",
+              "RelativeToolTip": "BobTheBuilder\\Logic\\Room.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T11:55:02.354Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Quest.cs",
+              "DocumentMoniker": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Quest.cs",
+              "RelativeDocumentMoniker": "BobTheBuilder\\Logic\\Quest.cs",
+              "ToolTip": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Quest.cs",
+              "RelativeToolTip": "BobTheBuilder\\Logic\\Quest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T11:55:01.549Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "House.cs",
+              "DocumentMoniker": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\House.cs",
+              "RelativeDocumentMoniker": "BobTheBuilder\\Logic\\House.cs",
+              "ToolTip": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\House.cs",
+              "RelativeToolTip": "BobTheBuilder\\Logic\\House.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEkAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T11:54:56.639Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Player.cs",
+              "RelativeDocumentMoniker": "BobTheBuilder\\Logic\\Player.cs",
+              "ToolTip": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Player.cs",
+              "RelativeToolTip": "BobTheBuilder\\Logic\\Player.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T11:55:00.162Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Parser.cs",
+              "DocumentMoniker": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Parser.cs",
+              "RelativeDocumentMoniker": "BobTheBuilder\\Logic\\Parser.cs",
+              "ToolTip": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Parser.cs",
+              "RelativeToolTip": "BobTheBuilder\\Logic\\Parser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T11:54:59.447Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "GameInit.cs",
+              "DocumentMoniker": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Data\\GameInit.cs",
+              "RelativeDocumentMoniker": "BobTheBuilder\\Data\\GameInit.cs",
+              "ToolTip": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Data\\GameInit.cs",
+              "RelativeToolTip": "BobTheBuilder\\Data\\GameInit.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T10:50:31.587Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ConstructionBuilding.cs",
+              "DocumentMoniker": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\ConstructionBuilding.cs",
+              "RelativeDocumentMoniker": "BobTheBuilder\\Logic\\ConstructionBuilding.cs",
+              "ToolTip": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\ConstructionBuilding.cs",
+              "RelativeToolTip": "BobTheBuilder\\Logic\\ConstructionBuilding.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T11:54:55.385Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Item.cs",
+              "DocumentMoniker": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Item.cs",
+              "RelativeDocumentMoniker": "BobTheBuilder\\Logic\\Item.cs",
+              "ToolTip": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Item.cs",
+              "RelativeToolTip": "BobTheBuilder\\Logic\\Item.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T11:54:57.909Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Command.cs",
+              "DocumentMoniker": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Command.cs",
+              "RelativeDocumentMoniker": "BobTheBuilder\\Logic\\Command.cs",
+              "ToolTip": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Logic\\Command.cs",
+              "RelativeToolTip": "BobTheBuilder\\Logic\\Command.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T10:50:35.754Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "QuestInit.cs",
+              "DocumentMoniker": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Data\\QuestInit.cs",
+              "RelativeDocumentMoniker": "BobTheBuilder\\Data\\QuestInit.cs",
+              "ToolTip": "C:\\Users\\alexz\\Documents\\GitHub\\BobTheBuilder\\BobTheBuilder\\Data\\QuestInit.cs",
+              "RelativeToolTip": "BobTheBuilder\\Data\\QuestInit.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAAA8AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T10:50:32.331Z",
               "EditorCaption": ""
             }
           ]
