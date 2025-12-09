@@ -13,7 +13,9 @@
         public List<Quest> GetQuestsCons1()
         {
             // use this as template for adding quests (shortDesc, longDesc, requirements, phase, price)
-            questsCons1.Add(new Quest("Dig Foundation", "You will have to pay the construction office to dig.", null , 1, 100)); 
+            List<string> requirements = new();
+            requirements.Add("Concrete");
+            questsCons1.Add(new Quest("Build Foundation", "Lay a sturdy foundation using concrete.", requirements , 1, 100, "foundation")); 
             
             return questsCons1;
         }
@@ -21,16 +23,19 @@
         public List<Quest> GetQuestsCons2()
         {
             List<string> requirements = new();
-            requirements.Add("Wood");
+            requirements.Add("Bricks");
             
 
-            questsCons2.Add(new Quest("Dig Foundation", "You will have to pay the construction office to dig.", requirements, 1, 100));
+            questsCons2.Add(new Quest("Build Walls", "Raise the walls with solid bricks.", requirements, 2, 80, "walls"));
 
             return questsCons2;
         }
 
         public List<Quest> GetQuestsCons3()
         {
+            List<string> requirements = new();
+            requirements.Add("Wood");
+            questsCons3.Add(new Quest("Build Roof", "Add a roof to keep the rain out.", requirements, 3, 60, "roof"));
             return questsCons3;
         }
     }

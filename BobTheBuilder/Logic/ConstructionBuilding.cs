@@ -62,20 +62,26 @@
             return myQuest.checkRequirements(player.Inventory);
 
         }
-        public void QuestItemRemover(int questId, Player player)
+        public Material? QuestItemRemover(int questId, Player player)
         {
             Quest myQuest = currentQuests[questId];
+            Material? usedMaterial = null;
             foreach (string req in myQuest.requirements)
             {
                 foreach (ShopInventoryContents item in player.Inventory)
                 {
                     if (item.Name == req)
                     {
+                        if (item is Material mat && usedMaterial == null)
+                        {
+                            usedMaterial = mat; // Remember the first material used for this quest.
+                        }
                         player.RemoveItem(item);
                         break;
                     }
                 }
             }
+            return usedMaterial;
         }
         public void MoneyDeduction(int questId, Bank bank)
         {

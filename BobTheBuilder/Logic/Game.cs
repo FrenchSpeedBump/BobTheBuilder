@@ -72,12 +72,16 @@
                 Console.WriteLine("===================================");
                 if (house != null)
                 {
-                    bool survived = disasterManager.TryTrigger(day, house, rng, msg => Console.WriteLine(msg));
+                    bool survived = disasterManager.TryTrigger(day, house, rng, msg => Console.WriteLine(msg), out var damagedParts);
                     if (!survived)
                     {
                         Console.WriteLine("Your house collapsed. Game over.");
                         gameOver = true;
                         continuePlaying = false;
+                    }
+                    else if (damagedParts.Any())
+                    {
+                        HandleRepairs(bank, house, damagedParts);
                     }
                 }
                 while (continuePlaying)
@@ -130,7 +134,13 @@
                                     if (consBuildingAccept.AcceptQuest(Convert.ToInt32(command.SecondWord), phase, player))
                                     {
                                         Console.WriteLine("Quest completed!");
-                                        consBuildingAccept.QuestItemRemover(Convert.ToInt32(command.SecondWord), player);
+                                        Material? usedMaterial = consBuildingAccept.QuestItemRemover(Convert.ToInt32(command.SecondWord), player);
+                                        Quest completedQuest = consBuildingAccept.currentQuests[Convert.ToInt32(command.SecondWord)];
+                                        completedQuest.isCompleted = true;
+                                        if (house != null && completedQuest.buildsPart != null)
+                                        {
+                                            house.SetBuiltPart(completedQuest.buildsPart, usedMaterial);
+                                        }
                                         consBuildingAccept.MoneyDeduction(Convert.ToInt32(command.SecondWord), bank);
                                         phase++;
                                     }
@@ -255,37 +265,6 @@
                             break;
                         case "inventory": // Show player inventory
                             player.DisplayInventory();
-                            break;
-
-                        case "build":
-                            if (house == null)
-                            {
-                                Console.WriteLine("You don't have a house to build on.");
-                                break;
-                            }
-                            if (command.SecondWord == null || command.ThirdWord == null)
-                            {
-                                Console.WriteLine("Build what part with which material? Usage: build <foundation|floors|walls|roof> <material>");
-                                break;
-                            }
-                            string part = Normalize(command.SecondWord);
-                            string materialName = Normalize(command.ThirdWord);
-                            if (!IsValidPart(part))
-                            {
-                                Console.WriteLine("Invalid part. Choose foundation, floors, walls, or roof.");
-                                break;
-                            }
-                            var material = player.Inventory
-                                .OfType<Material>()
-                                .FirstOrDefault(m => Normalize(m.Name) == materialName);
-                            if (material == null)
-                            {
-                                Console.WriteLine("You don't have that material.");
-                                break;
-                            }
-                            house.UsedMaterials[part] = material;
-                            player.RemoveItem(material);
-                            Console.WriteLine($"Built {command.SecondWord} with {material.Name}.");
                             break;
 
                         case "buy"://buy stuff
@@ -413,10 +392,6 @@
                     .Replace(",", "")
                     .ToLowerInvariant();
         }
-        private static bool IsValidPart(string part)
-        {
-            return part == "foundation" || part == "floors" || part == "walls" || part == "roof";
-        }
 
         private void AssignItem(string shopShortDescription, Item items)
         {
@@ -442,7 +417,44 @@
                 Console.WriteLine($"Shop '{shopShortDescription}' not found to add material '{material.Name}'.");
             }
         }
-        
+
+        private void HandleRepairs(Bank bank, House house, List<string> damagedParts)
+        {
+            foreach (string part in damagedParts)
+            {
+                while (true)
+                {
+                    Console.WriteLine($"{part} was damaged. Rebuild now for $50? (yes/no)");
+                    string? input = Console.ReadLine();
+                    if (input == null) break;
+                    string normalized = Normalize(input);
+                    if (normalized == "yes" || normalized == "y")
+                    {
+                        if (bank.getBalance() >= 50)
+                        {
+                            bank.accountBalance -= 50;
+                            Material repaired = new("Repaired Part", "Quick paid rebuild", 0.5, 50, 0.5, 0.5, 0.5, 0.5);
+                            house.SetBuiltPart(part, repaired);
+                            Console.WriteLine($"Rebuilt {part} for $50. Remaining balance: {bank.getBalance():0.00}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Not enough money to rebuild now. Consider taking a loan at the bank.");
+                        }
+                        break;
+                    }
+                    else if (normalized == "no" || normalized == "n")
+                    {
+                        Console.WriteLine("You chose not to rebuild. If another disaster comes your house might collapse.");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please answer yes or no.");
+                    }
+                }
+            }
+        }
 
     }
 }

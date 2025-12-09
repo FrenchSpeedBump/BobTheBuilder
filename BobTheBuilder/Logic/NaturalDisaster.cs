@@ -41,18 +41,19 @@ namespace BobTheBuilder
             // Define the disasters we support and which parts they stress.
             _disasters = new List<NaturalDisaster>
             {
-                new NaturalDisaster("Flood", HazardType.Flood, new[]{ "foundation", "floors", "walls" }, 0.6),
+                new NaturalDisaster("Flood", HazardType.Flood, new[]{ "foundation", "walls" }, 0.6),
                 new NaturalDisaster("Wildfire", HazardType.Fire, new[]{ "walls", "roof" }, 0.6),
                 new NaturalDisaster("Hurricane", HazardType.Wind, new[]{ "walls", "roof" }, 0.7),
-                new NaturalDisaster("Earthquake", HazardType.Earthquake, new[]{ "foundation", "floors", "walls", "roof" }, 0.7)
+                new NaturalDisaster("Earthquake", HazardType.Earthquake, new[]{ "foundation", "walls", "roof" }, 0.7)
             };
         }
 
         // Call this once per day. It rolls for a disaster based on the schedule and reports results via log.
         // Returns false if the house collapses (e.g., missing material on an affected part).
-        public bool TryTrigger(int day, House house, Random rng, Action<string> log)
+        public bool TryTrigger(int day, House house, Random rng, Action<string> log, out List<string> damagedParts)
         {
-            if (house.UsedMaterials.Count == 0) return true;                         // Do nothing until at least one part is built.
+            damagedParts = new List<string>();                                       // Track parts that were damaged (but not collapsed house).
+            if (!house.HasAnyBuiltParts()) return true;                              // Do nothing until at least one part is built.
             if (day % _intervalDays != 0) return true;                               // Only roll on interval days.
             if (rng.NextDouble() > _baseChance) return true;                         // Skip if the random roll misses.
 
@@ -61,10 +62,10 @@ namespace BobTheBuilder
 
             foreach (string part in disaster.AffectedParts)                          // Evaluate each affected house part.
             {
-                house.UsedMaterials.TryGetValue(part, out var material);             // Look up the material for this part.
+                Material? material = house.GetMaterialForPart(part);                 // Look up the material for this part.
                 if (material == null)
                 {
-                    log($"- {part} had no material and collapsed. Your house is no longer safe.");
+                    log($"- {part} has not been built yet and collapsed. Your house is no longer safe.");
                     return false;                                                    // Game over if a required part is missing.
                 }
 
@@ -78,7 +79,8 @@ namespace BobTheBuilder
                 else
                 {
                     log($"- {part} was damaged; {material?.Name ?? "no material"} had only {resistance:0.00} vs required {disaster.Threshold:0.00}.");
-                    house.UsedMaterials.Remove(part);                                // Simple approach: damaged part loses its material; player must rebuild.
+                    house.DamagePart(part);                                          // Damaged part loses its material; player must rebuild via quests.
+                    damagedParts.Add(part);
                 }
             }
             return true;                                                            // House survived this disaster.

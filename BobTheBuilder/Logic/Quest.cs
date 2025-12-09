@@ -12,9 +12,10 @@
 
         public List<string> requirements {get; private set; } = new();
         public int price { get; private set; }
+        public string? buildsPart { get; private set; }
 
 
-        public Quest(string shortDescription, string longDescription, List<string>? requirements , int phase, int price) 
+        public Quest(string shortDescription, string longDescription, List<string>? requirements , int phase, int price, string? buildsPart = null) 
         {
             this.shortDescription = shortDescription;
             this.longDescription = longDescription;
@@ -25,6 +26,7 @@
             }
             this.phase = phase;
             this.price = price;
+            this.buildsPart = buildsPart;
         }
 
         public bool checkRequirements(List<ShopInventoryContents> inventory)
