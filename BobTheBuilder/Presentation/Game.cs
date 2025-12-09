@@ -7,7 +7,6 @@
         private Room? previousRoom;
         private List<Room> discoveredRooms = new();
         private Bank bank = null!;
-        private Presentation.UI.HouseUI myHouse;
 
 
         public Game()
