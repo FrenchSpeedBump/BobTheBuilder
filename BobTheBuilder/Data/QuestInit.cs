@@ -13,29 +13,93 @@
         public List<Quest> GetQuestsCons1()
         {
             // Company 1: cheaper, least sustainable
-            // Foundation (phases 1-4)
-            List<Material> reqF1 = new List<Material> { new Material("Gravel", "Low-cost gravel for excavation.", 0.2, 0.3, 5) };
-            List<Material> reqF2 = new List<Material> { new Material("Gravel", "Low-cost gravel for site leveling.", 0.2, 0.3, 5) };
-            List<Material> reqF3 = new List<Material> { new Material("Concrete", "Economy concrete mix.", 0.25, 0.4, 10) };
-            List<Material> reqF4 = new List<Material> { new Material("Insulation", "Basic foundation insulation.", 0.2, 0.3, 8) };
+            // Foundation (phases 1-4) - use 3 materials per quest
+            List<Material> reqF1 = new List<Material> {
+                new Material("Gravel", "Low-cost gravel for excavation.", 0.2, 0.3, 5),
+                new Material("Concrete", "Economy concrete mix.", 0.25, 0.35, 8),
+                new Material("Brick", "Low-cost brick.", 0.2, 0.25, 2)
+            };
+            List<Material> reqF2 = new List<Material> {
+                new Material("Gravel", "Low-cost gravel for site leveling.", 0.2, 0.3, 5),
+                new Material("Concrete", "Economy concrete for footings.", 0.25, 0.35, 10),
+                new Material("Insulation", "Basic foundation insulation.", 0.2, 0.3, 6)
+            };
+            List<Material> reqF3 = new List<Material> {
+                new Material("Concrete", "Economy concrete mix for slab.", 0.25, 0.4, 12),
+                new Material("Gravel", "Backfill gravel.", 0.2, 0.3, 4),
+                new Material("Insulation", "Basic curing insulation.", 0.2, 0.3, 5)
+            };
+            List<Material> reqF4 = new List<Material> {
+                new Material("Concrete", "Concrete for curing and finishing.", 0.2, 0.25, 6),
+                new Material("Insulation", "Foundation finishing insulation.", 0.2, 0.3, 4),
+                new Material("Gravel", "Site tidy gravel.", 0.2, 0.25, 3)
+            };
 
             // Flooring (phases 5-8)
-            List<Material> reqFL5 = new List<Material> { new Material("Pine", "Cheap pine boards.", 0.25, 0.35, 12) };
-            List<Material> reqFL6 = new List<Material> { new Material("Pine", "Subfloor pine.", 0.25, 0.35, 10) };
-            List<Material> reqFL7 = new List<Material> { new Material("Pine", "Flooring pine planks.", 0.25, 0.35, 15) };
-            List<Material> reqFL8 = new List<Material> { new Material("Insulation", "Basic underlay.", 0.2, 0.3, 6) };
+            List<Material> reqFL5 = new List<Material> {
+                new Material("Pine", "Cheap pine boards for joists.", 0.25, 0.35, 10),
+                new Material("Wood", "Basic wood for support.", 0.2, 0.3, 8),
+                new Material("Insulation", "Underfloor insulation basic.", 0.2, 0.3, 5)
+            };
+            List<Material> reqFL6 = new List<Material> {
+                new Material("Pine", "Subfloor pine panels.", 0.25, 0.35, 12),
+                new Material("Wood", "Subfloor battens.", 0.2, 0.3, 7),
+                new Material("Concrete", "Small concrete pads for support.", 0.2, 0.25, 6)
+            };
+            List<Material> reqFL7 = new List<Material> {
+                new Material("Pine", "Flooring pine planks.", 0.25, 0.35, 15),
+                new Material("Wood", "Finish trims.", 0.2, 0.3, 5),
+                new Material("Insulation", "Floor finishing underlay.", 0.2, 0.3, 4)
+            };
+            List<Material> reqFL8 = new List<Material> {
+                new Material("Pine", "Finish boards.", 0.2, 0.3, 6),
+                new Material("Wood", "Sealant timber.", 0.2, 0.3, 4),
+                new Material("Insulation", "Final underlay.", 0.2, 0.3, 3)
+            };
 
             // Walls (phases 9-12)
-            List<Material> reqW9 = new List<Material> { new Material("Brick", "Low-grade bricks.", 0.2, 0.35, 10) };
-            List<Material> reqW10 = new List<Material> { new Material("Brick", "Bricks for wall erection.", 0.2, 0.35, 12) };
-            List<Material> reqW11 = new List<Material> { new Material("Insulation", "Basic wall insulation.", 0.2, 0.3, 8) };
-            List<Material> reqW12 = new List<Material> { new Material("Brick", "Finishing bricks.", 0.2, 0.35, 9) };
+            List<Material> reqW9 = new List<Material> {
+                new Material("Brick", "Low-grade bricks for walls.", 0.2, 0.35, 9),
+                new Material("Bricks", "Stack of basic bricks.", 0.2, 0.35, 12),
+                new Material("Concrete", "Basic mortar/concrete.", 0.2, 0.3, 6)
+            };
+            List<Material> reqW10 = new List<Material> {
+                new Material("Brick", "Bricks for wall erection.", 0.2, 0.35, 10),
+                new Material("Concrete", "Mortar mix.", 0.2, 0.3, 7),
+                new Material("Insulation", "Basic wall insulation.", 0.2, 0.3, 5)
+            };
+            List<Material> reqW11 = new List<Material> {
+                new Material("Bricks", "Bricks for finishing.", 0.2, 0.35, 9),
+                new Material("Brick", "Detail bricks.", 0.2, 0.35, 6),
+                new Material("Insulation", "Wall finishing insulation.", 0.2, 0.3, 4)
+            };
+            List<Material> reqW12 = new List<Material> {
+                new Material("Bricks", "Exterior finish bricks.", 0.2, 0.35, 8),
+                new Material("Wood", "Wall trims and frames.", 0.2, 0.3, 5),
+                new Material("Insulation", "Final insulation touch.", 0.2, 0.3, 3)
+            };
 
             // Roofs (phases 13-16)
-            List<Material> reqR13 = new List<Material> { new Material("Shingle", "Cheap roofing shingles.", 0.25, 0.35, 10) };
-            List<Material> reqR14 = new List<Material> { new Material("Shingle", "Roof underlayment.", 0.25, 0.35, 6) };
-            List<Material> reqR15 = new List<Material> { new Material("Shingle", "Top roofing layer.", 0.25, 0.35, 12) };
-            List<Material> reqR16 = new List<Material> { new Material("Insulation", "Roof insulation basic.", 0.2, 0.3, 7) };
+            List<Material> reqR13 = new List<Material> {
+                new Material("Shingle", "Cheap roofing shingles for cover.", 0.25, 0.35, 10),
+                new Material("Wood", "Rafters and battens.", 0.2, 0.3, 9),
+                new Material("Insulation", "Roof insulation basic.", 0.2, 0.3, 5)
+            };
+            List<Material> reqR14 = new List<Material> {
+                new Material("Shingle", "Roof underlayment.", 0.25, 0.35, 6),
+                new Material("Wood", "Under-structure for roof.", 0.2, 0.3, 7),
+                new Material("Metal", "Basic fixings.", 0.25, 0.35, 8)
+            };
+            List<Material> reqR15 = new List<Material> {
+                new Material("Shingle", "Top roofing layer.", 0.25, 0.35, 12),
+                new Material("Glass", "Skylight glass basic.", 0.2, 0.25, 10),
+                new Material("Wood", "Roof finishing timbers.", 0.2, 0.3, 6)
+            };
+            List<Material> reqR16 = new List<Material> {
+                new Material("Shingle", "Final roof cover.", 0.25, 0.35, 9),
+                new Material("Insulation", "Roof finishing insulation.", 0.2, 0.3, 4),
+                new Material("Metal", "Fasteners and trims.", 0.25, 0.35, 6)
+            };
 
             questsCons1.Add(new Quest("Dig Foundation", "Digging and clearing the foundation area.", reqF1, 1, 50));
             questsCons1.Add(new Quest("Level Site", "Level the site for foundation work.", reqF2, 2, 60));
@@ -63,29 +127,93 @@
         public List<Quest> GetQuestsCons2()
         {
             // Company 2: average cost, average sustainability
-            // Foundation (phases 1-4)
-            List<Material> reqF1 = new List<Material> { new Material("Gravel", "Balanced gravel for excavation.", 0.55, 0.6, 12) };
-            List<Material> reqF2 = new List<Material> { new Material("Concrete", "Standard concrete mix.", 0.6, 0.6, 20) };
-            List<Material> reqF3 = new List<Material> { new Material("Concrete", "Concrete with reinforcement.", 0.6, 0.65, 30) };
-            List<Material> reqF4 = new List<Material> { new Material("Insulation", "Good quality foundation insulation.", 0.5, 0.6, 18) };
+            // Foundation (phases 1-4) - 3 materials each
+            List<Material> reqF1 = new List<Material> {
+                new Material("Gravel", "Balanced gravel for excavation.", 0.55, 0.6, 12),
+                new Material("Concrete", "Standard concrete mix.", 0.6, 0.6, 18),
+                new Material("Insulation", "Foundation insulation standard.", 0.5, 0.6, 10)
+            };
+            List<Material> reqF2 = new List<Material> {
+                new Material("Concrete", "Concrete for footings.", 0.6, 0.65, 22),
+                new Material("Gravel", "Compaction gravel.", 0.55, 0.6, 10),
+                new Material("Metal", "Rebar/metal fixings.", 0.6, 0.7, 18)
+            };
+            List<Material> reqF3 = new List<Material> {
+                new Material("Concrete", "Concrete with reinforcement.", 0.6, 0.65, 30),
+                new Material("Metal", "Reinforcement and ties.", 0.6, 0.7, 20),
+                new Material("Insulation", "Curing insulation.", 0.6, 0.6, 12)
+            };
+            List<Material> reqF4 = new List<Material> {
+                new Material("Concrete", "Foundation seal and finish.", 0.6, 0.6, 16),
+                new Material("Insulation", "Good quality foundation insulation.", 0.5, 0.6, 14),
+                new Material("Gravel", "Final site dressing.", 0.55, 0.6, 8)
+            };
 
             // Flooring (phases 5-8)
-            List<Material> reqFL5 = new List<Material> { new Material("Pine", "Engineered wood joists.", 0.6, 0.6, 30) };
-            List<Material> reqFL6 = new List<Material> { new Material("Pine", "Quality subfloor panels.", 0.6, 0.6, 35) };
-            List<Material> reqFL7 = new List<Material> { new Material("Pine", "Durable flooring boards.", 0.6, 0.6, 50) };
-            List<Material> reqFL8 = new List<Material> { new Material("Insulation", "Underfloor insulation.", 0.55, 0.6, 20) };
+            List<Material> reqFL5 = new List<Material> {
+                new Material("Pine", "Engineered joists.", 0.6, 0.6, 30),
+                new Material("Wood", "Support timber.", 0.6, 0.6, 25),
+                new Material("Insulation", "Underfloor insulation.", 0.55, 0.6, 18)
+            };
+            List<Material> reqFL6 = new List<Material> {
+                new Material("Pine", "Good subfloor panels.", 0.6, 0.6, 35),
+                new Material("Wood", "Subfloor battens.", 0.6, 0.6, 20),
+                new Material("Concrete", "Pads for support.", 0.6, 0.6, 12)
+            };
+            List<Material> reqFL7 = new List<Material> {
+                new Material("Pine", "Durable flooring boards.", 0.6, 0.6, 50),
+                new Material("Wood", "Finish trims.", 0.6, 0.6, 15),
+                new Material("Insulation", "Finish underlay.", 0.55, 0.6, 10)
+            };
+            List<Material> reqFL8 = new List<Material> {
+                new Material("Pine", "Floor finishing materials.", 0.6, 0.6, 20),
+                new Material("Wood", "Sealant timber.", 0.6, 0.6, 10),
+                new Material("Insulation", "Underfloor finish.", 0.55, 0.6, 8)
+            };
 
             // Walls (phases 9-12)
-            List<Material> reqW9 = new List<Material> { new Material("Brick", "Standard bricks.", 0.6, 0.6, 25) };
-            List<Material> reqW10 = new List<Material> { new Material("Brick", "Bricks with mortar.", 0.6, 0.65, 40) };
-            List<Material> reqW11 = new List<Material> { new Material("Insulation", "Wall insulation standard.", 0.6, 0.65, 30) };
-            List<Material> reqW12 = new List<Material> { new Material("Brick", "Exterior finish bricks.", 0.6, 0.6, 28) };
+            List<Material> reqW9 = new List<Material> {
+                new Material("Bricks", "Standard bricks.", 0.6, 0.6, 25),
+                new Material("Brick", "Detail bricks.", 0.6, 0.6, 6),
+                new Material("Concrete", "Mortar mix.", 0.6, 0.6, 12)
+            };
+            List<Material> reqW10 = new List<Material> {
+                new Material("Bricks", "Bricks with mortar.", 0.6, 0.65, 40),
+                new Material("Concrete", "Structural mortar.", 0.6, 0.65, 20),
+                new Material("Insulation", "Wall insulation standard.", 0.6, 0.65, 18)
+            };
+            List<Material> reqW11 = new List<Material> {
+                new Material("Bricks", "Bricks for insulation prep.", 0.6, 0.6, 22),
+                new Material("Insulation", "Wall insulation standard.", 0.6, 0.65, 20),
+                new Material("Wood", "Wall trims.", 0.6, 0.6, 10)
+            };
+            List<Material> reqW12 = new List<Material> {
+                new Material("Bricks", "Exterior finish bricks.", 0.6, 0.6, 28),
+                new Material("Wood", "Finish trims and frames.", 0.6, 0.6, 12),
+                new Material("Insulation", "Final insulation.", 0.6, 0.6, 10)
+            };
 
             // Roofs (phases 13-16)
-            List<Material> reqR13 = new List<Material> { new Material("Metal", "Metal trusses and framing.", 0.6, 0.7, 60) };
-            List<Material> reqR14 = new List<Material> { new Material("Shingle", "Good quality underlayment.", 0.6, 0.65, 25) };
-            List<Material> reqR15 = new List<Material> { new Material("Shingle", "Durable roofing cover.", 0.6, 0.7, 80) };
-            List<Material> reqR16 = new List<Material> { new Material("Insulation", "Roof insulation standard.", 0.6, 0.65, 30) };
+            List<Material> reqR13 = new List<Material> {
+                new Material("Metal", "Metal trusses and framing.", 0.6, 0.7, 60),
+                new Material("Wood", "Quality rafters.", 0.6, 0.65, 30),
+                new Material("Insulation", "Roof insulation standard.", 0.6, 0.65, 20)
+            };
+            List<Material> reqR14 = new List<Material> {
+                new Material("Wood", "Roof sheathing materials.", 0.6, 0.6, 25),
+                new Material("Shingle", "Good quality underlayment.", 0.6, 0.65, 25),
+                new Material("Metal", "Fasteners and trims.", 0.6, 0.7, 18)
+            };
+            List<Material> reqR15 = new List<Material> {
+                new Material("Shingle", "Durable roofing cover.", 0.6, 0.7, 80),
+                new Material("Glass", "Skylight glass.", 0.6, 0.6, 40),
+                new Material("Wood", "Finish timbers.", 0.6, 0.6, 20)
+            };
+            List<Material> reqR16 = new List<Material> {
+                new Material("Shingle", "Roof finishing layer.", 0.6, 0.65, 35),
+                new Material("Insulation", "Roof finishing insulation.", 0.6, 0.65, 18),
+                new Material("Metal", "Inspection fixings.", 0.6, 0.7, 15)
+            };
 
             questsCons2.Add(new Quest("Dig Foundation", "Excavate the foundation with standard equipment.", reqF1, 1, 120));
             questsCons2.Add(new Quest("Install Footings", "Install standard footings.", reqF2, 2, 160));
@@ -112,30 +240,94 @@
 
         public List<Quest> GetQuestsCons3()
         {
-            // Company 3: expensive but sustainable
+            // Company 3: expensive but sustainable (uses same simple material names)
             // Foundation (phases 1-4)
-            List<Material> reqF1 = new List<Material> { new Material("Recycled", "Recycled aggregate for excavation.", 0.9, 0.9, 30) };
-            List<Material> reqF2 = new List<Material> { new Material("Recycled", "Precision site preparation with recycled fill.", 0.9, 0.9, 35) };
-            List<Material> reqF3 = new List<Material> { new Material("Concrete", "High-grade sustainable concrete.", 0.9, 0.95, 80) };
-            List<Material> reqF4 = new List<Material> { new Material("Insulation", "High-performance foundation insulation.", 0.9, 0.95, 60) };
+            List<Material> reqF1 = new List<Material> {
+                new Material("Recycled", "Recycled aggregate for excavation.", 0.9, 0.9, 30),
+                new Material("Gravel", "Precision recycled gravel.", 0.9, 0.9, 18),
+                new Material("Concrete", "High-grade sustainable concrete.", 0.9, 0.95, 45)
+            };
+            List<Material> reqF2 = new List<Material> {
+                new Material("Recycled", "Precision site preparation with recycled fill.", 0.9, 0.9, 35),
+                new Material("Concrete", "Premium concrete for footings.", 0.9, 0.95, 55),
+                new Material("Insulation", "High-performance foundation insulation.", 0.9, 0.95, 30)
+            };
+            List<Material> reqF3 = new List<Material> {
+                new Material("Concrete", "High-grade sustainable concrete for slab.", 0.9, 0.95, 85),
+                new Material("Recycled", "Recycled aggregate for reinforcement.", 0.9, 0.9, 40),
+                new Material("Metal", "High-quality reinforcement.", 0.9, 0.95, 60)
+            };
+            List<Material> reqF4 = new List<Material> {
+                new Material("Insulation", "High-performance foundation insulation.", 0.9, 0.95, 40),
+                new Material("Concrete", "Premium foundation finish.", 0.9, 0.95, 30),
+                new Material("Gravel", "Final recycled dressing.", 0.9, 0.9, 15)
+            };
 
             // Flooring (phases 5-8)
-            List<Material> reqFL5 = new List<Material> { new Material("Bamboo", "Sustainably sourced bamboo joists.", 0.95, 0.9, 80) };
-            List<Material> reqFL6 = new List<Material> { new Material("Bamboo", "High-quality bamboo subfloor.", 0.95, 0.92, 90) };
-            List<Material> reqFL7 = new List<Material> { new Material("Bamboo", "Premium bamboo flooring.", 0.95, 0.95, 150) };
-            List<Material> reqFL8 = new List<Material> { new Material("Insulation", "Low-VOC underlay and insulation.", 0.95, 0.9, 50) };
+            List<Material> reqFL5 = new List<Material> {
+                new Material("Bamboo", "Sustainably sourced bamboo joists.", 0.95, 0.9, 80),
+                new Material("Wood", "High-quality support timber.", 0.9, 0.9, 50),
+                new Material("Insulation", "Low-VOC underlay and insulation.", 0.95, 0.9, 25)
+            };
+            List<Material> reqFL6 = new List<Material> {
+                new Material("Bamboo", "High-quality bamboo subfloor.", 0.95, 0.92, 90),
+                new Material("Wood", "Eco-friendly support.", 0.9, 0.9, 45),
+                new Material("Concrete", "Precision pads.", 0.9, 0.9, 20)
+            };
+            List<Material> reqFL7 = new List<Material> {
+                new Material("Bamboo", "Premium bamboo flooring.", 0.95, 0.95, 150),
+                new Material("Wood", "Finish trims.", 0.9, 0.9, 30),
+                new Material("Insulation", "Low-VOC finishing underlay.", 0.95, 0.9, 20)
+            };
+            List<Material> reqFL8 = new List<Material> {
+                new Material("Insulation", "Low-VOC underlay and insulation.", 0.95, 0.9, 25),
+                new Material("Bamboo", "Finish boards.", 0.95, 0.95, 60),
+                new Material("Wood", "Premium sealants.", 0.9, 0.9, 15)
+            };
 
             // Walls (phases 9-12)
-            List<Material> reqW9 = new List<Material> { new Material("EcoBlock", "High-efficiency eco blocks.", 0.95, 0.95, 120) };
-            List<Material> reqW10 = new List<Material> { new Material("EcoBlock", "Eco blocks for structural walls.", 0.95, 0.95, 160) };
-            List<Material> reqW11 = new List<Material> { new Material("Insulation", "High-performance eco insulation.", 0.95, 0.95, 90) };
-            List<Material> reqW12 = new List<Material> { new Material("EcoBlock", "Sustainable exterior cladding blocks.", 0.95, 0.9, 130) };
+            List<Material> reqW9 = new List<Material> {
+                new Material("EcoBlock", "High-efficiency eco blocks.", 0.95, 0.95, 120),
+                new Material("Brick", "High-quality brick accents.", 0.9, 0.9, 18),
+                new Material("Insulation", "High-performance eco insulation.", 0.95, 0.95, 40)
+            };
+            List<Material> reqW10 = new List<Material> {
+                new Material("EcoBlock", "Eco blocks for structural walls.", 0.95, 0.95, 160),
+                new Material("Concrete", "Eco mortar.", 0.9, 0.95, 40),
+                new Material("Recycled", "Recycled fillers.", 0.9, 0.9, 30)
+            };
+            List<Material> reqW11 = new List<Material> {
+                new Material("Insulation", "High-performance eco insulation.", 0.95, 0.95, 50),
+                new Material("EcoBlock", "Structural eco-blocks.", 0.95, 0.95, 110),
+                new Material("Wood", "Eco-friendly finishes.", 0.9, 0.9, 25)
+            };
+            List<Material> reqW12 = new List<Material> {
+                new Material("EcoBlock", "Sustainable exterior cladding blocks.", 0.95, 0.9, 130),
+                new Material("Brick", "Eco brick finishes.", 0.9, 0.9, 30),
+                new Material("Insulation", "Final eco insulation.", 0.95, 0.95, 35)
+            };
 
             // Roofs (phases 13-16)
-            List<Material> reqR13 = new List<Material> { new Material("Metal", "Sustainable metal trusses.", 0.9, 0.95, 140) };
-            List<Material> reqR14 = new List<Material> { new Material("Solar", "Solar-ready sheathing.", 0.95, 0.95, 200) };
-            List<Material> reqR15 = new List<Material> { new Material("Solar", "Solar tiles for roof covering.", 0.95, 0.95, 450) };
-            List<Material> reqR16 = new List<Material> { new Material("Insulation", "Top-tier roof insulation.", 0.95, 0.95, 120) };
+            List<Material> reqR13 = new List<Material> {
+                new Material("Metal", "Sustainable metal trusses.", 0.9, 0.95, 140),
+                new Material("Wood", "Premium rafters.", 0.9, 0.95, 80),
+                new Material("Recycled", "Recycled connectors and fixings.", 0.9, 0.9, 30)
+            };
+            List<Material> reqR14 = new List<Material> {
+                new Material("Solar", "Solar-ready sheathing.", 0.95, 0.95, 200),
+                new Material("Metal", "Premium sheathing supports.", 0.9, 0.95, 100),
+                new Material("Insulation", "Top-tier roof insulation.", 0.95, 0.95, 60)
+            };
+            List<Material> reqR15 = new List<Material> {
+                new Material("Solar", "Solar tiles for roof covering.", 0.95, 0.95, 450),
+                new Material("Glass", "High-efficiency skylight glass.", 0.95, 0.95, 120),
+                new Material("Wood", "Premium finishing timbers.", 0.9, 0.95, 60)
+            };
+            List<Material> reqR16 = new List<Material> {
+                new Material("Insulation", "Top-tier roof insulation.", 0.95, 0.95, 120),
+                new Material("Metal", "Final inspection fixings.", 0.9, 0.95, 30),
+                new Material("Recycled", "Final recycled dressing.", 0.9, 0.9, 25)
+            };
 
             questsCons3.Add(new Quest("Site Protection", "Prepare and protect site with sustainable methods.", reqF1, 1, 300));
             questsCons3.Add(new Quest("Precision Excavation", "Excavate precisely with recycled fill.", reqF2, 2, 350));
