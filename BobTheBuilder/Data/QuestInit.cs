@@ -15,16 +15,19 @@
             // Company 1: cheaper, least sustainable
             // Foundation (phases 1-4) - use 3 materials per quest
             List<Material> reqF1 = new List<Material> {
+                new Material("Wood","Winner",1,0.5,10),
                 new Material("Gravel", "Low-cost gravel for excavation.", 0.2, 0.3, 5),
                 new Material("Concrete", "Economy concrete mix.", 0.25, 0.35, 8),
                 new Material("Brick", "Low-cost brick.", 0.2, 0.25, 2)
             };
             List<Material> reqF2 = new List<Material> {
+                new Material("Wood","Winner",1,0.5,10),
                 new Material("Gravel", "Low-cost gravel for site leveling.", 0.2, 0.3, 5),
                 new Material("Concrete", "Economy concrete for footings.", 0.25, 0.35, 10),
                 new Material("Insulation", "Basic foundation insulation.", 0.2, 0.3, 6)
             };
             List<Material> reqF3 = new List<Material> {
+                new Material("Wood","Winner",1,0.5,10),
                 new Material("Concrete", "Economy concrete mix for slab.", 0.25, 0.4, 12),
                 new Material("Gravel", "Backfill gravel.", 0.2, 0.3, 4),
                 new Material("Insulation", "Basic curing insulation.", 0.2, 0.3, 5)
