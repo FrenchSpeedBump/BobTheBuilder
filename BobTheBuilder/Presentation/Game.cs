@@ -163,9 +163,14 @@
                             break;
 
                         case "quit":
+                            day = 10000;
                             continuePlaying = false;
                             break;
-
+                        case "sleep":
+                            Console.WriteLine("You went home to sleep.");
+                            continuePlaying = false;
+                            currentRoom = house;
+                            break;
                         case "help":
                             GameUI.PrintHelp();
                             break;
