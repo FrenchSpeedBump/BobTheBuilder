@@ -50,7 +50,7 @@
             }
             else
             {
-                return NoFoundation;
+                return ConcreteFoundation;
             }
         }
         public string getFoundation()
@@ -75,10 +75,11 @@
             {
                 return BrickWall;
             }
-            else
+            else if (walls == 4)
             {
                 return WoodShinglesWall;
             }
+            return ConcreteWall;
         }
         public string getWalls()
         {
@@ -104,7 +105,7 @@
             }
             else
             {
-                return " \r\n \r\n \r\n \r\n \n";
+                return TyleRoof;
             }
         }
         public string getRoof()
