@@ -64,8 +64,8 @@
         {
             List<(string, Item)> list = new();
             //Item new(string name, string description, double price)
-            Item hammer = new("Hammer", "A sturdy hammer for building.", 10);
-            Item nails = new("Nails", "A box of small nails.", 5);
+            Item hammer = new("Hammer", "A sturdy hammer for building.", 20,"Wood",0.90);
+            Item nails = new("Nails", "A box of small nails.", 10, "Wood", 0.95);
 
             list.Add(("Magic Tool Shop", hammer));
             list.Add(("Magic Tool Shop", nails));

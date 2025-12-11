@@ -337,9 +337,17 @@
                                 ShopInventoryContents? contentsToBuy = buyShop.GetContents(command.SecondWord);
                                 if (contentsToBuy != null)
                                 {
-                                    if(player.BuyItem(contentsToBuy, bank))
+                                    Room? otherShop = FindRoomByName("Bob's", "Materials", null);
+                                    if (buyShop.ShortDescription == "Bob's Materials" && player.BuyMaterial(contentsToBuy, bank))
                                     {
                                         Console.WriteLine($"Bought {contentsToBuy.Name} for {contentsToBuy.Price}.");
+                                    }
+                                    else if(otherShop is Shop materialShop && buyShop.ShortDescription == "Magic Tool Shop")
+                                    {
+                                        if (contentsToBuy is Item tool && player.BuyItem(tool, bank, materialShop))
+                                        {
+                                            Console.WriteLine($"Bought {contentsToBuy.Name} for {contentsToBuy.Price}.");
+                                        }
                                     }
                                     else
                                     {
