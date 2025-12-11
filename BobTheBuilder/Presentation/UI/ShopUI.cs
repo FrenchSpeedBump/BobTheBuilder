@@ -7,7 +7,7 @@ namespace BobTheBuilder
             Console.WriteLine($"Inventory for {shop.ShortDescription}:");
             foreach (Item item in shop.Inventory.Values.OfType<Item>())
             {
-                Console.WriteLine($" - {item.Name}: {item.Description} Price: {item.Price}");
+                Console.WriteLine($" - {item.Name}: {item.Description} Price: {item.Price}. It affects {item.efect} by x{item.discount}");
             }
             foreach (Material material in shop.Inventory.Values.OfType<Material>())
             {
