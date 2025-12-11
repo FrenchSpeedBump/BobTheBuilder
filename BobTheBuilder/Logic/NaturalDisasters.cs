@@ -38,6 +38,7 @@
         {
             Random rng = new Random();
             int rand = rng.Next(1, 5);
+            rand--;
             NaturalDisaster disaster = disasters[rand];
             if (house.foundation == 0 && house.walls == 0 && house.roof == 0)
             {
