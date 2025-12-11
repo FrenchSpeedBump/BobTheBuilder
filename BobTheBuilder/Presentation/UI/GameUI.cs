@@ -57,13 +57,15 @@
             Console.WriteLine("Type 'help' to print this message again.");
             Console.WriteLine("Type 'quit' to exit the game.");
             Console.WriteLine("Type 'map' to show the minimap.");
-            Console.WriteLine("Type 'goto' to plot a direction to another room.");
+            //Console.WriteLine("Type 'goto' to plot a direction to another room.");
+            Console.WriteLine("Type 'sleep' to go to the next day.");
             Console.WriteLine("Type 'gointo' to enter a neighbouring room by it's name.");
             Console.WriteLine("Type 'travel' to travel to any discovered room by it's name.");
             Console.WriteLine("Type 'loan <amount>' in a bank to take out a loan");
             Console.WriteLine("Type 'account' in a bank to check your account details");
             Console.WriteLine("Type 'inventory' to list your inventory");
             Console.WriteLine("Type 'buy <item>' in a shop to buy an item");
+            //next day
         }
 
         public static void LoadingBar()

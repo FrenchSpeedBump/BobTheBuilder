@@ -7,6 +7,8 @@
         private Room? previousRoom;
         private List<Room> discoveredRooms = new();
         private Bank bank = null!;
+        public House house = null!;
+        private Logic.NaturalDisasters disasterEvent = new();
 
 
         public Game()
@@ -24,6 +26,7 @@
                 currentRoom = houseRoom;
                 houseRoom.discovered = true;
                 minimap.MapRooms(houseRoom);
+                house = (House)rooms["House"];
             }
 
             if (rooms.TryGetValue(GameInit.Normalize("Bank"), out Room? bankRoom) && bankRoom is Bank b)
@@ -68,7 +71,10 @@
                 Console.WriteLine("===================================");
                 StatisticsUI.DisplayStats(stats, day);
 
-
+                if(!disasterEvent.disasterStruck(house, day))
+                {
+                    Console.WriteLine("Unfortunatelly your house did not survive the disaster.\n===================\nGAME OVER\n===================");
+                }
                 while (continuePlaying)
                 {
                     
@@ -105,6 +111,10 @@
                                 ConstructionUI.DisplayQuests(quests);
                             }
 
+                            if (currentRoom is House)
+                            {
+                                showHouse();
+                            }
                             break;
 
                         case "accept":
@@ -119,10 +129,85 @@
                                 {
                                     if (consBuildingAccept.AcceptQuest(Convert.ToInt32(command.SecondWord), phase, player))
                                     {
+                                        if(phase==1)//phase for foundation
+                                        {
+                                            Quest quest = consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase);
+                                            string name = quest.requirements[0].Name;
+                                            double quality = quest.requirements[0].Quality;
+                                            house.foundationHP = quality;
+                                            if (name == "Wood")
+                                            {
+                                                house.foundation = 1;
+                                            }
+                                            else if (name == "Concrete")
+                                            {
+                                                house.foundation = 2;
+                                            }
+                                            else if (name == "Brick")
+                                            {
+                                                house.foundation = 3;
+                                            }
+                                            else//other
+                                            {
+                                                house.foundation = 4;
+                                            }
+
+                                        }
+                                        if (phase == 2)//phase for walls
+                                        {
+                                            Quest quest = consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase);
+                                            string name = quest.requirements[0].Name;
+                                            double quality = quest.requirements[0].Quality;
+                                            house.wallsHP = quality;
+                                            if (name == "Wood")
+                                            {
+                                                house.walls = 1;
+                                            }
+                                            else if (name == "Concrete")
+                                            {
+                                                house.walls = 2;
+                                            }
+                                            else if (name == "Brick")
+                                            {
+                                                house.walls = 3;
+                                            }
+                                            else if (name == "WoodShingles")
+                                            {
+                                                house.walls = 4;
+                                            }
+                                            else//other
+                                            {
+                                                house.walls = 5;
+                                            }
+                                        }
+                                        if (phase == 3)//phase for roof
+                                        {
+                                            Quest quest = consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase);
+                                            string name = quest.requirements[0].Name;
+                                            double quality = quest.requirements[0].Quality;
+                                            house.roofHP = quality;
+                                            if (name == "Wood")
+                                            {
+                                                house.roof = 1;
+                                            }
+                                            else if (name == "Concrete")
+                                            {
+                                                house.roof = 2;
+                                            }
+                                            else if (name == "Tyle")
+                                            {
+                                                house.roof = 3;
+                                            }
+                                            else//other
+                                            {
+                                                house.foundation = 4;
+                                            }
+                                        }
                                         Console.WriteLine("Quest completed!");
                                         consBuildingAccept.QuestItemRemover(Convert.ToInt32(command.SecondWord), player);
                                         consBuildingAccept.MoneyDeduction(Convert.ToInt32(command.SecondWord), bank);
                                         stats.RecordQuestCompletion(consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase));
+                                        house.RecordMaterials(consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase));
                                         phase++;
                                     }
                                     else
@@ -156,9 +241,14 @@
                             break;
 
                         case "quit":
+                            day = 10000;
                             continuePlaying = false;
                             break;
-
+                        case "sleep":
+                            Console.WriteLine("You went home to sleep.");
+                            continuePlaying = false;
+                            currentRoom = house;
+                            break;
                         case "help":
                             GameUI.PrintHelp();
                             break;
@@ -390,6 +480,14 @@
             {
                 Console.WriteLine($"Shop '{shopShortDescription}' not found to add material '{material.Name}'.");
             }
+        }
+
+        private void showHouse()
+        {
+            Presentation.UI.HouseUI my = new Presentation.UI.HouseUI();
+            Console.Write(my.setRoof(house.roof));
+            Console.Write(my.setWalls(house.walls));
+            Console.Write(my.setFoundation(house.foundation));
         }
         
 
