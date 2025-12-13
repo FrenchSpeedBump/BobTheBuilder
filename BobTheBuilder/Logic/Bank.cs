@@ -5,6 +5,7 @@
         public double accountBalance;
         public double totalDebt;
         public double monthlyRepayment;
+        public char currency='$';
 
         public Bank(string shortDesc,string longDesc)
             : base(shortDesc, longDesc)

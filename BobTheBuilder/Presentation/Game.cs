@@ -67,7 +67,7 @@
                 bank?.calculateRepayment();
                 Console.WriteLine("==============|Day {0}|==============",day);
                 Console.WriteLine("===================================");
-                Console.WriteLine("Money = " + bank!.getBalance());
+                Console.WriteLine("Money = " + bank!.getBalance()+bank.currency);
                 Console.WriteLine("===================================");
                 StatisticsUI.DisplayStats(stats, day);
 
@@ -318,9 +318,9 @@
                                 break;
                             }
                             Console.WriteLine("Account information:");
-                            Console.WriteLine("Account balance: " + bank!.getBalance());
-                            Console.WriteLine("Total debt: " + bank!.getTotalDebt());
-                            Console.WriteLine("Monthly repayment: " + bank!.getMonthlyRepayment());
+                            Console.WriteLine("Account balance: " + bank!.getBalance()+bank.currency);
+                            Console.WriteLine("Total debt: " + bank!.getTotalDebt() + bank.currency);
+                            Console.WriteLine("Monthly repayment: " + bank!.getMonthlyRepayment() + bank.currency);
                             break;
                         case "inventory": // Show player inventory
                             PlayerUI.DisplayInventory(player);
@@ -360,7 +360,13 @@
                                 }
                             }
                             break;
-
+                        case "work":
+                            continuePlaying = false;
+                            double amount = 200;
+                            Console.WriteLine("Today you went to work and earned {0}{1}.",amount,bank.currency);
+                            bank.addMoney(amount);
+                            Thread.Sleep(3000);
+                            break;
                         default:
                             Console.WriteLine("I don't know what command.");
                             break;
