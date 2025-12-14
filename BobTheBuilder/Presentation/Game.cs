@@ -60,9 +60,10 @@
             
             int day = 1;
             int phase = 1;
-
+            bool built_today;
             while (day<10)
             {
+                built_today = false;
                 bool continuePlaying = true;
                 bank?.calculateRepayment();
                 Console.WriteLine("==============|Day {0}|==============",day);
@@ -120,102 +121,110 @@
                         case "accept":
                             if (currentRoom is ConstructionBuilding consBuildingAccept)
                             {
-                                if (command.SecondWord == null)
+                                if(!built_today)
                                 {
-                                    Console.WriteLine("Accept which quest?");
-                                    break;
-                                }
-                                else
-                                {
-                                    if (consBuildingAccept.AcceptQuest(Convert.ToInt32(command.SecondWord), phase, player))
+                                    if (command.SecondWord == null)
                                     {
-                                        if(phase==1)//phase for foundation
-                                        {
-                                            Quest quest = consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase);
-                                            string name = quest.requirements[0].Name;
-                                            double quality = quest.requirements[0].Quality;
-                                            house.foundationHP = quality;
-                                            if (name == "Wood")
-                                            {
-                                                house.foundation = 1;
-                                            }
-                                            else if (name == "Concrete")
-                                            {
-                                                house.foundation = 2;
-                                            }
-                                            else if (name == "Brick")
-                                            {
-                                                house.foundation = 3;
-                                            }
-                                            else//other
-                                            {
-                                                house.foundation = 4;
-                                            }
-
-                                        }
-                                        if (phase == 2)//phase for walls
-                                        {
-                                            Quest quest = consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase);
-                                            string name = quest.requirements[0].Name;
-                                            double quality = quest.requirements[0].Quality;
-                                            house.wallsHP = quality;
-                                            if (name == "Wood")
-                                            {
-                                                house.walls = 1;
-                                            }
-                                            else if (name == "Concrete")
-                                            {
-                                                house.walls = 2;
-                                            }
-                                            else if (name == "Brick")
-                                            {
-                                                house.walls = 3;
-                                            }
-                                            else if (name == "WoodShingles")
-                                            {
-                                                house.walls = 4;
-                                            }
-                                            else//other
-                                            {
-                                                house.walls = 5;
-                                            }
-                                        }
-                                        if (phase == 3)//phase for roof
-                                        {
-                                            Quest quest = consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase);
-                                            string name = quest.requirements[0].Name;
-                                            double quality = quest.requirements[0].Quality;
-                                            house.roofHP = quality;
-                                            if (name == "Wood")
-                                            {
-                                                house.roof = 1;
-                                            }
-                                            else if (name == "Concrete")
-                                            {
-                                                house.roof = 2;
-                                            }
-                                            else if (name == "Tyle")
-                                            {
-                                                house.roof = 3;
-                                            }
-                                            else//other
-                                            {
-                                                house.foundation = 4;
-                                            }
-                                        }
-                                        Console.WriteLine("Quest completed!");
-                                        consBuildingAccept.QuestItemRemover(Convert.ToInt32(command.SecondWord), player);
-                                        consBuildingAccept.MoneyDeduction(Convert.ToInt32(command.SecondWord), bank);
-                                        stats.RecordQuestCompletion(consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase));
-                                        house.RecordMaterials(consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase));
-                                        phase++;
+                                        Console.WriteLine("Accept which quest?");
+                                        break;
                                     }
                                     else
                                     {
-                                        Console.WriteLine("Could not complete quest.");
+                                        if (consBuildingAccept.AcceptQuest(Convert.ToInt32(command.SecondWord), phase, player))
+                                        {
+                                            built_today = true;
+                                            if (phase == 1)//phase for foundation
+                                            {
+                                                Quest quest = consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase);
+                                                string name = quest.requirements[0].Name;
+                                                double quality = quest.requirements[0].Quality;
+                                                house.foundationHP = quality;
+                                                if (name == "Wood")
+                                                {
+                                                    house.foundation = 1;
+                                                }
+                                                else if (name == "Concrete")
+                                                {
+                                                    house.foundation = 2;
+                                                }
+                                                else if (name == "Brick")
+                                                {
+                                                    house.foundation = 3;
+                                                }
+                                                else//other
+                                                {
+                                                    house.foundation = 4;
+                                                }
 
+                                            }
+                                            if (phase == 2)//phase for walls
+                                            {
+                                                Quest quest = consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase);
+                                                string name = quest.requirements[0].Name;
+                                                double quality = quest.requirements[0].Quality;
+                                                house.wallsHP = quality;
+                                                if (name == "Wood")
+                                                {
+                                                    house.walls = 1;
+                                                }
+                                                else if (name == "Concrete")
+                                                {
+                                                    house.walls = 2;
+                                                }
+                                                else if (name == "Brick")
+                                                {
+                                                    house.walls = 3;
+                                                }
+                                                else if (name == "WoodShingles")
+                                                {
+                                                    house.walls = 4;
+                                                }
+                                                else//other
+                                                {
+                                                    house.walls = 5;
+                                                }
+                                            }
+                                            if (phase == 3)//phase for roof
+                                            {
+                                                Quest quest = consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase);
+                                                string name = quest.requirements[0].Name;
+                                                double quality = quest.requirements[0].Quality;
+                                                house.roofHP = quality;
+                                                if (name == "Wood")
+                                                {
+                                                    house.roof = 1;
+                                                }
+                                                else if (name == "Concrete")
+                                                {
+                                                    house.roof = 2;
+                                                }
+                                                else if (name == "Tyle")
+                                                {
+                                                    house.roof = 3;
+                                                }
+                                                else//other
+                                                {
+                                                    house.foundation = 4;
+                                                }
+                                            }
+                                            Console.WriteLine("Quest completed!");
+                                            consBuildingAccept.QuestItemRemover(Convert.ToInt32(command.SecondWord), player);
+                                            consBuildingAccept.MoneyDeduction(Convert.ToInt32(command.SecondWord), bank);
+                                            stats.RecordQuestCompletion(consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase));
+                                            house.RecordMaterials(consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase));
+                                            phase++;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Could not complete quest.");
+
+                                        }
                                     }
-                                } 
+                                }
+                                else
+                                {
+                                    Console.WriteLine("You need to wait for the construction team to finish. Maybe come back tomorrow to start a new quest.");
+                                }
                             } else
                             {
                                 Console.WriteLine("You can only accept quests in a construction building.");
