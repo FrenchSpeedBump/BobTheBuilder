@@ -18,7 +18,7 @@ namespace BobTheBuilder
         {
             if (bank.accountBalance >= contents.Price)
             {
-                if(contents.Name!=null)
+                if(contents.Name!=null && contents.efect!=null)
                 {
                     ShopInventoryContents? item = materials.GetContents(contents.efect);
                     if (item != null)
@@ -47,6 +47,17 @@ namespace BobTheBuilder
             {
                 return false;
             }
+        }
+        public bool Has(string item)
+        {
+            for (int i = 0; i < Inventory.Count; i++)
+            {
+                if(Inventory[i].Name== item)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

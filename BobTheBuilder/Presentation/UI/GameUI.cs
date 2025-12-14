@@ -60,7 +60,7 @@
             //Console.WriteLine("Type 'goto' to plot a direction to another room.");
             Console.WriteLine("Type 'sleep' to go to the next day.");
             Console.WriteLine("Type 'gointo' to enter a neighbouring room by it's name.");
-            Console.WriteLine("Type 'travel' to travel to any discovered room by it's name.");
+            Console.WriteLine("Type 'travel' to travel to any discovered room by it's name. You need a car to do it.");
             Console.WriteLine("Type 'loan <amount>' in a bank to take out a loan");
             Console.WriteLine("Type 'account' in a bank to check your account details");
             Console.WriteLine("Type 'inventory' to list your inventory");

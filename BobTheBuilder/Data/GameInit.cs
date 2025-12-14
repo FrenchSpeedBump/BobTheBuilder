@@ -66,9 +66,11 @@
             //Item new(string name, string description, double price)
             Item hammer = new("Hammer", "A sturdy hammer for building.", 20,"Wood",0.90);
             Item nails = new("Nails", "A box of small nails.", 10, "Wood", 0.95);
+            Item car = new("Car", "A nice 2004 Volvo V50 that lets you fast travel between discovered locations.",2000);
 
             list.Add(("Magic Tool Shop", hammer));
             list.Add(("Magic Tool Shop", nails));
+            list.Add(("Magic Tool Shop", car));
             return list;
         }
 

@@ -268,22 +268,27 @@
                             break;
                             
                         case "travel":
-                            if (command.SecondWord == null)
+                            if (player.Has("Car"))
                             {
-                                Console.WriteLine("Travel where?");
+                                if (command.SecondWord == null)
+                                {
+                                    Console.WriteLine("Travel where?");
+                                    break;
+                                }
+                                var targetTravel = FindRoomByName(command.SecondWord, command.ThirdWord, command.FourthWord);
+                                if (targetTravel != null)
+                                {
+                                    if (currentRoom != null && !discoveredRooms.Contains(currentRoom))
+                                    {
+                                        discoveredRooms.Add(currentRoom);
+                                    }
+                                    Travel(targetTravel);
+                                }
+                                else
+                                    Console.WriteLine("Unknown room");
                                 break;
                             }
-                            var targetTravel = FindRoomByName(command.SecondWord, command.ThirdWord, command.FourthWord);
-                            if (targetTravel != null)
-                            {
-                                if (currentRoom != null && !discoveredRooms.Contains(currentRoom))
-                                {
-                                discoveredRooms.Add(currentRoom);
-                                }
-                                Travel(targetTravel);
-                            }
-                            else
-                                Console.WriteLine("Unknown room");
+                            Console.WriteLine("You can't travel yet. You need to buy a car first.");
                             break;
 
                         case "gointo"://now you can enter a neighbouring room by typing in it's name without knowing the direction
