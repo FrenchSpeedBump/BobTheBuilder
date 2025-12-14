@@ -88,7 +88,7 @@
             Material gravel = new("Gravel", "General gravel for site work.", 0.5, 0.5, 8);
             Material insulation = new("Insulation", "Insulation material.", 0.6, 0.6, 25);
             Material pine = new("Pine", "Pine timber and boards.", 0.5, 0.5, 18);
-            Material brick = new("Brick", "Single standard brick.", 0.5, 0.5, 2);
+            Material brick = new("Bricks", "Single standard brick.", 0.5, 0.5, 2);
             Material shingle = new("Shingle", "Roofing shingle material.", 0.5, 0.5, 12);
             Material metal = new("Metal", "Metal parts and framing.", 0.6, 0.7, 60);
             Material recycled = new("Recycled", "Recycled aggregate/materials.", 0.9, 0.9, 60);
