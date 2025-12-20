@@ -37,8 +37,7 @@
         public bool disasterStruck(House house, int day)
         {
             Random rng = new Random();
-            int rand = rng.Next(1, 5);
-            rand--;
+            int rand = rng.Next(0, 4);
             NaturalDisaster disaster = disasters[rand];
             if (house.foundation == 0 && house.walls == 0 && house.roof == 0)
             {
