@@ -56,7 +56,7 @@
             Console.WriteLine("Oh No! A disaster struck!\n========\n{0}\n========", disaster.name);
             if (disaster.affectFoundation>house.foundationHP)
             {
-                house.foundationHP = disaster.affectFoundation - house.foundationHP;
+                house.foundationHP -= disaster.affectFoundation - house.foundationHP;
                 Console.WriteLine("Foundation damage! Foundation durability reduced to {0}", house.foundationHP);
                 if(house.foundationHP<0)
                 {
@@ -65,7 +65,7 @@
             }
             if (disaster.affectWalls > house.wallsHP)
             {
-                house.wallsHP = disaster.affectWalls - house.wallsHP;
+                house.wallsHP -= disaster.affectWalls - house.wallsHP;
                 Console.WriteLine("Wall damage! Wall durability reduced to {0}", house.wallsHP);
                 if (house.wallsHP < 0)
                 {
@@ -74,7 +74,7 @@
             }
             if (disaster.affectRoof > house.roofHP)
             {
-                house.roofHP = disaster.affectRoof - house.roofHP;
+                house.roofHP -= disaster.affectRoof - house.roofHP;
                 Console.WriteLine("Roof damage! Roof durability reduced to {0}", house.roofHP);
                 if (house.roofHP < 0)
                 {
