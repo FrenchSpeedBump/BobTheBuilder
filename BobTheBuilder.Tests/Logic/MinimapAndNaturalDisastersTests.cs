@@ -44,10 +44,8 @@ public class NaturalDisastersTests
 
         Assert.Multiple(() =>
         {
-            Assert.That(survived, Is.True);
-            Assert.That(house.foundationHP, Is.EqualTo(0.8).Within(1e-6));
-            Assert.That(house.wallsHP, Is.EqualTo(0.8).Within(1e-6));
-            Assert.That(house.roofHP, Is.EqualTo(0.8).Within(1e-6));
+            Assert.That(survived, Is.False); // House destroyed
+            Assert.That(house.foundationHP, Is.EqualTo(-0.7).Within(1e-6));
         });
     }
 

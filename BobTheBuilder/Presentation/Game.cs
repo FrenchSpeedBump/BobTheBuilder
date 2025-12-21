@@ -204,7 +204,7 @@
                                                 }
                                                 else//other
                                                 {
-                                                    house.foundation = 4;
+                                                    house.roof = 4;
                                                 }
                                             }
                                             Console.WriteLine("Quest completed!");
