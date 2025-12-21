@@ -30,7 +30,7 @@
             ASCIIWalls = "";
             ASCIIRoof = "";
         }
-        public string setFoundation(int foundation)
+        public string SetFoundation(int foundation)
         {
             if (foundation == 0)
             {
@@ -53,11 +53,11 @@
                 return ConcreteFoundation;
             }
         }
-        public string getFoundation()
+        public string GetFoundation()
         {
             return ASCIIFoundation;
         }
-        public string setWalls(int walls)
+        public string SetWalls(int walls)
         {
             if (walls == 0)
             {
@@ -81,11 +81,11 @@
             }
             return ConcreteWall;
         }
-        public string getWalls()
+        public string GetWalls()
         {
             return ASCIIWalls;
         }
-        public string setRoof(int roof)
+        public string SetRoof(int roof)
         {
             if (roof == 0)
             {
@@ -108,7 +108,7 @@
                 return TyleRoof;
             }
         }
-        public string getRoof()
+        public string GetRoof()
         {
             return ASCIIRoof;
         }

@@ -23,8 +23,8 @@ namespace BobTheBuilder
 
         public List<Material> GetMaterials(Quest quest)
         {
-            List<Material> materials = new();
-            foreach(Material material in quest.requirements)
+            List<Material> materials = new List<Material>();
+            foreach(Material material in quest.Requirements)
             {
                 materials.Add(material);
             }

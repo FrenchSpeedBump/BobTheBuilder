@@ -19,7 +19,7 @@ public class QuestTests
             new Material("Concrete", "desc", 0.6, 0.6, 15)
         };
 
-        var result = quest.checkRequirements(inventory);
+        bool result = quest.CheckRequirements(inventory);
 
         Assert.That(result, Is.True);
     }
@@ -31,7 +31,7 @@ public class QuestTests
         var quest = new Quest("Test", "desc", requirements, 1, 100);
         var inventory = new List<ShopInventoryContents>();
 
-        var result = quest.checkRequirements(inventory);
+        bool result = quest.CheckRequirements(inventory);
 
         Assert.That(result, Is.False);
     }
@@ -59,7 +59,7 @@ public class ConstructionBuildingTests
         Assert.Multiple(() =>
         {
             Assert.That(phaseOne, Has.Count.EqualTo(1));
-            Assert.That(phaseOne[0].phase, Is.EqualTo(1));
+            Assert.That(phaseOne[0].Phase, Is.EqualTo(1));
         });
     }
 
@@ -76,7 +76,7 @@ public class ConstructionBuildingTests
         Assert.Multiple(() =>
         {
             Assert.That(accepted, Is.True);
-            Assert.That(quests[0].isCompleted, Is.True);
+            Assert.That(quests[0].IsCompleted, Is.True);
         });
     }
 
@@ -118,8 +118,8 @@ public class ConstructionBuildingTests
         player.AddItem(new Material("Wood", "desc", 0.5, 0.5, 10));
 
         building.AcceptQuest(0, 1, player);
-        var info = building.GetQuestInfo(0, 1);
+        Quest info = building.GetQuestInfo(0, 1);
 
-        Assert.That(info.shortDescription, Is.EqualTo("Quest 1"));
+        Assert.That(info.ShortDescription, Is.EqualTo("Quest 1"));
     }
 }

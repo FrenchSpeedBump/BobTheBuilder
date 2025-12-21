@@ -19,18 +19,18 @@
 */
     public class Item : ShopInventoryContents
     {
-        public string? effect { get; set; } //what does it affect
-        public double discount { get; set; } //by how much
+        public string? Effect { get; set; } //what does it affect
+        public double Discount { get; set; } //by how much
 
         public Item(string name, string description, double price, string effect, double discount) : base(name, description, price)
         {
-            this.effect = effect;
-            this.discount = discount;
+            this.Effect = effect;
+            this.Discount = discount;
         }
         public Item(string name, string description, double price) : base(name, description, price)
         {
-            this.effect = null;
-            this.discount = 1;
+            this.Effect = null;
+            this.Discount = 1;
         }
     }
 

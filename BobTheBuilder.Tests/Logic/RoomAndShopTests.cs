@@ -73,12 +73,12 @@ public class ShopTests
     [Test]
     public void Item_ShouldPersistEffectMetadata()
     {
-        var coupon = new Item("Coupon", "desc", 10, "Wood", 0.5);
+        Item coupon = new Item("Coupon", "desc", 10, "Wood", 0.5);
 
         Assert.Multiple(() =>
         {
-            Assert.That(coupon.effect, Is.EqualTo("Wood"));
-            Assert.That(coupon.discount, Is.EqualTo(0.5));
+            Assert.That(coupon.Effect, Is.EqualTo("Wood"));
+            Assert.That(coupon.Discount, Is.EqualTo(0.5));
         });
     }
 

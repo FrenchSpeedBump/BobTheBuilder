@@ -6,9 +6,9 @@ public class BankTests
     [Test]
     public void AddMoney_ShouldIncreaseBalance()
     {
-        var bank = new Bank("Bank", "desc");
+        Bank bank = new Bank("Bank", "desc");
 
-        bank.addMoney(500);
+        bank.AddMoney(500);
 
         Assert.That(bank.accountBalance, Is.EqualTo(50500));
     }
@@ -30,9 +30,9 @@ public class BankTests
     [Test]
     public void TakeLoan_ShouldApplyInterestAndRepayment()
     {
-        var bank = new Bank("Bank", "desc");
+        Bank bank = new Bank("Bank", "desc");
 
-        var success = bank.takeLoan(800);
+        bool success = bank.TakeLoan(800);
 
         Assert.Multiple(() =>
         {
@@ -46,10 +46,10 @@ public class BankTests
     [Test]
     public void CalculateRepayment_ShouldReduceDebtAndBalance()
     {
-        var bank = new Bank("Bank", "desc");
-        bank.takeLoan(2000);
+        Bank bank = new Bank("Bank", "desc");
+        bank.TakeLoan(2000);
 
-        bank.calculateRepayment();
+        bank.CalculateRepayment();
 
         Assert.Multiple(() =>
         {

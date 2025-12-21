@@ -73,14 +73,14 @@
             {
                 built_today = false;
                 bool continuePlaying = true;
-                bank.calculateRepayment();
+                bank.CalculateRepayment();
                 Console.WriteLine("==============|Day {0}|==============",day);
                 Console.WriteLine("===================================");
-                Console.WriteLine("Money = " + bank.getBalance() + bank.currency);
+                Console.WriteLine("Money = " + bank.GetBalance() + bank.currency);
                 Console.WriteLine("===================================");
                 StatisticsUI.DisplayStats(stats, day);
 
-                if(!disasterEvent.disasterStruck(house, day))
+                if(!disasterEvent.DisasterStruck(house, day))
                 {
                     Console.WriteLine("Unfortunately your house did not survive the disaster.\n===================\nGAME OVER\n===================");
                     day = 10000;
@@ -145,8 +145,8 @@
                                         {
                                             built_today = true;
                                             Quest quest = consBuildingAccept.GetQuestInfo(questId, phase);
-                                            string materialName = quest.requirements[0].Name;
-                                            double quality = quest.requirements[0].Quality;
+                                            string materialName = quest.Requirements[0].Name;
+                                            double quality = quest.Requirements[0].Quality;
                                             
                                             if (phase == 1)//phase for foundation
                                             {
@@ -326,7 +326,7 @@
                                 Console.WriteLine("How much would you like to loan?");
                                 break;
                             }
-                            if (!bank.takeLoan(Convert.ToDouble(command.SecondWord)))
+                            if (!bank.TakeLoan(Convert.ToDouble(command.SecondWord)))
                             {
                                 Console.WriteLine("Loan request denied.");
                             }
@@ -338,9 +338,9 @@
                                 break;
                             }
                             Console.WriteLine("Account information:");
-                            Console.WriteLine("Account balance: " + bank.getBalance() + bank.currency);
-                            Console.WriteLine("Total debt: " + bank.getTotalDebt() + bank.currency);
-                            Console.WriteLine("Monthly repayment: " + bank.getMonthlyRepayment() + bank.currency);
+                            Console.WriteLine("Account balance: " + bank.GetBalance() + bank.currency);
+                            Console.WriteLine("Total debt: " + bank.GetTotalDebt() + bank.currency);
+                            Console.WriteLine("Monthly repayment: " + bank.GetMonthlyRepayment() + bank.currency);
                             break;
                         case "inventory": // Show player inventory
                             PlayerUI.DisplayInventory(player);
@@ -388,7 +388,7 @@
                             continuePlaying = false;
                             double amount = 200;
                             Console.WriteLine("Today you went to work and earned {0}{1}.",amount,bank.currency);
-                            bank.addMoney(amount);
+                            bank.AddMoney(amount);
                             Thread.Sleep(3000);
                             break;
                         default:
@@ -421,7 +421,7 @@
         }
         private string IsNeighbour(string room)
         {
-            foreach (var direction in currentRoom!.Exits)
+            foreach (KeyValuePair<string, Room> direction in currentRoom!.Exits)
             {
                 if (Normalize(direction.Value.ShortDescription) == Normalize(room))
                 {
@@ -466,7 +466,7 @@
                 if (Normalize(current.ShortDescription) == target)
                     return current;
 
-                foreach (var neighbor in current.Exits.Values)
+                foreach (Room neighbor in current.Exits.Values)
                 {
                     if (!visited.Contains(neighbor))
                     {
@@ -523,9 +523,9 @@
         private void ShowHouse()
         {
             Presentation.UI.HouseUI houseUI = new Presentation.UI.HouseUI();
-            Console.Write(houseUI.setRoof(house.roof));
-            Console.Write(houseUI.setWalls(house.walls));
-            Console.Write(houseUI.setFoundation(house.foundation));
+            Console.Write(houseUI.SetRoof(house.roof));
+            Console.Write(houseUI.SetWalls(house.walls));
+            Console.Write(houseUI.SetFoundation(house.foundation));
         }
         
 

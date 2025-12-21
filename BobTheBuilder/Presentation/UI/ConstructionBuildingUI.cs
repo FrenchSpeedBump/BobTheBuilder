@@ -6,15 +6,15 @@ namespace BobTheBuilder
         {
             foreach (Quest quest in quests)
             {
-                Console.WriteLine(quest.shortDescription+ " " + quest.longDescription+ " "+ quest.price);
+                Console.WriteLine(quest.ShortDescription+ " " + quest.LongDescription+ " "+ quest.Price);
                 Console.WriteLine("Requirements:");
-                if (quest.requirements.Count == 0)
+                if (quest.Requirements.Count == 0)
                 {
                     Console.WriteLine("No requirements.");
                 }
                 else
                 {
-                    foreach (Material req in quest.requirements)
+                    foreach (Material req in quest.Requirements)
                     {
                         Console.Write(req.Name + " ");
                     }

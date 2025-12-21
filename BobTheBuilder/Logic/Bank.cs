@@ -14,7 +14,7 @@
             totalDebt = 0;
             monthlyRepayment = 0;
         }
-        public void addMoney(double amount)
+        public void AddMoney(double amount)
         {
             accountBalance += amount;
         }
@@ -27,15 +27,15 @@
             accountBalance -= amount;
             return true;
         }
-        public double getBalance() 
+        public double GetBalance() 
         {
             return accountBalance;
         }
-        public double getTotalDebt() 
+        public double GetTotalDebt() 
         { 
             return totalDebt;
         }
-        public bool takeLoan(double amount)
+        public bool TakeLoan(double amount)
         {
             if(amount < 1000)
             {
@@ -64,11 +64,11 @@
             }
 
         }
-        public double getMonthlyRepayment()
+        public double GetMonthlyRepayment()
         {
             return monthlyRepayment;
         }
-        public void calculateRepayment()
+        public void CalculateRepayment()
         {
             if (totalDebt == 0)
             {

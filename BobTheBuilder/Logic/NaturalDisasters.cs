@@ -34,7 +34,7 @@
             disasterChance = 1;
         }
 
-        public bool disasterStruck(House house, int day)
+        public bool DisasterStruck(House house, int day)
         {
             Random rng = new Random();
             int rand = rng.Next(0, 4);

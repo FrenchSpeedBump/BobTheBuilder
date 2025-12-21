@@ -21,7 +21,7 @@
 
             foreach (Quest quest in quests)
             {
-                if (quest.phase == phase)
+                if (quest.Phase == phase)
                 {
                     currentQuests.Add(quest);
                 }
@@ -34,7 +34,7 @@
 
             foreach (Quest quest in quests)
             {
-                if (quest.phase == phase)
+                if (quest.Phase == phase)
                 {
                     currentQuests.Add(quest);
                 }
@@ -44,18 +44,18 @@
                 return false;
             }
             Quest myQuest = currentQuests[questId];
-            if (myQuest.checkRequirements(player.Inventory))
+            if (myQuest.CheckRequirements(player.Inventory))
             {
-                myQuest.isCompleted = true;
+                myQuest.IsCompleted = true;
             }
 
-            return myQuest.checkRequirements(player.Inventory);
+            return myQuest.CheckRequirements(player.Inventory);
 
         }
         public void QuestItemRemover(int questId, Player player)
         {
             Quest myQuest = currentQuests[questId];
-            foreach (Material req in myQuest.requirements)
+            foreach (Material req in myQuest.Requirements)
             {
                 foreach (ShopInventoryContents item in player.Inventory)
                 {
@@ -70,7 +70,7 @@
         public void MoneyDeduction(int questId, Bank bank)
         {
             Quest myQuest = currentQuests[questId];
-            bank.accountBalance -= myQuest.price;
+            bank.accountBalance -= myQuest.Price;
         }
         public Quest GetQuestInfo(int questId, int phase)
         {

@@ -40,7 +40,7 @@ public class NaturalDisastersTests
             roofHP = 0.1
         };
 
-        var survived = disasters.disasterStruck(house, 1);
+        bool survived = disasters.DisasterStruck(house, 1);
 
         Assert.Multiple(() =>
         {
@@ -63,7 +63,7 @@ public class NaturalDisastersTests
             roofHP = 10
         };
 
-        var survived = disasters.disasterStruck(house, 1);
+        bool survived = disasters.DisasterStruck(house, 1);
 
         Assert.Multiple(() =>
         {

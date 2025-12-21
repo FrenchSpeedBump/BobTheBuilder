@@ -2,34 +2,34 @@
 {
     public class Quest
     {
-        public string shortDescription { get; }
+        public string ShortDescription { get; }
 
-        public string longDescription { get; }
+        public string LongDescription { get; }
 
-        public bool isCompleted { get; set; }
+        public bool IsCompleted { get; set; }
 
-        public int phase { get; }
+        public int Phase { get; }
 
-        public List<Material> requirements { get; set; } = new();
-        public int price { get; }
+        public List<Material> Requirements { get; set; } = new List<Material>();
+        public int Price { get; }
 
         public Quest(string shortDescription, string longDescription, List<Material>? requirements , int phase, int price) 
         {
-            this.shortDescription = shortDescription;
-            this.longDescription = longDescription;
-            isCompleted = false;
+            this.ShortDescription = shortDescription;
+            this.LongDescription = longDescription;
+            IsCompleted = false;
             if (requirements != null)
             {
-                this.requirements = requirements;
+                this.Requirements = requirements;
             }
-            this.phase = phase;
-            this.price = price;
+            this.Phase = phase;
+            this.Price = price;
         }
 
-        public bool checkRequirements(List<ShopInventoryContents> inventory)
+        public bool CheckRequirements(List<ShopInventoryContents> inventory)
         {
 
-            List<Material> tempList = new List<Material>(requirements);
+            List<Material> tempList = new List<Material>(Requirements);
 
             foreach (ShopInventoryContents item in inventory)
             {

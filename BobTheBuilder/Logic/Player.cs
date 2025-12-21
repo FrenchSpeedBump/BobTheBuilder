@@ -18,12 +18,12 @@ namespace BobTheBuilder
         {
             if (bank.accountBalance >= contents.Price)
             {
-                if(contents.Name!=null && contents.effect!=null)
+                if(contents.Name!=null && contents.Effect!=null)
                 {
-                    ShopInventoryContents? item = materials.GetContents(contents.effect);
+                    ShopInventoryContents? item = materials.GetContents(contents.Effect);
                     if (item != null)
                     {
-                        item.Price *= contents.discount;
+                        item.Price *= contents.Discount;
                     }
                 }
                 bank.accountBalance -= contents.Price;

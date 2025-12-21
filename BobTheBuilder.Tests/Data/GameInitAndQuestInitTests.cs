@@ -58,10 +58,10 @@ public class QuestInitTests
     [TestCaseSource(nameof(QuestFactories))]
     public void QuestSets_ShouldCoverAllPhases(Func<QuestInit, List<Quest>> factory)
     {
-        var questInit = new QuestInit();
+        QuestInit questInit = new QuestInit();
 
-        var quests = factory(questInit);
-        var phases = quests.Select(q => q.phase).Distinct().OrderBy(phase => phase).ToList();
+        List<Quest> quests = factory(questInit);
+        List<int> phases = quests.Select(q => q.Phase).Distinct().OrderBy(p => p).ToList();
 
         Assert.Multiple(() =>
         {

@@ -9,9 +9,9 @@ public class HouseUITests
     [Test]
     public void SetFoundation_ShouldReturnAsciiForConcrete()
     {
-        var ui = new HouseUI();
+        HouseUI ui = new HouseUI();
 
-        var ascii = ui.setFoundation(2);
+        string ascii = ui.SetFoundation(2);
 
         Assert.That(ascii, Does.Contain("████"));
     }
@@ -19,9 +19,9 @@ public class HouseUITests
     [Test]
     public void SetWalls_ShouldReturnAsciiForWood()
     {
-        var ui = new HouseUI();
+        HouseUI ui = new HouseUI();
 
-        var ascii = ui.setWalls(1);
+        string ascii = ui.SetWalls(1);
 
         Assert.That(ascii, Does.Contain("╔═╦═╗"));
     }
@@ -29,9 +29,9 @@ public class HouseUITests
     [Test]
     public void SetRoof_ShouldReturnAsciiForTyle()
     {
-        var ui = new HouseUI();
+        HouseUI ui = new HouseUI();
 
-        var ascii = ui.setRoof(3);
+        string ascii = ui.SetRoof(3);
 
         Assert.That(ascii, Does.Contain("nununun"));
     }

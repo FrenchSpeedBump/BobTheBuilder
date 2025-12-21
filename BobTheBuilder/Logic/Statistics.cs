@@ -2,8 +2,8 @@ namespace BobTheBuilder
 {
     public class Statistics
     {
-        private List<double> sustainabilityScores = new();
-        private List<double> qualityScores = new();
+        private List<double> sustainabilityScores = new List<double>();
+        private List<double> qualityScores = new List<double>();
         private double totalMoneySpent = 0;
         private int questsCompleted = 0;
     
@@ -47,8 +47,8 @@ namespace BobTheBuilder
 
         public double GetQuestSustainability(Quest quest)
         {
-            List<double> scores = new();
-            foreach(Material material in quest.requirements)
+            List<double> scores = new List<double>();
+            foreach(Material material in quest.Requirements)
             {
                 scores.Add(material.Sustainability);
             }
@@ -56,8 +56,8 @@ namespace BobTheBuilder
         }
         public double GetQuestQuality(Quest quest)
         {
-            List<double> scores = new();
-            foreach(Material material in quest.requirements)
+            List<double> scores = new List<double>();
+            foreach(Material material in quest.Requirements)
             {
                 scores.Add(material.Quality);
             }
@@ -65,12 +65,12 @@ namespace BobTheBuilder
         }
         public double GetQuestTotalPrice(Quest quest)
         {
-            List<double> prices = new();
-            foreach(Material material in quest.requirements)
+            List<double> prices = new List<double>();
+            foreach(Material material in quest.Requirements)
             {
                 prices.Add(material.Price);
             }
-            return prices.Sum()+quest.price;
+            return prices.Sum()+quest.Price;
         }
     }
 }
