@@ -12,9 +12,9 @@ public class GameTests
 
         Assert.Multiple(() =>
         {
-            Assert.That(game.house, Is.Not.Null);
+            Assert.That(game.House, Is.Not.Null);
             Assert.That(currentRoom?.ShortDescription, Is.EqualTo("House"));
-            Assert.That(game.house.discovered, Is.True);
+            Assert.That(game.House.discovered, Is.True);
         });
     }
 

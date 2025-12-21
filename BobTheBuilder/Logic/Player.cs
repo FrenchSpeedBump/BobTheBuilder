@@ -18,9 +18,9 @@ namespace BobTheBuilder
         {
             if (bank.accountBalance >= contents.Price)
             {
-                if(contents.Name!=null && contents.efect!=null)
+                if(contents.Name!=null && contents.effect!=null)
                 {
-                    ShopInventoryContents? item = materials.GetContents(contents.efect);
+                    ShopInventoryContents? item = materials.GetContents(contents.effect);
                     if (item != null)
                     {
                         item.Price *= contents.discount;

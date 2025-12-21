@@ -2,13 +2,15 @@
 {
     public class Game
     {
-        private Minimap minimap = new();
+        private Minimap minimap = new Minimap();
         private Room? currentRoom;
         private Room? previousRoom;
-        private List<Room> discoveredRooms = new();
-        private Bank bank = null!;
-        public House house = null!;
-        private Logic.NaturalDisasters disasterEvent = new();
+        private List<Room> discoveredRooms = new List<Room>();
+        private Bank bank;
+        private House house;
+        private Logic.NaturalDisasters disasterEvent = new Logic.NaturalDisasters();
+
+        public House House => house;
 
 
         public Game()
@@ -28,28 +30,34 @@
                 minimap.MapRooms(houseRoom);
                 house = (House)rooms["House"];
             }
+            else
+            {
+                throw new InvalidOperationException("House room not found in game initialization.");
+            }
 
             if (rooms.TryGetValue(GameInit.Normalize("Bank"), out Room? bankRoom) && bankRoom is Bank b)
             {
                 bank = b;
             }
+            else
+            {
+                throw new InvalidOperationException("Bank room not found in game initialization.");
+            }
 
             // place items/materials into shops using existing helpers
-            foreach (var (shopShort, item) in items)
+            foreach ((string shopShort, Item item) in items)
                 AssignItem(shopShort, item);
 
-            foreach (var (shopShort, material) in materials)
+            foreach ((string shopShort, Material material) in materials)
                 AssignMaterial(shopShort, material);
         }
         
 
         public void Play()
         {
-            Parser parser = new();
-
-            Player player = new();
-
-            Statistics stats = new();
+            Parser parser = new Parser();
+            Player player = new Player();
+            Statistics stats = new Statistics();
 
             // UI features now handled through GameUI static class, which should contain all UI related methods
 
@@ -65,10 +73,10 @@
             {
                 built_today = false;
                 bool continuePlaying = true;
-                bank?.calculateRepayment();
+                bank.calculateRepayment();
                 Console.WriteLine("==============|Day {0}|==============",day);
                 Console.WriteLine("===================================");
-                Console.WriteLine("Money = " + bank!.getBalance()+bank.currency);
+                Console.WriteLine("Money = " + bank.getBalance() + bank.currency);
                 Console.WriteLine("===================================");
                 StatisticsUI.DisplayStats(stats, day);
 
@@ -116,7 +124,7 @@
 
                             if (currentRoom is House)
                             {
-                                showHouse();
+                                ShowHouse();
                             }
                             break;
 
@@ -132,24 +140,26 @@
                                     }
                                     else
                                     {
-                                        if (consBuildingAccept.AcceptQuest(Convert.ToInt32(command.SecondWord), phase, player))
+                                        int questId = Convert.ToInt32(command.SecondWord);
+                                        if (consBuildingAccept.AcceptQuest(questId, phase, player))
                                         {
                                             built_today = true;
+                                            Quest quest = consBuildingAccept.GetQuestInfo(questId, phase);
+                                            string materialName = quest.requirements[0].Name;
+                                            double quality = quest.requirements[0].Quality;
+                                            
                                             if (phase == 1)//phase for foundation
                                             {
-                                                Quest quest = consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase);
-                                                string name = quest.requirements[0].Name;
-                                                double quality = quest.requirements[0].Quality;
                                                 house.foundationHP = quality;
-                                                if (name == "Wood")
+                                                if (materialName == "Wood")
                                                 {
                                                     house.foundation = 1;
                                                 }
-                                                else if (name == "Concrete")
+                                                else if (materialName == "Concrete")
                                                 {
                                                     house.foundation = 2;
                                                 }
-                                                else if (name == "Brick")
+                                                else if (materialName == "Brick")
                                                 {
                                                     house.foundation = 3;
                                                 }
@@ -157,27 +167,23 @@
                                                 {
                                                     house.foundation = 4;
                                                 }
-
                                             }
-                                            if (phase == 2)//phase for walls
+                                            else if (phase == 2)//phase for walls
                                             {
-                                                Quest quest = consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase);
-                                                string name = quest.requirements[0].Name;
-                                                double quality = quest.requirements[0].Quality;
                                                 house.wallsHP = quality;
-                                                if (name == "Wood")
+                                                if (materialName == "Wood")
                                                 {
                                                     house.walls = 1;
                                                 }
-                                                else if (name == "Concrete")
+                                                else if (materialName == "Concrete")
                                                 {
                                                     house.walls = 2;
                                                 }
-                                                else if (name == "Brick")
+                                                else if (materialName == "Brick")
                                                 {
                                                     house.walls = 3;
                                                 }
-                                                else if (name == "WoodShingles")
+                                                else if (materialName == "WoodShingles")
                                                 {
                                                     house.walls = 4;
                                                 }
@@ -186,21 +192,18 @@
                                                     house.walls = 5;
                                                 }
                                             }
-                                            if (phase == 3)//phase for roof
+                                            else if (phase == 3)//phase for roof
                                             {
-                                                Quest quest = consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase);
-                                                string name = quest.requirements[0].Name;
-                                                double quality = quest.requirements[0].Quality;
                                                 house.roofHP = quality;
-                                                if (name == "Wood")
+                                                if (materialName == "Wood")
                                                 {
                                                     house.roof = 1;
                                                 }
-                                                else if (name == "Concrete")
+                                                else if (materialName == "Concrete")
                                                 {
                                                     house.roof = 2;
                                                 }
-                                                else if (name == "Tyle")
+                                                else if (materialName == "Tyle")
                                                 {
                                                     house.roof = 3;
                                                 }
@@ -210,10 +213,10 @@
                                                 }
                                             }
                                             Console.WriteLine("Quest completed!");
-                                            consBuildingAccept.QuestItemRemover(Convert.ToInt32(command.SecondWord), player);
-                                            consBuildingAccept.MoneyDeduction(Convert.ToInt32(command.SecondWord), bank);
-                                            stats.RecordQuestCompletion(consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase));
-                                            house.RecordMaterials(consBuildingAccept.GetQuestInfo(Convert.ToInt32(command.SecondWord), phase));
+                                            consBuildingAccept.QuestItemRemover(questId, player);
+                                            consBuildingAccept.MoneyDeduction(questId, bank);
+                                            stats.RecordQuestCompletion(quest);
+                                            house.RecordMaterials(quest);
                                             phase++;
                                         }
                                         else
@@ -277,7 +280,7 @@
                                     Console.WriteLine("Travel where?");
                                     break;
                                 }
-                                var targetTravel = FindRoomByName(command.SecondWord, command.ThirdWord, command.FourthWord);
+                                Room? targetTravel = FindRoomByName(command.SecondWord, command.ThirdWord, command.FourthWord);
                                 if (targetTravel != null)
                                 {
                                     if (currentRoom != null && !discoveredRooms.Contains(currentRoom))
@@ -294,14 +297,14 @@
                             break;
 
                         case "gointo"://now you can enter a neighbouring room by typing in it's name without knowing the direction
-                            if (command.SecondWord != null)
-                            {
-                                string direction = IsNeighbour(command.SecondWord);
-                                if (command.SecondWord == null)
+                            if (command.SecondWord == null)
                                 {
                                 Console.WriteLine("You need to specify where to go");
                                 }
-                                else if (direction != "")
+                            else if (command.SecondWord != null)
+                            {
+                                string direction = IsNeighbour(command.SecondWord);
+                                if (direction != "")
                                 {
                                 Move(direction);
                                 }
@@ -321,8 +324,9 @@
                             if (command.SecondWord == null)
                             {
                                 Console.WriteLine("How much would you like to loan?");
+                                break;
                             }
-                            if (!bank!.takeLoan(Convert.ToDouble(command.SecondWord)))
+                            if (!bank.takeLoan(Convert.ToDouble(command.SecondWord)))
                             {
                                 Console.WriteLine("Loan request denied.");
                             }
@@ -334,9 +338,9 @@
                                 break;
                             }
                             Console.WriteLine("Account information:");
-                            Console.WriteLine("Account balance: " + bank!.getBalance()+bank.currency);
-                            Console.WriteLine("Total debt: " + bank!.getTotalDebt() + bank.currency);
-                            Console.WriteLine("Monthly repayment: " + bank!.getMonthlyRepayment() + bank.currency);
+                            Console.WriteLine("Account balance: " + bank.getBalance() + bank.currency);
+                            Console.WriteLine("Total debt: " + bank.getTotalDebt() + bank.currency);
+                            Console.WriteLine("Monthly repayment: " + bank.getMonthlyRepayment() + bank.currency);
                             break;
                         case "inventory": // Show player inventory
                             PlayerUI.DisplayInventory(player);
@@ -374,6 +378,10 @@
                                 {
                                     Console.WriteLine("Item not found.");
                                 }
+                            }
+                            else 
+                            {
+                                Console.WriteLine("You can't buy that here.");
                             }
                             break;
                         case "work":
@@ -445,15 +453,15 @@
                 return null;
             }
 
-            var visited = new HashSet<Room>();
-            var queue = new Queue<Room>();
+            HashSet<Room> visited = new HashSet<Room>();
+            Queue<Room> queue = new Queue<Room>();
 
             queue.Enqueue(currentRoom!);
             visited.Add(currentRoom!);
 
             while (queue.Count > 0)
             {
-                var current = queue.Dequeue();
+                Room current = queue.Dequeue();
 
                 if (Normalize(current.ShortDescription) == target)
                     return current;
@@ -487,21 +495,21 @@
                     .ToLowerInvariant();
         }
 
-        private void AssignItem(string shopShortDescription, Item items)
+        private void AssignItem(string shopShortDescription, Item item)
         {
-            var room = FindRoomByName(shopShortDescription, null, null);
+            Room? room = FindRoomByName(shopShortDescription, null, null);
             if (room is Shop shop)
             {
-                shop.AddContents(items);
+                shop.AddContents(item);
             }
             else
             {
-                Console.WriteLine($"Shop '{shopShortDescription}' not found to add item '{items.Name}'.");
+                Console.WriteLine($"Shop '{shopShortDescription}' not found to add item '{item.Name}'.");
             }
         }
         private void AssignMaterial(string shopShortDescription, Material material)
         {
-            var room = FindRoomByName(shopShortDescription, null, null);
+            Room? room = FindRoomByName(shopShortDescription, null, null);
             if (room is Shop shop)
             {
                 shop.AddContents(material);
@@ -512,12 +520,12 @@
             }
         }
 
-        private void showHouse()
+        private void ShowHouse()
         {
-            Presentation.UI.HouseUI my = new Presentation.UI.HouseUI();
-            Console.Write(my.setRoof(house.roof));
-            Console.Write(my.setWalls(house.walls));
-            Console.Write(my.setFoundation(house.foundation));
+            Presentation.UI.HouseUI houseUI = new Presentation.UI.HouseUI();
+            Console.Write(houseUI.setRoof(house.roof));
+            Console.Write(houseUI.setWalls(house.walls));
+            Console.Write(houseUI.setFoundation(house.foundation));
         }
         
 

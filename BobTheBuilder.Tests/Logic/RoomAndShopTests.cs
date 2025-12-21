@@ -77,7 +77,7 @@ public class ShopTests
 
         Assert.Multiple(() =>
         {
-            Assert.That(coupon.efect, Is.EqualTo("Wood"));
+            Assert.That(coupon.effect, Is.EqualTo("Wood"));
             Assert.That(coupon.discount, Is.EqualTo(0.5));
         });
     }
