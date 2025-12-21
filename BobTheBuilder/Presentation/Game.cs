@@ -74,7 +74,9 @@
 
                 if(!disasterEvent.disasterStruck(house, day))
                 {
-                    Console.WriteLine("Unfortunatelly your house did not survive the disaster.\n===================\nGAME OVER\n===================");
+                    Console.WriteLine("Unfortunately your house did not survive the disaster.\n===================\nGAME OVER\n===================");
+                    day = 10000;
+                    break;
                 }
                 while (continuePlaying)
                 {

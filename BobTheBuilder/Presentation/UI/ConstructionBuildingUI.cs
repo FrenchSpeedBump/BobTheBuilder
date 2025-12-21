@@ -8,7 +8,7 @@ namespace BobTheBuilder
             {
                 Console.WriteLine(quest.shortDescription+ " " + quest.longDescription+ " "+ quest.price);
                 Console.WriteLine("Requirements:");
-                if (quest.requirements.Count < 0)
+                if (quest.requirements.Count == 0)
                 {
                     Console.WriteLine("No requirements.");
                 }
