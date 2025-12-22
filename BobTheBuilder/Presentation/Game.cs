@@ -80,11 +80,16 @@
                 Console.WriteLine("===================================");
                 StatisticsUI.DisplayStats(stats, day);
 
-                if(!disasterEvent.DisasterStruck(house, day))
+                if(!disasterEvent.DisasterStruck(house, day, out bool disasterHappened))
                 {
+                    stats.RecordNaturalDisasterHappening(true);
                     Console.WriteLine("Unfortunately your house did not survive the disaster.\n===================\nGAME OVER\n===================");
                     day = 10000;
                     break;
+                }
+                if(disasterHappened)
+                {
+                    stats.RecordNaturalDisasterHappening(true);
                 }
                 while (continuePlaying)
                 {

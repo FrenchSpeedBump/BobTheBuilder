@@ -34,8 +34,9 @@
             disasterChance = 1;
         }
 
-        public bool DisasterStruck(House house, int day)
+        public bool DisasterStruck(House house, int day, out bool disasterOccurred)
         {
+            disasterOccurred = false;
             Random rng = new Random();
             int rand = rng.Next(0, 4);
             NaturalDisaster disaster = disasters[rand];
@@ -52,6 +53,7 @@
             {
                 return true;
             }
+            disasterOccurred = true;
             Console.WriteLine("Oh No! A disaster struck!\n========\n{0}\n========", disaster.name);
             
             if (house.foundation > 0)
