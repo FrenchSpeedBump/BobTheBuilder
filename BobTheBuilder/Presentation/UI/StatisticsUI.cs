@@ -4,7 +4,14 @@ namespace BobTheBuilder
     {
         public static void DisplayStats(Statistics statistics, int day)
         {
+            // Don't show stats on day 1 since there's nothing to display yet
+            if (day <= 1)
+            {
+                return;
+            }
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("============|Statistics for Day " + day + "|============");
+            Console.ResetColor();
             Console.WriteLine("Average Sustainability: " + statistics.GetAverageSustainability().ToString("F2"));
             Console.WriteLine("Average Quality: " + statistics.GetAverageQuality().ToString("F2"));
             Console.WriteLine("Total Money Spent: " + statistics.GetTotalMoneySpent().ToString("F2"));

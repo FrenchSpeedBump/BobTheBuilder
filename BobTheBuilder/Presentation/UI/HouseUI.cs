@@ -112,5 +112,36 @@
         {
             return ASCIIRoof;
         }
+
+        public static void DisplayHouse(House house)
+        {
+            HouseUI houseUI = new HouseUI();
+            Console.Write(houseUI.SetRoof(house.roof));
+            Console.Write(houseUI.SetWalls(house.walls));
+            Console.Write(houseUI.SetFoundation(house.foundation));
+            
+            // Display house stats if materials have been used
+            if (house.UsedMaterials.Count > 0)
+            {
+                double totalQuality = 0;
+                double totalSustainability = 0;
+                
+                foreach (Material material in house.UsedMaterials)
+                {
+                    totalQuality += material.Quality;
+                    totalSustainability += material.Sustainability;
+                }
+                
+                double avgQuality = totalQuality / house.UsedMaterials.Count;
+                double avgSustainability = totalSustainability / house.UsedMaterials.Count;
+                
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("\n--- House Statistics ---");
+                Console.ResetColor();
+                Console.WriteLine("Average Quality: " + avgQuality.ToString("F2"));
+                Console.WriteLine("Average Sustainability: " + avgSustainability.ToString("F2"));
+                Console.WriteLine();
+            }
+        }
     }
 }

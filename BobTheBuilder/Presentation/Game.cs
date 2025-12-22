@@ -74,16 +74,22 @@
                 built_today = false;
                 bool continuePlaying = true;
                 bank.CalculateRepayment();
-                Console.WriteLine("==============|Day {0}|==============",day);
-                Console.WriteLine("===================================");
-                Console.WriteLine("Money = " + bank.GetBalance() + bank.currency);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\n==============|Day {0}|==============",day);
+                Console.ResetColor();
+                Console.WriteLine("Balance: " + bank.GetBalance() + bank.currency);
                 Console.WriteLine("===================================");
                 StatisticsUI.DisplayStats(stats, day);
 
                 if(!disasterEvent.DisasterStruck(house, day, out bool disasterHappened))
                 {
                     stats.RecordNaturalDisasterHappening(true);
-                    Console.WriteLine("Unfortunately your house did not survive the disaster.\n===================\nGAME OVER\n===================");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\n================================");
+                    Console.WriteLine("       GAME OVER");
+                    Console.WriteLine("================================");
+                    Console.ResetColor();
+                    Console.WriteLine("Your house did not survive the disaster.\n");
                     day = 10000;
                     break;
                 }
@@ -117,19 +123,19 @@
                     {
                         case "look":
                             Console.WriteLine(currentRoom?.LongDescription);
-                            if (currentRoom is Shop lookShop)
-                            {
-                                ShopUI.DisplayInventory(lookShop);
-                            }
                             if (currentRoom is ConstructionBuilding consBuilding)
                             {
                                 List<Quest> quests = consBuilding.GetQuestByPhase(phase);
                                 ConstructionUI.DisplayQuests(quests);
                             }
+                            else if (currentRoom is Shop lookShop)
+                            {
+                                ShopUI.DisplayInventory(lookShop);
+                            }
 
                             if (currentRoom is House)
                             {
-                                ShowHouse();
+                                Presentation.UI.HouseUI.DisplayHouse(house);
                             }
                             break;
 
@@ -217,7 +223,9 @@
                                                     house.roof = 4;
                                                 }
                                             }
-                                            Console.WriteLine("Quest completed!");
+                                            Console.ForegroundColor = ConsoleColor.Green;
+                                            Console.WriteLine("\n✓ Quest completed!\n");
+                                            Console.ResetColor();
                                             consBuildingAccept.QuestItemRemover(questId, player);
                                             consBuildingAccept.MoneyDeduction(questId, bank);
                                             stats.RecordQuestCompletion(quest);
@@ -226,8 +234,9 @@
                                         }
                                         else
                                         {
-                                            Console.WriteLine("Could not complete quest.");
-
+                                            Console.ForegroundColor = ConsoleColor.Red;
+                                            Console.WriteLine("Could not complete quest.\n");
+                                            Console.ResetColor();
                                         }
                                     }
                                 }
@@ -264,7 +273,9 @@
                             continuePlaying = false;
                             break;
                         case "sleep":
-                            Console.WriteLine("You went home to sleep.");
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.WriteLine("You went home to sleep.\n");
+                            Console.ResetColor();
                             continuePlaying = false;
                             currentRoom = house;
                             break;
@@ -342,10 +353,13 @@
                                 Console.WriteLine("I can only do this in a bank.");
                                 break;
                             }
-                            Console.WriteLine("Account information:");
-                            Console.WriteLine("Account balance: " + bank.GetBalance() + bank.currency);
-                            Console.WriteLine("Total debt: " + bank.GetTotalDebt() + bank.currency);
-                            Console.WriteLine("Monthly repayment: " + bank.GetMonthlyRepayment() + bank.currency);
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine("\n--- Account Information ---");
+                            Console.ResetColor();
+                            Console.WriteLine("Balance: " + bank.GetBalance() + bank.currency);
+                            Console.WriteLine("Total Debt: " + bank.GetTotalDebt() + bank.currency);
+                            Console.WriteLine("Monthly Repayment: " + bank.GetMonthlyRepayment() + bank.currency);
+                            Console.WriteLine();
                             break;
                         case "inventory": // Show player inventory
                             PlayerUI.DisplayInventory(player);
@@ -365,13 +379,17 @@
                                     Room? otherShop = FindRoomByName("Bob's", "Materials", null);
                                     if (buyShop.ShortDescription == "Bob's Materials" && player.BuyMaterial(contentsToBuy, bank))
                                     {
-                                        Console.WriteLine($"Bought {contentsToBuy.Name} for {contentsToBuy.Price}.");
+                                        Console.ForegroundColor = ConsoleColor.Green;
+                                        Console.WriteLine($"Bought {contentsToBuy.Name} for ${contentsToBuy.Price}.\n");
+                                        Console.ResetColor();
                                     }
                                     else if(otherShop is Shop materialShop && buyShop.ShortDescription == "Magic Tool Shop")
                                     {
                                         if (contentsToBuy is Item tool && player.BuyItem(tool, bank, materialShop))
                                         {
-                                            Console.WriteLine($"Bought {contentsToBuy.Name} for {contentsToBuy.Price}.");
+                                            Console.ForegroundColor = ConsoleColor.Green;
+                                            Console.WriteLine($"Bought {contentsToBuy.Name} for ${contentsToBuy.Price}.\n");
+                                            Console.ResetColor();
                                         }
                                     }
                                     else
@@ -381,7 +399,9 @@
                                 }
                                 else
                                 {
+                                    Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine("Item not found.");
+                                    Console.ResetColor();
                                 }
                             }
                             else 
@@ -392,7 +412,9 @@
                         case "work":
                             continuePlaying = false;
                             double amount = 200;
-                            Console.WriteLine("Today you went to work and earned {0}{1}.",amount,bank.currency);
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("You earned {0}{1} from work today.\n",amount,bank.currency);
+                            Console.ResetColor();
                             bank.AddMoney(amount);
                             Thread.Sleep(3000);
                             break;
@@ -407,7 +429,11 @@
             }
             
 
-            Console.WriteLine("Thank you for playing Bob the Builder!");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("\n================================");
+            Console.WriteLine("  Thank you for playing!");
+            Console.WriteLine("================================\n");
+            Console.ResetColor();
         }
 
         private void Move(string direction)
@@ -523,14 +549,6 @@
             {
                 Console.WriteLine($"Shop '{shopShortDescription}' not found to add material '{material.Name}'.");
             }
-        }
-
-        private void ShowHouse()
-        {
-            Presentation.UI.HouseUI houseUI = new Presentation.UI.HouseUI();
-            Console.Write(houseUI.SetRoof(house.roof));
-            Console.Write(houseUI.SetWalls(house.walls));
-            Console.Write(houseUI.SetFoundation(house.foundation));
         }
         
 

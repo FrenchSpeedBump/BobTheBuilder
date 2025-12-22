@@ -4,13 +4,21 @@ namespace BobTheBuilder
     {
         public static void DisplayQuests(List<Quest> quests)
         {
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("\n=== Available Quests ===\n");
+            Console.ResetColor();
             int questNumber = 1;
             foreach (Quest quest in quests)
             {
-                Console.WriteLine("Quest " + questNumber + ": " + quest.ShortDescription);
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("Quest " + questNumber + ": ");
+                Console.ResetColor();
+                Console.WriteLine(quest.ShortDescription);
                 Console.WriteLine("  " + quest.LongDescription);
-                Console.WriteLine("  Price: $" + quest.Price);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("  Price: ");
+                Console.ResetColor();
+                Console.WriteLine("$" + quest.Price);
                 Console.WriteLine("  Quality: " + quest.GetAverageQuality().ToString("F2") + " | Sustainability: " + quest.GetAverageSustainability().ToString("F2"));
                 
                 if (quest.Requirements.Count == 0)

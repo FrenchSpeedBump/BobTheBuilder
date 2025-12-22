@@ -39,33 +39,44 @@
 
     public static void PrintWelcome()//this needs to be moved to a separate file and just be called 
     {
-        Console.WriteLine("                 ||================================||");
-        Console.WriteLine("                 ||   Welcome to Bob the Builder!  ||");
-        Console.WriteLine("                 ||================================||\n");
-        Console.WriteLine("Bob the Builder is a new, incredibly boring base building game.");
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("\n================================");
+        Console.WriteLine("  WELCOME TO BOB THE BUILDER");
+        Console.WriteLine("================================\n");
+        Console.ResetColor();
+        Console.WriteLine("You just bought a plot of land. Build your dream house!");
+        Console.WriteLine();
         PrintHelp();
         Console.WriteLine();
     }
 
     public static void PrintHelp()
         {
-            Console.WriteLine("You just bought a plot of land. Now you have to build your dream house.");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("MOVEMENT:");
+            Console.ResetColor();
+            Console.WriteLine("  north, south, east, west  - Navigate between rooms");
+            Console.WriteLine("  back                      - Return to previous room");
+            Console.WriteLine("  gointo <name>             - Enter neighboring room by name");
+            Console.WriteLine("  travel <name>             - Travel to discovered room (requires car)");
             Console.WriteLine();
-            Console.WriteLine("Navigate by typing 'north', 'south', 'east', or 'west'.");
-            Console.WriteLine("Type 'look' for more details.");
-            Console.WriteLine("Type 'back' to go to the previous room.");
-            Console.WriteLine("Type 'help' to print this message again.");
-            Console.WriteLine("Type 'quit' to exit the game.");
-            Console.WriteLine("Type 'map' to show the minimap.");
-            //Console.WriteLine("Type 'goto' to plot a direction to another room.");
-            Console.WriteLine("Type 'sleep' to go to the next day.");
-            Console.WriteLine("Type 'gointo' to enter a neighbouring room by it's name.");
-            Console.WriteLine("Type 'travel' to travel to any discovered room by it's name. You need a car to do it.");
-            Console.WriteLine("Type 'loan <amount>' in a bank to take out a loan");
-            Console.WriteLine("Type 'account' in a bank to check your account details");
-            Console.WriteLine("Type 'inventory' to list your inventory");
-            Console.WriteLine("Type 'buy <item>' in a shop to buy an item");
-            //next day
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("ACTIONS:");
+            Console.ResetColor();
+            Console.WriteLine("  look                      - View room details");
+            Console.WriteLine("  buy <item>                - Purchase item in shop");
+            Console.WriteLine("  accept <number>           - Accept quest in construction building");
+            Console.WriteLine("  sleep                     - End day and start next");
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("INFORMATION:");
+            Console.ResetColor();
+            Console.WriteLine("  inventory                 - View your items");
+            Console.WriteLine("  map                       - Show minimap");
+            Console.WriteLine("  account                   - Check bank account (at bank)");
+            Console.WriteLine("  loan <amount>             - Take out loan (at bank)");
+            Console.WriteLine("  help                      - Show this message");
+            Console.WriteLine("  quit                      - Exit game");
         }
 
         public static void LoadingBar()
