@@ -81,7 +81,9 @@
                 Console.WriteLine("===================================");
                 StatisticsUI.DisplayStats(stats, day);
 
-                if(!disasterEvent.DisasterStruck(house, day, out bool disasterHappened))
+                Logic.DisasterResult disasterResult = disasterEvent.DisasterStruck(house, day);
+                
+                if(!disasterResult.HouseSurvived)
                 {
                     stats.RecordNaturalDisasterHappening(true);
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -93,9 +95,46 @@
                     day = 10000;
                     break;
                 }
-                if(disasterHappened)
+                if(disasterResult.DisasterOccurred)
                 {
                     stats.RecordNaturalDisasterHappening(true);
+                    Presentation.UI.NaturalDisastersUI.DisplayDisasterAnnouncement(disasterResult.DisasterName!);
+                    
+                    // Check quality vs disaster damage for each part
+                    if (house.foundation > 0)
+                    {
+                        if (house.foundationQuality < disasterResult.FoundationDamage)
+                        {
+                            Presentation.UI.NaturalDisastersUI.DisplayDamageReport("Foundation", house.foundationHP);
+                        }
+                        else
+                        {
+                            Presentation.UI.NaturalDisastersUI.DisplayBlockedMessage("Foundation", house.foundationQuality, house.foundationHP);
+                        }
+                    }
+                    if (house.walls > 0)
+                    {
+                        if (house.wallsQuality < disasterResult.WallsDamage)
+                        {
+                            Presentation.UI.NaturalDisastersUI.DisplayDamageReport("Walls", house.wallsHP);
+                        }
+                        else
+                        {
+                            Presentation.UI.NaturalDisastersUI.DisplayBlockedMessage("Walls", house.wallsQuality, house.wallsHP);
+                        }
+                    }
+                    if (house.roof > 0)
+                    {
+                        if (house.roofQuality < disasterResult.RoofDamage)
+                        {
+                            Presentation.UI.NaturalDisastersUI.DisplayDamageReport("Roof", house.roofHP);
+                        }
+                        else
+                        {
+                            Presentation.UI.NaturalDisastersUI.DisplayBlockedMessage("Roof", house.roofQuality, house.roofHP);
+                        }
+                    }
+                    Presentation.UI.NaturalDisastersUI.DisplayRepairSuggestion();
                 }
                 while (continuePlaying)
                 {
@@ -161,11 +200,19 @@
                                             built_today = true;
                                             Quest quest = consBuildingAccept.GetQuestInfo(questId, phase);
                                             string materialName = quest.Requirements[0].Name;
-                                            double quality = quest.Requirements[0].Quality;
+                                            
+                                            // Calculate average quality from all materials
+                                            double totalQuality = 0;
+                                            foreach (Material material in quest.Requirements)
+                                            {
+                                                totalQuality += material.Quality;
+                                            }
+                                            double averageQuality = totalQuality / quest.Requirements.Count;
                                             
                                             if (phase == 1)//phase for foundation
                                             {
-                                                house.foundationHP = quality;
+                                                house.foundationHP = 100;
+                                                house.foundationQuality = averageQuality;
                                                 if (materialName == "Wood")
                                                 {
                                                     house.foundation = 1;
@@ -183,9 +230,10 @@
                                                     house.foundation = 4;
                                                 }
                                             }
-                                            else if (phase == 2)//phase for walls
+                                            else if (phase == 9)//phase for walls
                                             {
-                                                house.wallsHP = quality;
+                                                house.wallsHP = 100;
+                                                house.wallsQuality = averageQuality;
                                                 if (materialName == "Wood")
                                                 {
                                                     house.walls = 1;
@@ -207,9 +255,10 @@
                                                     house.walls = 5;
                                                 }
                                             }
-                                            else if (phase == 3)//phase for roof
+                                            else if (phase == 13)//phase for roof
                                             {
-                                                house.roofHP = quality;
+                                                house.roofHP = 100;
+                                                house.roofQuality = averageQuality;
                                                 if (materialName == "Wood")
                                                 {
                                                     house.roof = 1;
@@ -455,6 +504,59 @@
                             Console.ResetColor();
                             bank.AddMoney(amount);
                             Thread.Sleep(3000);
+                            break;
+                        case "repair":
+                            if (currentRoom is ConstructionBuilding)
+                            {
+                                double repairCost = 0;
+                                int repairsNeeded = 0;
+                                
+                                if (house.foundation > 0 && house.foundationHP < 100)
+                                {
+                                    double foundationRepair = (100 - house.foundationHP) * 2;
+                                    repairCost += foundationRepair;
+                                    repairsNeeded++;
+                                }
+                                if (house.walls > 0 && house.wallsHP < 100)
+                                {
+                                    double wallsRepair = (100 - house.wallsHP) * 2;
+                                    repairCost += wallsRepair;
+                                    repairsNeeded++;
+                                }
+                                if (house.roof > 0 && house.roofHP < 100)
+                                {
+                                    double roofRepair = (100 - house.roofHP) * 2;
+                                    repairCost += roofRepair;
+                                    repairsNeeded++;
+                                }
+                                
+                                if (repairsNeeded == 0)
+                                {
+                                    Console.WriteLine("Your house is in perfect condition!");
+                                }
+                                else if (bank.GetBalance() >= repairCost)
+                                {
+                                    bank.AddMoney(-repairCost);
+                                    if (house.foundation > 0 && house.foundationHP < 100) house.foundationHP = 100;
+                                    if (house.walls > 0 && house.wallsHP < 100) house.wallsHP = 100;
+                                    if (house.roof > 0 && house.roofHP < 100) house.roofHP = 100;
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine("House fully repaired for ${0:F2}!\n", repairCost);
+                                    Console.ResetColor();
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Not enough money. Repair cost: ${0:F2}", repairCost);
+                                    Console.ResetColor();
+                                }
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("You can only repair at a construction building.");
+                                Console.ResetColor();
+                            }
                             break;
                         default:
                             Console.WriteLine("I don't know what command.");
