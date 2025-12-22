@@ -69,7 +69,7 @@
             int day = 1;
             int phase = 1;
             bool built_today;
-            while (day<10)
+            while (day<21)
             {
                 built_today = false;
                 bool continuePlaying = true;
@@ -361,12 +361,18 @@
                                     if (buyShop.ShortDescription == "Bob's Materials" && player.BuyMaterial(contentsToBuy, bank))
                                     {
                                         Console.WriteLine($"Bought {contentsToBuy.Name} for {contentsToBuy.Price}.");
+                                        if(contentsToBuy.Name== "Repair_Kit")
+                                        {
+                                            House.foundationHP += 0.2;
+                                            House.wallsHP += 0.2;
+                                            House.roofHP += 0.2;
+                                        }
                                     }
                                     else if(otherShop is Shop materialShop && buyShop.ShortDescription == "Magic Tool Shop")
                                     {
                                         if (contentsToBuy is Item tool && player.BuyItem(tool, bank, materialShop))
                                         {
-                                            Console.WriteLine($"Bought {contentsToBuy.Name} for {contentsToBuy.Price}.");
+                                            Console.WriteLine($"Bought {contentsToBuy.Name} for {contentsToBuy.Price}$.");
                                         }
                                     }
                                     else

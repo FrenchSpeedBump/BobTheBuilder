@@ -30,8 +30,8 @@
                 new NaturalDisaster("tornado", 0.4, 0.6, 0.8),
                 new NaturalDisaster("earthquake", 0.7, 0.5, 0.3)
             };
-            dayInterval = 1;
-            disasterChance = 1;
+            dayInterval = 4;
+            disasterChance = 0.25;
         }
 
         public bool DisasterStruck(House house, int day)
