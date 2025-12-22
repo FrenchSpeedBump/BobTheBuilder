@@ -64,8 +64,8 @@
         {
             List<(string, Item)> list = new();
             //Item new(string name, string description, double price)
-            Item hammer = new("Hammer", "A sturdy hammer for building.", 20,"Wood",0.90);
-            Item nails = new("Nails", "A box of small nails.", 10, "Wood", 0.95);
+            Item hammer = new("Hammer", "A sturdy hammer for building.", 200,"Wood",0.90);
+            Item nails = new("Nails", "A box of small nails.", 100, "Wood", 0.95);
             Item car = new("Car", "A nice 2004 Volvo V50 that lets you fast travel between discovered locations.",2000);
             Item repair_kit = new("Repair_Kit", "A repair kit that will increase the durability of your house.", 2000);
 
