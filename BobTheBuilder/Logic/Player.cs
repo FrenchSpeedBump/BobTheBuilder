@@ -16,7 +16,7 @@ namespace BobTheBuilder
         }
         public bool BuyItem(Item contents, Bank bank, Shop materials)
         {
-            if (bank.accountBalance >= contents.Price)
+            if (bank.GetBalance() >= contents.Price)
             {
                 if(contents.Name!=null && contents.Effect!=null)
                 {
@@ -26,7 +26,10 @@ namespace BobTheBuilder
                         item.Price *= contents.Discount;
                     }
                 }
-                bank.accountBalance -= contents.Price;
+                if (!bank.takeMoney(contents.Price))
+                {
+                    return false;
+                }
                 AddItem(contents);
                 return true;
             }
@@ -37,9 +40,12 @@ namespace BobTheBuilder
         }
         public bool BuyMaterial(ShopInventoryContents contents, Bank bank)
         {
-            if (bank.accountBalance >= contents.Price)
+            if (bank.GetBalance() >= contents.Price)
             {
-                bank.accountBalance -= contents.Price;
+                if (!bank.takeMoney(contents.Price))
+                {
+                    return false;
+                }
                 AddItem(contents);
                 return true;
             }

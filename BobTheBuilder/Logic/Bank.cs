@@ -2,7 +2,7 @@
 {
     public class Bank : Room
     {
-        public double accountBalance;
+        private double accountBalance;
         public double totalDebt;
         public double monthlyRepayment;
         public char currency='$';

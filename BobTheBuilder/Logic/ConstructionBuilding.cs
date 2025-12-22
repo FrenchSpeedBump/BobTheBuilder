@@ -67,10 +67,10 @@
                 }
             }
         }
-        public void MoneyDeduction(int questId, Bank bank)
+        public bool MoneyDeduction(int questId, Bank bank)
         {
             Quest myQuest = currentQuests[questId];
-            bank.accountBalance -= myQuest.Price;
+            return bank.takeMoney(myQuest.Price);
         }
         public Quest GetQuestInfo(int questId, int phase)
         {

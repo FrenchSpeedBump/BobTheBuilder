@@ -197,93 +197,28 @@
                                         int questId = Convert.ToInt32(command.SecondWord) - 1; // Convert from 1-based to 0-based index
                                         if (consBuildingAccept.AcceptQuest(questId, phase, player))
                                         {
-                                            built_today = true;
                                             Quest quest = consBuildingAccept.GetQuestInfo(questId, phase);
-                                            string materialName = quest.Requirements[0].Name;
                                             
-                                            // Calculate average quality from all materials
-                                            double totalQuality = 0;
-                                            foreach (Material material in quest.Requirements)
+                                            // Check payment first before completing quest
+                                            if (!consBuildingAccept.MoneyDeduction(questId, bank))
                                             {
-                                                totalQuality += material.Quality;
+                                                Console.ForegroundColor = ConsoleColor.Red;
+                                                Console.WriteLine("Not enough money to pay for this quest!");
+                                                Console.ResetColor();
                                             }
-                                            double averageQuality = totalQuality / quest.Requirements.Count;
-                                            
-                                            if (phase == 1)//phase for foundation
+                                            else
                                             {
-                                                house.foundationHP = 100;
-                                                house.foundationQuality = averageQuality;
-                                                if (materialName == "Wood")
-                                                {
-                                                    house.foundation = 1;
-                                                }
-                                                else if (materialName == "Concrete")
-                                                {
-                                                    house.foundation = 2;
-                                                }
-                                                else if (materialName == "Bricks")
-                                                {
-                                                    house.foundation = 3;
-                                                }
-                                                else//other
-                                                {
-                                                    house.foundation = 4;
-                                                }
+                                                built_today = true;
+                                                house.BuildPart(phase, quest);
+                                                
+                                                Console.ForegroundColor = ConsoleColor.Green;
+                                                Console.WriteLine("\n✓ Quest completed!\n");
+                                                Console.ResetColor();
+                                                consBuildingAccept.QuestItemRemover(questId, player);
+                                                stats.RecordQuestCompletion(quest);
+                                                house.RecordMaterials(quest);
+                                                phase++;
                                             }
-                                            else if (phase == 9)//phase for walls
-                                            {
-                                                house.wallsHP = 100;
-                                                house.wallsQuality = averageQuality;
-                                                if (materialName == "Wood")
-                                                {
-                                                    house.walls = 1;
-                                                }
-                                                else if (materialName == "Concrete")
-                                                {
-                                                    house.walls = 2;
-                                                }
-                                                else if (materialName == "Bricks")
-                                                {
-                                                    house.walls = 3;
-                                                }
-                                                else if (materialName == "Shingle")
-                                                {
-                                                    house.walls = 4;
-                                                }
-                                                else//other
-                                                {
-                                                    house.walls = 5;
-                                                }
-                                            }
-                                            else if (phase == 13)//phase for roof
-                                            {
-                                                house.roofHP = 100;
-                                                house.roofQuality = averageQuality;
-                                                if (materialName == "Wood")
-                                                {
-                                                    house.roof = 1;
-                                                }
-                                                else if (materialName == "Concrete")
-                                                {
-                                                    house.roof = 2;
-                                                }
-                                                else if (materialName == "Shingle")
-                                                {
-                                                    house.roof = 3;
-                                                }
-                                                else//other
-                                                {
-                                                    house.roof = 4;
-                                                }
-                                            }
-                                            Console.ForegroundColor = ConsoleColor.Green;
-                                            Console.WriteLine("\n✓ Quest completed!\n");
-                                            Console.ResetColor();
-                                            consBuildingAccept.QuestItemRemover(questId, player);
-                                            consBuildingAccept.MoneyDeduction(questId, bank);
-                                            stats.RecordQuestCompletion(quest);
-                                            house.RecordMaterials(quest);
-                                            phase++;
                                         }
                                         else
                                         {

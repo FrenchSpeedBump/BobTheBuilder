@@ -40,11 +40,11 @@ public class NaturalDisastersTests
             roofHP = 0.1
         };
 
-        bool survived = disasters.DisasterStruck(house, 1);
+        var result = disasters.DisasterStruck(house, 1);
 
         Assert.Multiple(() =>
         {
-            Assert.That(survived, Is.False); // House destroyed
+            Assert.That(result.HouseSurvived, Is.False); // House destroyed
             Assert.That(house.foundationHP, Is.EqualTo(-0.7).Within(1e-6));
         });
     }
@@ -63,11 +63,11 @@ public class NaturalDisastersTests
             roofHP = 10
         };
 
-        bool survived = disasters.DisasterStruck(house, 1);
+        var result = disasters.DisasterStruck(house, 1);
 
         Assert.Multiple(() =>
         {
-            Assert.That(survived, Is.True);
+            Assert.That(result.HouseSurvived, Is.True);
             Assert.That(house.foundationHP, Is.EqualTo(10));
         });
     }
