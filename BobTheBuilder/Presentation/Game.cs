@@ -140,7 +140,7 @@
                                     }
                                     else
                                     {
-                                        int questId = Convert.ToInt32(command.SecondWord);
+                                        int questId = Convert.ToInt32(command.SecondWord) - 1; // Convert from 1-based to 0-based index
                                         if (consBuildingAccept.AcceptQuest(questId, phase, player))
                                         {
                                             built_today = true;

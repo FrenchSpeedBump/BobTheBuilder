@@ -6,6 +6,7 @@ namespace BobTheBuilder
         private List<double> qualityScores = new List<double>();
         private double totalMoneySpent = 0;
         private int questsCompleted = 0;
+        private int naturalDisasters = 0;
     
         // Called when a quest is completed
         public void RecordQuestCompletion(Quest quest)
@@ -14,6 +15,13 @@ namespace BobTheBuilder
             qualityScores.Add(GetQuestQuality(quest));
             totalMoneySpent += GetQuestTotalPrice(quest);
             questsCompleted++;
+        }
+        public void RecordNaturalDisasterHappening(bool happened)
+        {
+            if (happened)
+            {
+                naturalDisasters++;
+            }
         }
     
         // Getters for calculated stats
@@ -44,6 +52,8 @@ namespace BobTheBuilder
         public double GetTotalMoneySpent() => totalMoneySpent;
         
         public int GetQuestsCompleted() => questsCompleted;
+
+        public int GetNaturalDisasters() => naturalDisasters;
 
         public double GetQuestSustainability(Quest quest)
         {

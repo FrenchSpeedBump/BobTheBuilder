@@ -4,9 +4,10 @@ namespace BobTheBuilder
     {
         public static void DisplayQuests(List<Quest> quests)
         {
+            int questNumber = 1;
             foreach (Quest quest in quests)
             {
-                Console.WriteLine(quest.ShortDescription+ " " + quest.LongDescription+ " "+ quest.Price);
+                Console.WriteLine("[Quest " + questNumber + "] " + quest.ShortDescription+ " " + quest.LongDescription+ " "+ quest.Price);
                 Console.WriteLine("Requirements:");
                 if (quest.Requirements.Count == 0)
                 {
@@ -20,6 +21,7 @@ namespace BobTheBuilder
                     }
                     Console.WriteLine();
                 }
+                questNumber++;
             }
         }
     }
