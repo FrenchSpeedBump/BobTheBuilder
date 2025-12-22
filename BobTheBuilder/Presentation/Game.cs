@@ -115,7 +115,9 @@
 
                     if (command == null)
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("I don't know that command.");
+                        Console.ResetColor();
                         continue;
                     }
 
@@ -146,7 +148,9 @@
                                 {
                                     if (command.SecondWord == null)
                                     {
+                                        Console.ForegroundColor = ConsoleColor.Red;
                                         Console.WriteLine("Accept which quest?");
+                                        Console.ResetColor();
                                         break;
                                     }
                                     else
@@ -242,17 +246,25 @@
                                 }
                                 else
                                 {
+                                    Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine("You need to wait for the construction team to finish. Maybe come back tomorrow to start a new quest.");
+                                    Console.ResetColor();
                                 }
                             } else
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("You can only accept quests in a construction building.");
+                                Console.ResetColor();
                             }
                             break;
 
                         case "back":
                             if (previousRoom == null)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("You can't go back from here!");
+                                Console.ResetColor();
+                            }
                             else
                                 currentRoom = previousRoom;
                             break;
@@ -293,7 +305,9 @@
                             {
                                 if (command.SecondWord == null)
                                 {
+                                    Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine("Travel where?");
+                                    Console.ResetColor();
                                     break;
                                 }
                                 Room? targetTravel = FindRoomByName(command.SecondWord, command.ThirdWord, command.FourthWord);
@@ -306,16 +320,24 @@
                                     Travel(targetTravel);
                                 }
                                 else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine("Unknown room");
+                                    Console.ResetColor();
+                                }
                                 break;
                             }
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("You can't travel yet. You need to buy a car first.");
+                            Console.ResetColor();
                             break;
 
                         case "gointo"://now you can enter a neighbouring room by typing in it's name without knowing the direction
                             if (command.SecondWord == null)
                                 {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("You need to specify where to go");
+                                Console.ResetColor();
                                 }
                             else if (command.SecondWord != null)
                             {
@@ -326,7 +348,9 @@
                                 }
                                 else
                                 {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("I can't see that room anywhere!");
+                                Console.ResetColor();
                                 }
                             }
                             break;
@@ -334,23 +358,31 @@
                         case "loan"://loan money
                             if (currentRoom != bank)
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("I can only do this in a bank.");
+                                Console.ResetColor();
                                 break;
                             }
                             if (command.SecondWord == null)
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("How much would you like to loan?");
+                                Console.ResetColor();
                                 break;
                             }
                             if (!bank.TakeLoan(Convert.ToDouble(command.SecondWord)))
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Loan request denied.");
+                                Console.ResetColor();
                             }
                             break;
                         case "account"://display account info
                             if (currentRoom != bank)
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("I can only do this in a bank.");
+                                Console.ResetColor();
                                 break;
                             }
                             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -368,7 +400,9 @@
                         case "buy"://buy stuff
                             if (command.SecondWord == null)
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Buy what?");
+                                Console.ResetColor();
                                 break;
                             }
                             if (currentRoom is Shop buyShop)
@@ -394,7 +428,9 @@
                                     }
                                     else
                                     {
+                                        Console.ForegroundColor = ConsoleColor.Red;
                                         Console.WriteLine("Not enough money.");
+                                        Console.ResetColor();
                                     }
                                 }
                                 else
@@ -406,7 +442,9 @@
                             }
                             else 
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("You can't buy that here.");
+                                Console.ResetColor();
                             }
                             break;
                         case "work":
@@ -447,7 +485,9 @@
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"You can't go {direction}!");
+                Console.ResetColor();
             }
         }
         private string IsNeighbour(string room)
@@ -470,7 +510,9 @@
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Targeted location not yet discovered.");
+                Console.ResetColor();
             }
         }
         
