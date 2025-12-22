@@ -8,7 +8,6 @@ namespace BobTheBuilder
         private int questsCompleted = 0;
         private int naturalDisasters = 0;
     
-        // Called when a quest is completed
         public void RecordQuestCompletion(Quest quest)
         {
             sustainabilityScores.Add(GetQuestSustainability(quest));
@@ -24,7 +23,6 @@ namespace BobTheBuilder
             }
         }
     
-        // Getters for calculated stats
         public double GetAverageSustainability()
         {
             if (questsCompleted > 0 && sustainabilityScores.Count > 0)
