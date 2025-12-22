@@ -15,8 +15,8 @@
             // Company 1: cheapest / least sustainable — use lower-sustainability materials (names must match GameInit)
             // Foundation (phases 1-4)
             List<Material> reqF1 = new List<Material> {
-                new Material("Gravel", "General gravel for site work.", 0.5, 0.5, 8),
                 new Material("Concrete", "Concrete mix.", 0.6, 0.6, 10),
+                new Material("Gravel", "General gravel for site work.", 0.5, 0.5, 8),
                 new Material("Bricks", "A stack of red bricks.", 0.7, 0.7, 15)
             };
             List<Material> reqF2 = new List<Material> {
@@ -81,7 +81,7 @@
 
             // Roofs (phases 13-16)
             List<Material> reqR13 = new List<Material> {
-                new Material("Shingle", "Roofing under/cover (cheap).", 0.5, 0.5, 12),
+                new Material("Tyle", "Roofing under/cover (cheap).", 0.5, 0.5, 12),
                 new Material("Wood", "Rafters and battens.", 0.8, 0.8, 20),
                 new Material("Insulation", "Roof insulation basic.", 0.6, 0.6, 25)
             };
@@ -129,6 +129,7 @@
             // Company 2: balanced / average — use mid-tier material names from GameInit
             // Foundation (phases 1-4)
             List<Material> reqF1 = new List<Material> {
+                new Material("Wood", "Basic wood support.", 0.8, 0.8, 20),
                 new Material("Gravel", "Balanced gravel for excavation.", 0.5, 0.5, 8),
                 new Material("Concrete", "Standard concrete mix.", 0.6, 0.6, 10),
                 new Material("Insulation", "Foundation insulation.", 0.6, 0.6, 25)
@@ -173,8 +174,8 @@
 
             // Walls (phases 9-12)
             List<Material> reqW9 = new List<Material> {
-                new Material("Bricks", "Standard bricks.", 0.7, 0.7, 15),
                 new Material("Concrete", "Mortar mix.", 0.6, 0.6, 10),
+                new Material("Bricks", "Standard bricks.", 0.7, 0.7, 15),
                 new Material("Insulation", "Wall insulation.", 0.6, 0.6, 25)
             };
             List<Material> reqW10 = new List<Material> {
@@ -195,8 +196,8 @@
 
             // Roofs (phases 13-16)
             List<Material> reqR13 = new List<Material> {
-                new Material("Metal", "Metal trusses and framing.", 0.6, 0.7, 60),
                 new Material("Wood", "Quality rafters.", 0.8, 0.8, 20),
+                new Material("Metal", "Metal trusses and framing.", 0.6, 0.7, 60),
                 new Material("Insulation", "Roof insulation.", 0.6, 0.6, 25)
             };
             List<Material> reqR14 = new List<Material> {
@@ -243,6 +244,7 @@
             // Company 3: expensive / most sustainable — use high-sustainability materials from GameInit
             // Foundation (phases 1-4)
             List<Material> reqF1 = new List<Material> {
+                new Material("Bricks", "A stack of red bricks.", 0.7, 0.7, 15),
                 new Material("Recycled", "Recycled aggregate/materials.", 0.9, 0.9, 60),
                 new Material("Gravel", "Precision recycled gravel.", 0.5, 0.5, 8),
                 new Material("Concrete", "High-grade concrete.", 0.6, 0.6, 10)
@@ -287,6 +289,7 @@
 
             // Walls (phases 9-12)
             List<Material> reqW9 = new List<Material> {
+                new Material("Wood", "Eco-friendly finishes.", 0.8, 0.8, 20),
                 new Material("EcoBlock", "High-efficiency eco blocks.", 0.95, 0.95, 140),
                 new Material("Bricks", "High-quality brick accents.", 0.7, 0.7, 15),
                 new Material("Insulation", "High-performance eco insulation.", 0.6, 0.6, 25)
@@ -309,6 +312,7 @@
 
             // Roofs (phases 13-16)
             List<Material> reqR13 = new List<Material> {
+                new Material("Concrete", "Eco mortar.", 0.6, 0.6, 10),
                 new Material("Metal", "Sustainable metal trusses.", 0.6, 0.7, 60),
                 new Material("Wood", "Premium rafters.", 0.8, 0.8, 20),
                 new Material("Recycled", "Recycled connectors and fixings.", 0.9, 0.9, 60)

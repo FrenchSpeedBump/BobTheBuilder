@@ -168,7 +168,7 @@
                                                     house.foundation = 4;
                                                 }
                                             }
-                                            else if (phase == 2)//phase for walls
+                                            else if (phase == 9)//phase for walls
                                             {
                                                 house.wallsHP = quality;
                                                 if (materialName == "Wood")
@@ -192,7 +192,7 @@
                                                     house.walls = 5;
                                                 }
                                             }
-                                            else if (phase == 3)//phase for roof
+                                            else if (phase == 13)//phase for roof
                                             {
                                                 house.roofHP = quality;
                                                 if (materialName == "Wood")
