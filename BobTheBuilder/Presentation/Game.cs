@@ -509,6 +509,28 @@
             Console.WriteLine("  Thank you for playing!");
             Console.WriteLine("================================\n");
             Console.ResetColor();
+            
+            // Display credits
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("╔════════════════════════════════════════╗");
+            Console.WriteLine("║                                        ║");
+            Console.WriteLine("║          SEMESTER 1 PROJECT            ║");
+            Console.WriteLine("║            GROUP NUMBER 4              ║");
+            Console.WriteLine("║                                        ║");
+            Console.WriteLine("╠════════════════════════════════════════╣");
+            Console.WriteLine("║                                        ║");
+            Console.WriteLine("║            DEVELOPED BY:               ║");
+            Console.WriteLine("║                                        ║");
+            Console.WriteLine("║              • Filip                   ║");
+            Console.WriteLine("║              • Lautaro                 ║");
+            Console.WriteLine("║              • David                   ║");
+            Console.WriteLine("║              • Adam                    ║");
+            Console.WriteLine("║              • Alex                    ║");
+            Console.WriteLine("║              • Marius                  ║");
+            Console.WriteLine("║                                        ║");
+            Console.WriteLine("╚════════════════════════════════════════╝");
+            Console.ResetColor();
+            Console.WriteLine();
         }
 
         private void Move(string direction)
