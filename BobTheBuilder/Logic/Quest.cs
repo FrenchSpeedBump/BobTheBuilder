@@ -44,5 +44,31 @@
             }
             return tempList.Count == 0;
         }
+
+        public double GetAverageSustainability()
+        {
+            if (Requirements.Count == 0)
+                return 0;
+            
+            List<double> scores = new List<double>();
+            foreach (Material material in Requirements)
+            {
+                scores.Add(material.Sustainability);
+            }
+            return scores.Average();
+        }
+
+        public double GetAverageQuality()
+        {
+            if (Requirements.Count == 0)
+                return 0;
+            
+            List<double> scores = new List<double>();
+            foreach (Material material in Requirements)
+            {
+                scores.Add(material.Quality);
+            }
+            return scores.Average();
+        }
     }
 }
