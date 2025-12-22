@@ -209,7 +209,7 @@
                                             }
                                             double averageQuality = totalQuality / quest.Requirements.Count;
                                             
-                                            if (phase == 1)//phase for foundation
+                                            if (phase == 4)//phase for foundation
                                             {
                                                 house.foundationHP = 100;
                                                 house.foundationQuality = averageQuality;
@@ -221,7 +221,7 @@
                                                 {
                                                     house.foundation = 2;
                                                 }
-                                                else if (materialName == "Brick")
+                                                else if (materialName == "Bricks")
                                                 {
                                                     house.foundation = 3;
                                                 }
@@ -242,11 +242,11 @@
                                                 {
                                                     house.walls = 2;
                                                 }
-                                                else if (materialName == "Brick")
+                                                else if (materialName == "Bricks")
                                                 {
                                                     house.walls = 3;
                                                 }
-                                                else if (materialName == "WoodShingles")
+                                                else if (materialName == "Shingle")
                                                 {
                                                     house.walls = 4;
                                                 }
@@ -267,7 +267,7 @@
                                                 {
                                                     house.roof = 2;
                                                 }
-                                                else if (materialName == "Tyle")
+                                                else if (materialName == "Shingle")
                                                 {
                                                     house.roof = 3;
                                                 }
