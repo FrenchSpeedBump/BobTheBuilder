@@ -38,7 +38,7 @@ public class GameUITests
     {
         var output = ConsoleTestHelper.CaptureOutput(GameUI.PrintWelcome);
 
-        Assert.That(output, Does.Contain("Welcome to Bob the Builder"));
+        Assert.That(output, Does.Contain("WELCOME TO BOB THE BUILDER"));
     }
 
     [Test]
@@ -84,7 +84,7 @@ public class GeneralUiOutputTests
 
         var output = ConsoleTestHelper.CaptureOutput(() => PlayerUI.DisplayInventory(player));
 
-        Assert.That(output, Does.Contain("Inventory for Bob"));
+        Assert.That(output, Does.Contain("Your Inventory"));
     }
 
     [Test]
@@ -115,6 +115,6 @@ public class GeneralUiOutputTests
 
         var output = ConsoleTestHelper.CaptureOutput(() => ConstructionUI.DisplayQuests(quests));
 
-        Assert.That(output, Does.Contain("Requirements"));
+        Assert.That(output, Does.Contain("Materials"));
     }
 }

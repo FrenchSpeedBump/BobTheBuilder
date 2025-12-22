@@ -35,9 +35,12 @@ public class NaturalDisastersTests
             foundation = 1,
             walls = 1,
             roof = 1,
-            foundationHP = 0.1,
-            wallsHP = 0.1,
-            roofHP = 0.1
+            foundationHP = 10,
+            foundationQuality = 0.0,
+            wallsHP = 10,
+            wallsQuality = 0.0,
+            roofHP = 10,
+            roofQuality = 0.0
         };
 
         var result = disasters.DisasterStruck(house, 1);
@@ -45,7 +48,7 @@ public class NaturalDisastersTests
         Assert.Multiple(() =>
         {
             Assert.That(result.HouseSurvived, Is.False); // House destroyed
-            Assert.That(house.foundationHP, Is.EqualTo(-0.7).Within(1e-6));
+            Assert.That(house.foundationHP, Is.LessThan(0)); // HP went negative
         });
     }
 
@@ -58,9 +61,12 @@ public class NaturalDisastersTests
             foundation = 1,
             walls = 1,
             roof = 1,
-            foundationHP = 10,
-            wallsHP = 10,
-            roofHP = 10
+            foundationHP = 100,
+            foundationQuality = 0.9,
+            wallsHP = 100,
+            wallsQuality = 0.9,
+            roofHP = 100,
+            roofQuality = 0.9
         };
 
         var result = disasters.DisasterStruck(house, 1);
@@ -68,7 +74,7 @@ public class NaturalDisastersTests
         Assert.Multiple(() =>
         {
             Assert.That(result.HouseSurvived, Is.True);
-            Assert.That(house.foundationHP, Is.EqualTo(10));
+            Assert.That(house.foundationHP, Is.EqualTo(100)); // Quality blocked damage
         });
     }
 

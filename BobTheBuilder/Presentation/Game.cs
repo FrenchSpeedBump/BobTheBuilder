@@ -433,7 +433,7 @@
                             break;
                         case "work":
                             continuePlaying = false;
-                            double amount = 600;
+                            double amount = 800;
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("You earned {0}{1} from work today.\n",amount,bank.currency);
                             Console.ResetColor();
@@ -469,9 +469,8 @@
                                 {
                                     Console.WriteLine("Your house is in perfect condition!");
                                 }
-                                else if (bank.GetBalance() >= repairCost)
+                                else if (bank.takeMoney(repairCost))
                                 {
-                                    bank.AddMoney(-repairCost);
                                     if (house.foundation > 0 && house.foundationHP < 100) house.foundationHP = 100;
                                     if (house.walls > 0 && house.wallsHP < 100) house.wallsHP = 100;
                                     if (house.roof > 0 && house.roofHP < 100) house.roofHP = 100;

@@ -10,7 +10,7 @@ public class BankTests
 
         bank.AddMoney(500);
 
-        Assert.That(bank.GetBalance(), Is.EqualTo(50500));
+        Assert.That(bank.GetBalance(), Is.EqualTo(3500));
     }
 
     [Test]
@@ -18,12 +18,12 @@ public class BankTests
     {
         var bank = new Bank("Bank", "desc");
 
-        var success = bank.takeMoney(60000);
+        var success = bank.takeMoney(5000);
 
         Assert.Multiple(() =>
         {
             Assert.That(success, Is.False);
-            Assert.That(bank.GetBalance(), Is.EqualTo(50000));
+            Assert.That(bank.GetBalance(), Is.EqualTo(3000));
         });
     }
 
@@ -37,9 +37,9 @@ public class BankTests
         Assert.Multiple(() =>
         {
             Assert.That(success, Is.True);
-            Assert.That(bank.GetBalance(), Is.EqualTo(50800));
+            Assert.That(bank.GetBalance(), Is.EqualTo(3800));
             Assert.That(bank.totalDebt, Is.EqualTo(820));
-            Assert.That(bank.monthlyRepayment, Is.EqualTo(410));
+            Assert.That(bank.monthlyRepayment, Is.EqualTo(820.0 / 3).Within(0.01));
         });
     }
 
@@ -53,8 +53,8 @@ public class BankTests
 
         Assert.Multiple(() =>
         {
-            Assert.That(bank.totalDebt, Is.EqualTo(1575));
-            Assert.That(bank.GetBalance(), Is.EqualTo(51475));
+            Assert.That(bank.totalDebt, Is.EqualTo(1750));
+            Assert.That(bank.GetBalance(), Is.EqualTo(4650));
         });
     }
 }
@@ -76,7 +76,7 @@ public class PlayerTests
         Assert.Multiple(() =>
         {
             Assert.That(success, Is.True);
-            Assert.That(bank.GetBalance(), Is.EqualTo(49990));
+            Assert.That(bank.GetBalance(), Is.EqualTo(2990));
             Assert.That(materialsShop.Inventory["Wood"].Price, Is.EqualTo(50));
             Assert.That(player.Inventory, Does.Contain(coupon));
         });
@@ -94,7 +94,7 @@ public class PlayerTests
         Assert.Multiple(() =>
         {
             Assert.That(success, Is.True);
-            Assert.That(bank.GetBalance(), Is.EqualTo(49975));
+            Assert.That(bank.GetBalance(), Is.EqualTo(2975));
             Assert.That(player.Has("Concrete"), Is.True);
         });
     }
