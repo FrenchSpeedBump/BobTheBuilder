@@ -59,8 +59,6 @@
             Player player = new Player();
             Statistics stats = new Statistics();
 
-            // UI features now handled through GameUI static class, which should contain all UI related methods
-
             GameUI.PrintWelcomeImage();
             GameUI.LoadingBar();
             Console.Clear();
@@ -86,12 +84,39 @@
                 if(!disasterResult.HouseSurvived)
                 {
                     stats.RecordNaturalDisasterHappening(true);
+                    Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("\n================================");
                     Console.WriteLine("       GAME OVER");
                     Console.WriteLine("================================");
                     Console.ResetColor();
                     Console.WriteLine("Your house did not survive the disaster.\n");
+                    Console.WriteLine("You survived until Day {0}\n", day);
+                    
+                    StatisticsUI.DisplayEndStats(stats, day);
+                    Console.WriteLine();
+                    
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("╔════════════════════════════════════════╗");
+                    Console.WriteLine("║                                        ║");
+                    Console.WriteLine("║         SEMESTER 1 PROJECT             ║");
+                    Console.WriteLine("║            GROUP NUMBER 4              ║");
+                    Console.WriteLine("║                                        ║");
+                    Console.WriteLine("╠════════════════════════════════════════╣");
+                    Console.WriteLine("║                                        ║");
+                    Console.WriteLine("║            DEVELOPED BY:               ║");
+                    Console.WriteLine("║                                        ║");
+                    Console.WriteLine("║              • Filip                   ║");
+                    Console.WriteLine("║              • Lautaro                 ║");
+                    Console.WriteLine("║              • David                   ║");
+                    Console.WriteLine("║              • Adam                    ║");
+                    Console.WriteLine("║              • Alex                    ║");
+                    Console.WriteLine("║              • Marius                  ║");
+                    Console.WriteLine("║                                        ║");
+                    Console.WriteLine("╚════════════════════════════════════════╝");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                    
                     day = 10000;
                     break;
                 }
@@ -100,7 +125,6 @@
                     stats.RecordNaturalDisasterHappening(true);
                     Presentation.UI.NaturalDisastersUI.DisplayDisasterAnnouncement(disasterResult.DisasterName!);
                     
-                    // Check quality vs disaster damage for each part
                     if (house.foundation > 0)
                     {
                         if (house.foundationQuality < disasterResult.FoundationDamage)
@@ -194,12 +218,11 @@
                                     }
                                     else
                                     {
-                                        int questId = Convert.ToInt32(command.SecondWord) - 1; // Convert from 1-based to 0-based index
+                                        int questId = Convert.ToInt32(command.SecondWord) - 1;
                                         if (consBuildingAccept.AcceptQuest(questId, phase, player))
                                         {
                                             Quest quest = consBuildingAccept.GetQuestInfo(questId, phase);
                                             
-                                            // Check payment first before completing quest
                                             if (!consBuildingAccept.MoneyDeduction(questId, bank))
                                             {
                                                 Console.ForegroundColor = ConsoleColor.Red;
@@ -218,6 +241,57 @@
                                                 stats.RecordQuestCompletion(quest);
                                                 house.RecordMaterials(quest);
                                                 phase++;
+                                                
+                                                // Check for victory
+                                                if (phase > 16)
+                                                {
+                                                    Console.Clear();
+                                                    Console.ForegroundColor = ConsoleColor.Green;
+                                                    Console.WriteLine("\n╔════════════════════════════════════════╗");
+                                                    Console.WriteLine("║                                        ║");
+                                                    Console.WriteLine("║          🎉 CONGRATULATIONS! 🎉        ║");
+                                                    Console.WriteLine("║                                        ║");
+                                                    Console.WriteLine("║      YOU COMPLETED YOUR HOUSE!         ║");
+                                                    Console.WriteLine("║                                        ║");
+                                                    Console.WriteLine("╚════════════════════════════════════════╝\n");
+                                                    Console.ResetColor();
+                                                    
+                                                    Console.WriteLine("Finished on Day {0} out of 20!\n", day);
+                                                    
+                                                    StatisticsUI.DisplayEndStats(stats, day);
+                                                    Console.WriteLine();
+                                                    
+                                                    Console.ForegroundColor = ConsoleColor.Cyan;
+                                                    Console.WriteLine("--- Your Completed House ---");
+                                                    Console.ResetColor();
+                                                    Presentation.UI.HouseUI.DisplayHouse(house);
+                                                    Console.WriteLine();
+                                                    
+                                                    Console.ForegroundColor = ConsoleColor.Yellow;
+                                                    Console.WriteLine("╔════════════════════════════════════════╗");
+                                                    Console.WriteLine("║                                        ║");
+                                                    Console.WriteLine("║         SEMESTER 1 PROJECT             ║");
+                                                    Console.WriteLine("║            GROUP NUMBER 4              ║");
+                                                    Console.WriteLine("║                                        ║");
+                                                    Console.WriteLine("╠════════════════════════════════════════╣");
+                                                    Console.WriteLine("║                                        ║");
+                                                    Console.WriteLine("║            DEVELOPED BY:               ║");
+                                                    Console.WriteLine("║                                        ║");
+                                                    Console.WriteLine("║              • Filip                   ║");
+                                                    Console.WriteLine("║              • Lautaro                 ║");
+                                                    Console.WriteLine("║              • David                   ║");
+                                                    Console.WriteLine("║              • Adam                    ║");
+                                                    Console.WriteLine("║              • Alex                    ║");
+                                                    Console.WriteLine("║              • Marius                  ║");
+                                                    Console.WriteLine("║                                        ║");
+                                                    Console.WriteLine("╚════════════════════════════════════════╝");
+                                                    Console.ResetColor();
+                                                    Console.WriteLine();
+                                                    
+                                                    day = 10000;
+                                                    continuePlaying = false;
+                                                    break;
+                                                }
                                             }
                                         }
                                         else
@@ -498,8 +572,11 @@
                     }
                     
                 }
+                if (!continuePlaying)
+                    break;
+
                 day++;
-                    Console.Clear();
+                Console.Clear();
             }
             
 
@@ -508,28 +585,6 @@
             Console.WriteLine("  Thank you for playing!");
             Console.WriteLine("================================\n");
             Console.ResetColor();
-            
-            // Display credits
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("╔════════════════════════════════════════╗");
-            Console.WriteLine("║                                        ║");
-            Console.WriteLine("║          SEMESTER 1 PROJECT            ║");
-            Console.WriteLine("║            GROUP NUMBER 4              ║");
-            Console.WriteLine("║                                        ║");
-            Console.WriteLine("╠════════════════════════════════════════╣");
-            Console.WriteLine("║                                        ║");
-            Console.WriteLine("║            DEVELOPED BY:               ║");
-            Console.WriteLine("║                                        ║");
-            Console.WriteLine("║              • Filip                   ║");
-            Console.WriteLine("║              • Lautaro                 ║");
-            Console.WriteLine("║              • David                   ║");
-            Console.WriteLine("║              • Adam                    ║");
-            Console.WriteLine("║              • Alex                    ║");
-            Console.WriteLine("║              • Marius                  ║");
-            Console.WriteLine("║                                        ║");
-            Console.WriteLine("╚════════════════════════════════════════╝");
-            Console.ResetColor();
-            Console.WriteLine();
         }
 
         private void Move(string direction)
