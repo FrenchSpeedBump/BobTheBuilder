@@ -10,7 +10,7 @@
         public Bank(string shortDesc,string longDesc)
             : base(shortDesc, longDesc)
         {
-            accountBalance = 50000;//here set initial money amount
+            accountBalance = 3000;//here set initial money amount - forces strategic planning
             totalDebt = 0;
             monthlyRepayment = 0;
         }

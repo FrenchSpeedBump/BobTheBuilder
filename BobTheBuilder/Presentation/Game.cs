@@ -433,7 +433,7 @@
                             break;
                         case "work":
                             continuePlaying = false;
-                            double amount = 200;
+                            double amount = 600;
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("You earned {0}{1} from work today.\n",amount,bank.currency);
                             Console.ResetColor();
