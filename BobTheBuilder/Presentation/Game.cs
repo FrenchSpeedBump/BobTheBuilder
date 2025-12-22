@@ -69,7 +69,7 @@
             int day = 1;
             int phase = 1;
             bool built_today;
-            while (day<10)
+            while (day<21)
             {
                 built_today = false;
                 bool continuePlaying = true;
@@ -209,7 +209,7 @@
                                             }
                                             double averageQuality = totalQuality / quest.Requirements.Count;
                                             
-                                            if (phase == 4)//phase for foundation
+                                            if (phase == 1)//phase for foundation
                                             {
                                                 house.foundationHP = 100;
                                                 house.foundationQuality = averageQuality;

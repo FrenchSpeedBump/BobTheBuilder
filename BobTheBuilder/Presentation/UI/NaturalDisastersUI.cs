@@ -6,7 +6,7 @@ namespace BobTheBuilder.Presentation.UI
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("\n================================");
-            Console.WriteLine("   NATURAL DISASTER!");
+            Console.WriteLine("       NATURAL DISASTER!");
             Console.WriteLine("================================");
             Console.ResetColor();
             Console.WriteLine("A {0} has struck your house!\n", disasterName);
