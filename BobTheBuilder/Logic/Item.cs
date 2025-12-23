@@ -12,11 +12,6 @@
             Price = price;
         }
     }
-/* 
-    Both item and material have both price and sustainability, however, only items can be bought and sold in the current implementation.
-    If we want to implement buying materials we just delete the condition in "buy" and assign a price to the material.
-    We also can assign sustainability to items in the same way we do for materials.
-*/
     public class Item : ShopInventoryContents
     {
         public string? Effect { get; set; } //what does it affect

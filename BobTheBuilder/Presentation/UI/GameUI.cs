@@ -37,7 +37,7 @@
         }
 
 
-    public static void PrintWelcome()//this needs to be moved to a separate file and just be called 
+    public static void PrintWelcome()
     {
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine("\n================================");

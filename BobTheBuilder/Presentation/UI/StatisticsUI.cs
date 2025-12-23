@@ -4,7 +4,6 @@ namespace BobTheBuilder
     {
         public static void DisplayStats(Statistics statistics, int day)
         {
-            // Don't show stats on day 1 since there's nothing to display yet
             if (day <= 1)
             {
                 return;

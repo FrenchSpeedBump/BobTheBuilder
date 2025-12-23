@@ -19,14 +19,14 @@ namespace BobTheBuilder
                     var room = roomPositions.FirstOrDefault(kvp => kvp.Value == (x, y)).Key;
                     if(room==null)
                     {
-                        Console.Write("     ");  // 5 spaces to match room width
+                        Console.Write("     ");
                     }
                     else
                     {
                         if (room == currentRoom)
                         {
                             Console.ForegroundColor = ConsoleColor.Green;
-                            Console.Write("[{0}]", room.ShortDescription.Substring(0, 3));  // Player position (5 chars)
+                            Console.Write("[{0}]", room.ShortDescription.Substring(0, 3));  // Player position
                             Console.ResetColor();
                         }
                         else
@@ -34,13 +34,13 @@ namespace BobTheBuilder
                             if (room.discovered)
                             {
                                 Console.ForegroundColor = ConsoleColor.White;
-                                Console.Write(" {0} ", room.ShortDescription.Substring(0, 3));  // Visited room (5 chars)
+                                Console.Write(" {0} ", room.ShortDescription.Substring(0, 3));  // Visited room
                                 Console.ResetColor();
                             }
                             else
                             {
                                 Console.ForegroundColor = ConsoleColor.DarkGray;
-                                Console.Write(" ??? ");  // Undiscovered (5 chars)
+                                Console.Write(" ??? ");  // Undiscovered
                                 Console.ResetColor();
                             }
                                 

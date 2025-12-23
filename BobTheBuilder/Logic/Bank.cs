@@ -22,7 +22,7 @@
         {
             if (amount < 0 || amount>accountBalance) 
             {
-                return false;//card declined
+                return false;
             }
             accountBalance -= amount;
             return true;

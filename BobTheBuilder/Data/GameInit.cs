@@ -38,10 +38,6 @@
             cons_2.SetExit("south", office);
             cons_3.SetExit("west", office);
 
-            // add quests to construction buildings
-
-
-
             // add every created room into the returned dictionary
             AddRoom(rooms, house);
             AddRoom(rooms, street_1);
@@ -59,7 +55,6 @@
             return rooms;
         }
 
-        // Return every item created along with the target shop short description
         public List<(string shopShortDescription, Item item)> CreateItems()
         {
             List<(string, Item)> list = new();
@@ -74,19 +69,15 @@
             return list;
         }
 
-        // Return every material created along with the target shop short description
         public List<(string shopShortDescription, Material material)> CreateMaterials()
         {
             List<(string, Material)> list = new();
 
             //Material new(string name, string description, double sustainability, double quality, double price)
-            // Keep original simple materials and add all materials referenced by quests so names match exactly.
             Material wood = new("Wood", "A sturdy piece of wood.", 0.9, 0.55, 10);
             Material bricks = new("Bricks", "A stack of red bricks.", 0.7, 0.75, 15);
             Material concrete = new("Concrete", "A heavy block of concrete.", 0.45, 0.9, 18);
             Material glass = new("Glass", "A transparent sheet of glass.", 0.8, 0.4, 7);
-
-            // Materials used in QuestInit (one-word names must match)
             Material gravel = new("Gravel", "General gravel for site work.", 0.65, 0.65, 8);
             Material insulation = new("Insulation", "Insulation material.", 0.55, 0.75, 20);
             Material pine = new("Pine", "Pine timber and boards.", 0.8, 0.55, 15);
@@ -97,13 +88,10 @@
             Material ecoblock = new("EcoBlock", "Eco-friendly building block.", 0.95, 0.9, 90);
             Material solar = new("Solar", "Solar tiles and panels.", 1, 0.7, 130);
 
-            // Add original materials (keep backward compatibility)
             list.Add(("Bob's Materials", wood));
             list.Add(("Bob's Materials", bricks));
             list.Add(("Bob's Materials", concrete));
             list.Add(("Bob's Materials", glass));
-
-            // Add materials referenced by quests
             list.Add(("Bob's Materials", gravel));
             list.Add(("Bob's Materials", insulation));
             list.Add(("Bob's Materials", pine));

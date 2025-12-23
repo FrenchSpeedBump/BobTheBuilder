@@ -3,9 +3,9 @@
     public class Command
     {
         public string Name { get; } 
-        public string? SecondWord { get; } // this might be used for future expansions, such as "take apple".
-        public string? ThirdWord { get; } // used for entering construction building
-        public string? FourthWord { get; } // used for entering construction building
+        public string? SecondWord { get; }
+        public string? ThirdWord { get; }
+        public string? FourthWord { get; }
         public Command(string name, string? secondWord = null, string? thirdWord = null, string? fourthWord = null)
         {
             Name = name;

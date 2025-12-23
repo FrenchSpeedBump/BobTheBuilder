@@ -96,7 +96,6 @@
             Console.Write(SetWalls(house.walls));
             Console.Write(SetFoundation(house.foundation));
             
-            // Display house stats if materials have been used
             if (house.UsedMaterials.Count > 0)
             {
                 double totalQuality = 0;

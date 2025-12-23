@@ -1,6 +1,6 @@
 namespace BobTheBuilder
 {
-    public class Player//can inventory be a separate class?
+    public class Player
     {
         public string Name = "Bob";
         public List<ShopInventoryContents> Inventory = new List<ShopInventoryContents>();

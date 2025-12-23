@@ -242,7 +242,6 @@
                                                 house.RecordMaterials(quest);
                                                 phase++;
                                                 
-                                                // Check for victory
                                                 if (phase > 16)
                                                 {
                                                     Console.Clear();
@@ -391,7 +390,7 @@
                             Console.ResetColor();
                             break;
 
-                        case "gointo"://now you can enter a neighbouring room by typing in it's name without knowing the direction
+                        case "gointo":
                             if (command.SecondWord == null)
                                 {
                                 Console.ForegroundColor = ConsoleColor.Red;
@@ -414,7 +413,7 @@
                             }
                             break;
 
-                        case "loan"://loan money
+                        case "loan":
                             if (currentRoom != bank)
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
@@ -436,7 +435,7 @@
                                 Console.ResetColor();
                             }
                             break;
-                        case "account"://display account info
+                        case "account":
                             if (currentRoom != bank)
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
@@ -452,11 +451,11 @@
                             Console.WriteLine("Monthly Repayment: " + bank.GetMonthlyRepayment() + bank.currency);
                             Console.WriteLine();
                             break;
-                        case "inventory": // Show player inventory
+                        case "inventory":
                             PlayerUI.DisplayInventory(player);
                             break;
 
-                        case "buy"://buy stuff
+                        case "buy":
                             if (command.SecondWord == null)
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
@@ -635,11 +634,11 @@
             }
         }
         
-        private Room? FindRoomByName(string? secondWord, string? thirdWord, string? fourthWord)//BFS for finding target room
+        private Room? FindRoomByName(string? secondWord, string? thirdWord, string? fourthWord)
         {
             string target = Normalize(secondWord) + Normalize(thirdWord) + Normalize(fourthWord);
 
-            if (target == "north" || target == "east" || target == "south" || target == "west")//if just direction going to direction
+            if (target == "north" || target == "east" || target == "south" || target == "west")
             {
                 Move(target);
                 return null;

@@ -1,22 +1,21 @@
 ﻿namespace BobTheBuilder
-{
-    //Shop class with inventory variable, which will hold multiple item objects of type Item 
+{ 
     public class Shop : Room
     {
         public Dictionary<string, ShopInventoryContents> Inventory { get; set; } = new Dictionary<string, ShopInventoryContents>();
-        public Shop(string shortDesc, string longDesc) : base(shortDesc, longDesc) // Made shop class inherit from Room, added inventory and relevant methods
+        public Shop(string shortDesc, string longDesc) : base(shortDesc, longDesc)
         {
         }
-        public void AddContents(ShopInventoryContents contents) // Both these methods support both items and materials
+        public void AddContents(ShopInventoryContents contents)
         {
             Inventory[contents.Name] = contents;
         }
-        public void RemoveContents(ShopInventoryContents contents) // Both these methods support both items and materials
+        public void RemoveContents(ShopInventoryContents contents)
         {
             Inventory.Remove(contents.Name);
         }
 
-        public ShopInventoryContents? GetContents(string contentsName) // Used in "buy" command
+        public ShopInventoryContents? GetContents(string contentsName)
         {
             Inventory.TryGetValue(contentsName, out ShopInventoryContents? contents);
             return contents;
