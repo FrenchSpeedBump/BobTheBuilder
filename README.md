@@ -2,7 +2,7 @@
 
 **Semester 1 Project - Group 4**
 
-A strategic construction simulation game where players manage resources, finances, and time to build their dream house within 20 days.
+A strategic construction simulation game where players manage resources, finances, and time to build their dream house within 30 days.
 
 ---
 
@@ -65,7 +65,7 @@ dotnet test
 - **Starting Balance:** $3,000
 - **Daily Work Income:** $800/day
 - **Loans Available:** Up to $8,000 (with interest)
-- **Time Limit:** 20 days maximum
+- **Time Limit:** 30 days maximum
 - **Daily Choice:** Complete 1 quest OR work (not both)
 
 ### Building Phases

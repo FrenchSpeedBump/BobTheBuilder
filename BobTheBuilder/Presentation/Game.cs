@@ -67,7 +67,7 @@
             int day = 1;
             int phase = 1;
             bool built_today;
-            while (day<21)
+            while (day<31)
             {
                 built_today = false;
                 bool continuePlaying = true;
@@ -256,7 +256,7 @@
                                                     Console.WriteLine("╚════════════════════════════════════════╝\n");
                                                     Console.ResetColor();
                                                     
-                                                    Console.WriteLine("Finished on Day {0} out of 20!\n", day);
+                                                    Console.WriteLine("Finished on Day {0} out of 30!\n", day);
                                                     
                                                     StatisticsUI.DisplayEndStats(stats, day);
                                                     Console.WriteLine();
@@ -344,10 +344,11 @@
                             break;
                         case "sleep":
                             Console.ForegroundColor = ConsoleColor.DarkCyan;
-                            Console.WriteLine("You went home to sleep.\n");
+                            Console.WriteLine("You went home to sleep. Another day passes...\n");
                             Console.ResetColor();
                             continuePlaying = false;
                             currentRoom = house;
+                            Thread.Sleep(2000);
                             break;
                         case "help":
                             GameUI.PrintHelp();
@@ -579,11 +580,7 @@
                             Console.WriteLine("I don't know what command.");
                             break;
                     }
-                    
                 }
-                if (!continuePlaying)
-                    break;
-
                 day++;
                 Console.Clear();
             }
