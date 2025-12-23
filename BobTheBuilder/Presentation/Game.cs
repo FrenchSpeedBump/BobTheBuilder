@@ -75,7 +75,7 @@
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("\n==============|Day {0}|==============",day);
                 Console.ResetColor();
-                Console.WriteLine("Balance: " + bank.currency + bank.GetBalance());
+                Console.WriteLine("Balance: " + bank.currency + bank.GetBalance().ToString("F2"));
                 Console.WriteLine("===================================");
                 StatisticsUI.DisplayStats(stats, day);
 
@@ -446,9 +446,9 @@
                             Console.ForegroundColor = ConsoleColor.Cyan;
                             Console.WriteLine("\n--- Account Information ---");
                             Console.ResetColor();
-                            Console.WriteLine("Balance: " + bank.GetBalance() + bank.currency);
-                            Console.WriteLine("Total Debt: " + bank.GetTotalDebt() + bank.currency);
-                            Console.WriteLine("Monthly Repayment: " + bank.GetMonthlyRepayment() + bank.currency);
+                            Console.WriteLine("Balance: " + bank.currency + bank.GetBalance().ToString("F2"));
+                            Console.WriteLine("Total Debt: " + bank.currency + bank.GetTotalDebt().ToString("F2"));
+                            Console.WriteLine("Monthly Repayment: " + bank.currency + bank.GetMonthlyRepayment().ToString("F2"));
                             Console.WriteLine();
                             break;
                         case "inventory":
