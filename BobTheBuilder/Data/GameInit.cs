@@ -14,12 +14,12 @@
             Room street_main = new("Street_Main", "The main street ouf our town. The street has an office building on one side and a bank on the other");
             Room street_north = new("Street_North", "The north street has two shops: Bob's Materials and the Magic Tool Shop. Funily enoguh, the street doesn't face north.");
             Room alley = new("Alley", "A small alley between two buildings. Nothing to see here.");
-            Room office = new("Office Building", "When you step into this old office building you are met with three construction company signs: Best Build, Big Build and Small Build");
+            Room office = new("Office Building", "\n══════════════════════════════════════════════════════\n\n   When you step into this old office building you are\n   met with three construction company signs:\n\n   • Big Build (west)\n   • Best Build (north)\n   • Small Build (east)\n\n══════════════════════════════════════════════════════\n");
             Bank bank = new("Bank", "A nice empty building where at the other side of the room a young teller is smiling at you");
             Shop materials = new("Bob's Materials", "Rows and rows of construction materials");
             Shop tools = new("Magic Tool Shop", "A nice old man is very happy to tell you everything about a hammer");
-            ConstructionBuilding cons_1 = new("Best Build", "Constructions", questInit.GetQuestsCons1());
-            ConstructionBuilding cons_2 = new("Big Build", "Constructions", questInit.GetQuestsCons2());
+            ConstructionBuilding cons_1 = new("Big Build", "Constructions", questInit.GetQuestsCons1());
+            ConstructionBuilding cons_2 = new("Best Build", "Constructions", questInit.GetQuestsCons2());
             ConstructionBuilding cons_3 = new("Small Build", "Constructions", questInit.GetQuestsCons3());
             Room forest = new("Forest", "Just a bunch of trees and bushes. Nothing to do here.");
 
@@ -66,7 +66,7 @@
             //Item new(string name, string description, double price)
             Item hammer = new("Hammer", "A sturdy hammer for building.", 200,"Wood",0.90);
             Item nails = new("Nails", "A box of small nails.", 100, "Wood", 0.95);
-            Item car = new("Car", "A nice 2004 Volvo V50 that lets you fast travel between discovered locations.",2000);
+            Item car = new("Car", "A nice 2004 Volvo V50 that lets you fast travel between discovered locations.",400);
 
             list.Add(("Magic Tool Shop", hammer));
             list.Add(("Magic Tool Shop", nails));
