@@ -75,7 +75,7 @@
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("\n==============|Day {0}|==============",day);
                 Console.ResetColor();
-                Console.WriteLine("Balance: " + bank.GetBalance() + bank.currency);
+                Console.WriteLine("Balance: " + bank.currency + bank.GetBalance());
                 Console.WriteLine("===================================");
                 StatisticsUI.DisplayStats(stats, day);
 

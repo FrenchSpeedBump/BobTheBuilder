@@ -10,9 +10,9 @@
 
 
             House house = new("House", "This is where we are going to build a house :)");
-            Room street_1 = new("Street_1", "A street leading to our house going into the city. Nothing but nature around us.");
-            Room street_main = new("Street_Main", "The main street ouf our town. The street has an office building on one side and a bank on the other");
-            Room street_north = new("Street_North", "The north street has two shops: Bob's Materials and the Magic Tool Shop. Funily enoguh, the street doesn't face north.");
+            Room street_1 = new("Eastside", "A street leading to our house going into the city. Nothing but nature around us.");
+            Room street_main = new("Square", "The main street ouf our town. The street has an office building on one side and a bank on the other");
+            Room street_north = new("Westside", "The north street has two shops: Bob's Materials and the Magic Tool Shop. Funily enoguh, the street doesn't face north.");
             Room alley = new("Alley", "A small alley between two buildings. Nothing to see here.");
             Room office = new("Office Building", "\n══════════════════════════════════════════════════════\n\n   When you step into this old office building you are\n   met with three construction company signs:\n\n   • Big Build (west)\n   • Best Build (north)\n   • Small Build (east)\n\n══════════════════════════════════════════════════════\n");
             Bank bank = new("Bank", "A nice empty building where at the other side of the room a young teller is smiling at you");

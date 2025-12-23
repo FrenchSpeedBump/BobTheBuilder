@@ -67,6 +67,7 @@
             Console.WriteLine("  buy <item>                - Purchase item in shop");
             Console.WriteLine("  accept <number>           - Accept quest in construction building");
             Console.WriteLine("  repair                    - Repair house (at construction building)");
+            Console.WriteLine("  work                      - Work for $400 (once per day)");
             Console.WriteLine("  sleep                     - End day and start next");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Yellow;
