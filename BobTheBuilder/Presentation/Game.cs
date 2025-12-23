@@ -448,7 +448,7 @@
                             Console.ResetColor();
                             Console.WriteLine("Balance: " + bank.currency + bank.GetBalance().ToString("F2"));
                             Console.WriteLine("Total Debt: " + bank.currency + bank.GetTotalDebt().ToString("F2"));
-                            Console.WriteLine("Monthly Repayment: " + bank.currency + bank.GetMonthlyRepayment().ToString("F2"));
+                            Console.WriteLine("Daily Repayment: " + bank.currency + bank.GetMonthlyRepayment().ToString("F2"));
                             Console.WriteLine();
                             break;
                         case "inventory":
