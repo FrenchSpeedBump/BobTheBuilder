@@ -1,5 +1,15 @@
 ﻿namespace BobTheBuilder.Logic
 {
+    public class DisasterResult
+    {
+        public bool HouseSurvived { get; set; }
+        public bool DisasterOccurred { get; set; }
+        public string? DisasterName { get; set; }
+        public double FoundationDamage { get; set; }
+        public double WallsDamage { get; set; }
+        public double RoofDamage { get; set; }
+    }
+
     internal class NaturalDisaster
     {
         public string name;
@@ -34,77 +44,81 @@
             disasterChance = 0.25;
         }
 
-        public bool DisasterStruck(House house, int day)
+        public DisasterResult DisasterStruck(House house, int day)
         {
+            DisasterResult result = new DisasterResult
+            {
+                HouseSurvived = true,
+                DisasterOccurred = false,
+                DisasterName = "",
+                FoundationDamage = 0,
+                WallsDamage = 0,
+                RoofDamage = 0
+            };
+
             Random rng = new Random();
             int rand = rng.Next(0, 4);
             NaturalDisaster disaster = disasters[rand];
             if (house.foundation == 0 && house.walls == 0 && house.roof == 0)
             {
-                return true;
+                return result;
             }
             if (day % dayInterval != 0)
             {
-                return true;
+                return result;
             }
             double chance = rng.NextDouble();
             if (chance > disasterChance)
             {
-                return true;
+                return result;
             }
-            Console.WriteLine("Oh No! A disaster struck!\n========\n{0}\n========", disaster.name);
+            result.DisasterOccurred = true;
+            result.DisasterName = disaster.name;
+            result.FoundationDamage = disaster.affectFoundation;
+            result.WallsDamage = disaster.affectWalls;
+            result.RoofDamage = disaster.affectRoof;
             
             if (house.foundation > 0)
             {
-                if (disaster.affectFoundation > house.foundationHP)
+                if (house.foundationQuality < disaster.affectFoundation)
                 {
-                    house.foundationHP -= disaster.affectFoundation - house.foundationHP;
-                    Console.WriteLine("Foundation damage! Foundation durability reduced to {0:F2}", house.foundationHP);
-                    if(house.foundationHP < 0)
+                    double damage = (disaster.affectFoundation - house.foundationQuality) * 100;
+                    house.foundationHP -= damage;
+                    if(house.foundationHP <= 0)
                     {
-                        return false;
+                        result.HouseSurvived = false;
+                        return result;
                     }
-                }
-                else
-                {
-                    Console.WriteLine("Foundation resisted the disaster! (HP: {0:F2})", house.foundationHP);
                 }
             }
             if (house.walls > 0)
             {
-                if (disaster.affectWalls > house.wallsHP)
+                if (house.wallsQuality < disaster.affectWalls)
                 {
-                    house.wallsHP -= disaster.affectWalls - house.wallsHP;
-                    Console.WriteLine("Wall damage! Wall durability reduced to {0:F2}", house.wallsHP);
-                    if (house.wallsHP < 0)
+                    double damage = (disaster.affectWalls - house.wallsQuality) * 100;
+                    house.wallsHP -= damage;
+                    if (house.wallsHP <= 0)
                     {
-                        return false;
+                        result.HouseSurvived = false;
+                        return result;
                     }
-                }
-                else
-                {
-                    Console.WriteLine("Walls resisted the disaster! (HP: {0:F2})", house.wallsHP);
                 }
             }
             if (house.roof > 0)
             {
-                if (disaster.affectRoof > house.roofHP)
+                if (house.roofQuality < disaster.affectRoof)
                 {
-                    house.roofHP -= disaster.affectRoof - house.roofHP;
-                    Console.WriteLine("Roof damage! Roof durability reduced to {0:F2}", house.roofHP);
-                    if (house.roofHP < 0)
+                    double damage = (disaster.affectRoof - house.roofQuality) * 100;
+                    house.roofHP -= damage;
+                    if (house.roofHP <= 0)
                     {
-                        return false;
+                        result.HouseSurvived = false;
+                        return result;
                     }
-                }
-                else
-                {
-                    Console.WriteLine("Roof resisted the disaster! (HP: {0:F2})", house.roofHP);
                 }
             }
             
-            Console.WriteLine("Consider buying an item to repair your house.");
-            return true;
+            return result;
         }
     }
 }

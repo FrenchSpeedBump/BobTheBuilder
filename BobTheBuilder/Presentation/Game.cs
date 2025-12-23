@@ -59,8 +59,6 @@
             Player player = new Player();
             Statistics stats = new Statistics();
 
-            // UI features now handled through GameUI static class, which should contain all UI related methods
-
             GameUI.PrintWelcomeImage();
             GameUI.LoadingBar();
             Console.Clear();
@@ -74,17 +72,93 @@
                 built_today = false;
                 bool continuePlaying = true;
                 bank.CalculateRepayment();
-                Console.WriteLine("==============|Day {0}|==============",day);
-                Console.WriteLine("===================================");
-                Console.WriteLine("Money = " + bank.GetBalance() + bank.currency);
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\n==============|Day {0}|==============",day);
+                Console.ResetColor();
+                Console.WriteLine("Balance: " + bank.GetBalance() + bank.currency);
                 Console.WriteLine("===================================");
                 StatisticsUI.DisplayStats(stats, day);
 
-                if(!disasterEvent.DisasterStruck(house, day))
+                Logic.DisasterResult disasterResult = disasterEvent.DisasterStruck(house, day);
+                
+                if(!disasterResult.HouseSurvived)
                 {
-                    Console.WriteLine("Unfortunately your house did not survive the disaster.\n===================\nGAME OVER\n===================");
+                    stats.RecordNaturalDisasterHappening(true);
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\n================================");
+                    Console.WriteLine("       GAME OVER");
+                    Console.WriteLine("================================");
+                    Console.ResetColor();
+                    Console.WriteLine("Your house did not survive the disaster.\n");
+                    Console.WriteLine("You survived until Day {0}\n", day);
+                    
+                    StatisticsUI.DisplayEndStats(stats, day);
+                    Console.WriteLine();
+                    
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("╔════════════════════════════════════════╗");
+                    Console.WriteLine("║                                        ║");
+                    Console.WriteLine("║         SEMESTER 1 PROJECT             ║");
+                    Console.WriteLine("║            GROUP NUMBER 4              ║");
+                    Console.WriteLine("║                                        ║");
+                    Console.WriteLine("╠════════════════════════════════════════╣");
+                    Console.WriteLine("║                                        ║");
+                    Console.WriteLine("║            DEVELOPED BY:               ║");
+                    Console.WriteLine("║                                        ║");
+                    Console.WriteLine("║              • Filip                   ║");
+                    Console.WriteLine("║              • Lautaro                 ║");
+                    Console.WriteLine("║              • David                   ║");
+                    Console.WriteLine("║              • Adam                    ║");
+                    Console.WriteLine("║              • Alex                    ║");
+                    Console.WriteLine("║              • Marius                  ║");
+                    Console.WriteLine("║                                        ║");
+                    Console.WriteLine("╚════════════════════════════════════════╝");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                    
                     day = 10000;
                     break;
+                }
+                if(disasterResult.DisasterOccurred)
+                {
+                    stats.RecordNaturalDisasterHappening(true);
+                    Presentation.UI.NaturalDisastersUI.DisplayDisasterAnnouncement(disasterResult.DisasterName!);
+                    
+                    if (house.foundation > 0)
+                    {
+                        if (house.foundationQuality < disasterResult.FoundationDamage)
+                        {
+                            Presentation.UI.NaturalDisastersUI.DisplayDamageReport("Foundation", house.foundationHP);
+                        }
+                        else
+                        {
+                            Presentation.UI.NaturalDisastersUI.DisplayBlockedMessage("Foundation", house.foundationQuality, house.foundationHP);
+                        }
+                    }
+                    if (house.walls > 0)
+                    {
+                        if (house.wallsQuality < disasterResult.WallsDamage)
+                        {
+                            Presentation.UI.NaturalDisastersUI.DisplayDamageReport("Walls", house.wallsHP);
+                        }
+                        else
+                        {
+                            Presentation.UI.NaturalDisastersUI.DisplayBlockedMessage("Walls", house.wallsQuality, house.wallsHP);
+                        }
+                    }
+                    if (house.roof > 0)
+                    {
+                        if (house.roofQuality < disasterResult.RoofDamage)
+                        {
+                            Presentation.UI.NaturalDisastersUI.DisplayDamageReport("Roof", house.roofHP);
+                        }
+                        else
+                        {
+                            Presentation.UI.NaturalDisastersUI.DisplayBlockedMessage("Roof", house.roofQuality, house.roofHP);
+                        }
+                    }
+                    Presentation.UI.NaturalDisastersUI.DisplayRepairSuggestion();
                 }
                 while (continuePlaying)
                 {
@@ -104,7 +178,9 @@
 
                     if (command == null)
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("I don't know that command.");
+                        Console.ResetColor();
                         continue;
                     }
 
@@ -112,19 +188,19 @@
                     {
                         case "look":
                             Console.WriteLine(currentRoom?.LongDescription);
-                            if (currentRoom is Shop lookShop)
-                            {
-                                ShopUI.DisplayInventory(lookShop);
-                            }
                             if (currentRoom is ConstructionBuilding consBuilding)
                             {
                                 List<Quest> quests = consBuilding.GetQuestByPhase(phase);
                                 ConstructionUI.DisplayQuests(quests);
                             }
+                            else if (currentRoom is Shop lookShop)
+                            {
+                                ShopUI.DisplayInventory(lookShop);
+                            }
 
                             if (currentRoom is House)
                             {
-                                ShowHouse();
+                                Presentation.UI.HouseUI.DisplayHouse(house);
                             }
                             break;
 
@@ -135,110 +211,118 @@
                                 {
                                     if (command.SecondWord == null)
                                     {
+                                        Console.ForegroundColor = ConsoleColor.Red;
                                         Console.WriteLine("Accept which quest?");
+                                        Console.ResetColor();
                                         break;
                                     }
                                     else
                                     {
-                                        int questId = Convert.ToInt32(command.SecondWord) - 1; // Convert from 1-based to 0-based index
+                                        int questId = Convert.ToInt32(command.SecondWord) - 1;
                                         if (consBuildingAccept.AcceptQuest(questId, phase, player))
                                         {
-                                            built_today = true;
                                             Quest quest = consBuildingAccept.GetQuestInfo(questId, phase);
-                                            string materialName = quest.Requirements[0].Name;
-                                            double quality = quest.Requirements[0].Quality;
                                             
-                                            if (phase == 1)//phase for foundation
+                                            if (!consBuildingAccept.MoneyDeduction(questId, bank))
                                             {
-                                                house.foundationHP = quality;
-                                                if (materialName == "Wood")
+                                                Console.ForegroundColor = ConsoleColor.Red;
+                                                Console.WriteLine("Not enough money to pay for this quest!");
+                                                Console.ResetColor();
+                                            }
+                                            else
+                                            {
+                                                built_today = true;
+                                                house.BuildPart(phase, quest);
+                                                
+                                                Console.ForegroundColor = ConsoleColor.Green;
+                                                Console.WriteLine("\n✓ Quest completed!\n");
+                                                Console.ResetColor();
+                                                consBuildingAccept.QuestItemRemover(questId, player);
+                                                stats.RecordQuestCompletion(quest);
+                                                house.RecordMaterials(quest);
+                                                phase++;
+                                                
+                                                // Check for victory
+                                                if (phase > 16)
                                                 {
-                                                    house.foundation = 1;
-                                                }
-                                                else if (materialName == "Concrete")
-                                                {
-                                                    house.foundation = 2;
-                                                }
-                                                else if (materialName == "Brick")
-                                                {
-                                                    house.foundation = 3;
-                                                }
-                                                else//other
-                                                {
-                                                    house.foundation = 4;
+                                                    Console.Clear();
+                                                    Console.ForegroundColor = ConsoleColor.Green;
+                                                    Console.WriteLine("\n╔════════════════════════════════════════╗");
+                                                    Console.WriteLine("║                                        ║");
+                                                    Console.WriteLine("║          🎉 CONGRATULATIONS! 🎉        ║");
+                                                    Console.WriteLine("║                                        ║");
+                                                    Console.WriteLine("║      YOU COMPLETED YOUR HOUSE!         ║");
+                                                    Console.WriteLine("║                                        ║");
+                                                    Console.WriteLine("╚════════════════════════════════════════╝\n");
+                                                    Console.ResetColor();
+                                                    
+                                                    Console.WriteLine("Finished on Day {0} out of 20!\n", day);
+                                                    
+                                                    StatisticsUI.DisplayEndStats(stats, day);
+                                                    Console.WriteLine();
+                                                    
+                                                    Console.ForegroundColor = ConsoleColor.Cyan;
+                                                    Console.WriteLine("--- Your Completed House ---");
+                                                    Console.ResetColor();
+                                                    Presentation.UI.HouseUI.DisplayHouse(house);
+                                                    Console.WriteLine();
+                                                    
+                                                    Console.ForegroundColor = ConsoleColor.Yellow;
+                                                    Console.WriteLine("╔════════════════════════════════════════╗");
+                                                    Console.WriteLine("║                                        ║");
+                                                    Console.WriteLine("║         SEMESTER 1 PROJECT             ║");
+                                                    Console.WriteLine("║            GROUP NUMBER 4              ║");
+                                                    Console.WriteLine("║                                        ║");
+                                                    Console.WriteLine("╠════════════════════════════════════════╣");
+                                                    Console.WriteLine("║                                        ║");
+                                                    Console.WriteLine("║            DEVELOPED BY:               ║");
+                                                    Console.WriteLine("║                                        ║");
+                                                    Console.WriteLine("║              • Filip                   ║");
+                                                    Console.WriteLine("║              • Lautaro                 ║");
+                                                    Console.WriteLine("║              • David                   ║");
+                                                    Console.WriteLine("║              • Adam                    ║");
+                                                    Console.WriteLine("║              • Alex                    ║");
+                                                    Console.WriteLine("║              • Marius                  ║");
+                                                    Console.WriteLine("║                                        ║");
+                                                    Console.WriteLine("╚════════════════════════════════════════╝");
+                                                    Console.ResetColor();
+                                                    Console.WriteLine();
+                                                    
+                                                    day = 10000;
+                                                    continuePlaying = false;
+                                                    break;
                                                 }
                                             }
-                                            else if (phase == 9)//phase for walls
-                                            {
-                                                house.wallsHP = quality;
-                                                if (materialName == "Wood")
-                                                {
-                                                    house.walls = 1;
-                                                }
-                                                else if (materialName == "Concrete")
-                                                {
-                                                    house.walls = 2;
-                                                }
-                                                else if (materialName == "Brick")
-                                                {
-                                                    house.walls = 3;
-                                                }
-                                                else if (materialName == "WoodShingles")
-                                                {
-                                                    house.walls = 4;
-                                                }
-                                                else//other
-                                                {
-                                                    house.walls = 5;
-                                                }
-                                            }
-                                            else if (phase == 13)//phase for roof
-                                            {
-                                                house.roofHP = quality;
-                                                if (materialName == "Wood")
-                                                {
-                                                    house.roof = 1;
-                                                }
-                                                else if (materialName == "Concrete")
-                                                {
-                                                    house.roof = 2;
-                                                }
-                                                else if (materialName == "Tyle")
-                                                {
-                                                    house.roof = 3;
-                                                }
-                                                else//other
-                                                {
-                                                    house.roof = 4;
-                                                }
-                                            }
-                                            Console.WriteLine("Quest completed!");
-                                            consBuildingAccept.QuestItemRemover(questId, player);
-                                            consBuildingAccept.MoneyDeduction(questId, bank);
-                                            stats.RecordQuestCompletion(quest);
-                                            house.RecordMaterials(quest);
-                                            phase++;
                                         }
                                         else
                                         {
-                                            Console.WriteLine("Could not complete quest.");
-
+                                            Console.ForegroundColor = ConsoleColor.Red;
+                                            Console.WriteLine("Could not complete quest.\n");
+                                            Console.ResetColor();
                                         }
                                     }
                                 }
                                 else
                                 {
+                                    Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine("You need to wait for the construction team to finish. Maybe come back tomorrow to start a new quest.");
+                                    Console.ResetColor();
                                 }
                             } else
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("You can only accept quests in a construction building.");
+                                Console.ResetColor();
                             }
                             break;
 
                         case "back":
                             if (previousRoom == null)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("You can't go back from here!");
+                                Console.ResetColor();
+                            }
                             else
                                 currentRoom = previousRoom;
                             break;
@@ -259,7 +343,9 @@
                             continuePlaying = false;
                             break;
                         case "sleep":
-                            Console.WriteLine("You went home to sleep.");
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.WriteLine("You went home to sleep.\n");
+                            Console.ResetColor();
                             continuePlaying = false;
                             currentRoom = house;
                             break;
@@ -277,7 +363,9 @@
                             {
                                 if (command.SecondWord == null)
                                 {
+                                    Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine("Travel where?");
+                                    Console.ResetColor();
                                     break;
                                 }
                                 Room? targetTravel = FindRoomByName(command.SecondWord, command.ThirdWord, command.FourthWord);
@@ -290,16 +378,24 @@
                                     Travel(targetTravel);
                                 }
                                 else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine("Unknown room");
+                                    Console.ResetColor();
+                                }
                                 break;
                             }
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("You can't travel yet. You need to buy a car first.");
+                            Console.ResetColor();
                             break;
 
                         case "gointo"://now you can enter a neighbouring room by typing in it's name without knowing the direction
                             if (command.SecondWord == null)
                                 {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("You need to specify where to go");
+                                Console.ResetColor();
                                 }
                             else if (command.SecondWord != null)
                             {
@@ -310,7 +406,9 @@
                                 }
                                 else
                                 {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("I can't see that room anywhere!");
+                                Console.ResetColor();
                                 }
                             }
                             break;
@@ -318,29 +416,40 @@
                         case "loan"://loan money
                             if (currentRoom != bank)
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("I can only do this in a bank.");
+                                Console.ResetColor();
                                 break;
                             }
                             if (command.SecondWord == null)
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("How much would you like to loan?");
+                                Console.ResetColor();
                                 break;
                             }
                             if (!bank.TakeLoan(Convert.ToDouble(command.SecondWord)))
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Loan request denied.");
+                                Console.ResetColor();
                             }
                             break;
                         case "account"://display account info
                             if (currentRoom != bank)
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("I can only do this in a bank.");
+                                Console.ResetColor();
                                 break;
                             }
-                            Console.WriteLine("Account information:");
-                            Console.WriteLine("Account balance: " + bank.GetBalance() + bank.currency);
-                            Console.WriteLine("Total debt: " + bank.GetTotalDebt() + bank.currency);
-                            Console.WriteLine("Monthly repayment: " + bank.GetMonthlyRepayment() + bank.currency);
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine("\n--- Account Information ---");
+                            Console.ResetColor();
+                            Console.WriteLine("Balance: " + bank.GetBalance() + bank.currency);
+                            Console.WriteLine("Total Debt: " + bank.GetTotalDebt() + bank.currency);
+                            Console.WriteLine("Monthly Repayment: " + bank.GetMonthlyRepayment() + bank.currency);
+                            Console.WriteLine();
                             break;
                         case "inventory": // Show player inventory
                             PlayerUI.DisplayInventory(player);
@@ -349,7 +458,9 @@
                         case "buy"://buy stuff
                             if (command.SecondWord == null)
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Buy what?");
+                                Console.ResetColor();
                                 break;
                             }
                             if (currentRoom is Shop buyShop)
@@ -360,42 +471,100 @@
                                     Room? otherShop = FindRoomByName("Bob's", "Materials", null);
                                     if (buyShop.ShortDescription == "Bob's Materials" && player.BuyMaterial(contentsToBuy, bank))
                                     {
-                                        Console.WriteLine($"Bought {contentsToBuy.Name} for {contentsToBuy.Price}.");
-                                        if(contentsToBuy.Name== "Repair_Kit")
-                                        {
-                                            House.foundationHP += 0.2;
-                                            House.wallsHP += 0.2;
-                                            House.roofHP += 0.2;
-                                        }
+                                        Console.ForegroundColor = ConsoleColor.Green;
+                                        Console.WriteLine($"Bought {contentsToBuy.Name} for ${contentsToBuy.Price}.\n");
+                                        Console.ResetColor();
                                     }
                                     else if(otherShop is Shop materialShop && buyShop.ShortDescription == "Magic Tool Shop")
                                     {
                                         if (contentsToBuy is Item tool && player.BuyItem(tool, bank, materialShop))
                                         {
-                                            Console.WriteLine($"Bought {contentsToBuy.Name} for {contentsToBuy.Price}$.");
+                                            Console.ForegroundColor = ConsoleColor.Green;
+                                            Console.WriteLine($"Bought {contentsToBuy.Name} for ${contentsToBuy.Price}.\n");
+                                            Console.ResetColor();
                                         }
                                     }
                                     else
                                     {
+                                        Console.ForegroundColor = ConsoleColor.Red;
                                         Console.WriteLine("Not enough money.");
+                                        Console.ResetColor();
                                     }
                                 }
                                 else
                                 {
+                                    Console.ForegroundColor = ConsoleColor.Red;
                                     Console.WriteLine("Item not found.");
+                                    Console.ResetColor();
                                 }
                             }
                             else 
                             {
+                                Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("You can't buy that here.");
+                                Console.ResetColor();
                             }
                             break;
                         case "work":
                             continuePlaying = false;
-                            double amount = 200;
-                            Console.WriteLine("Today you went to work and earned {0}{1}.",amount,bank.currency);
+                            double amount = 800;
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("You earned {0}{1} from work today.\n",amount,bank.currency);
+                            Console.ResetColor();
                             bank.AddMoney(amount);
                             Thread.Sleep(3000);
+                            break;
+                        case "repair":
+                            if (currentRoom is ConstructionBuilding)
+                            {
+                                double repairCost = 0;
+                                int repairsNeeded = 0;
+                                
+                                if (house.foundation > 0 && house.foundationHP < 100)
+                                {
+                                    double foundationRepair = (100 - house.foundationHP) * 2;
+                                    repairCost += foundationRepair;
+                                    repairsNeeded++;
+                                }
+                                if (house.walls > 0 && house.wallsHP < 100)
+                                {
+                                    double wallsRepair = (100 - house.wallsHP) * 2;
+                                    repairCost += wallsRepair;
+                                    repairsNeeded++;
+                                }
+                                if (house.roof > 0 && house.roofHP < 100)
+                                {
+                                    double roofRepair = (100 - house.roofHP) * 2;
+                                    repairCost += roofRepair;
+                                    repairsNeeded++;
+                                }
+                                
+                                if (repairsNeeded == 0)
+                                {
+                                    Console.WriteLine("Your house is in perfect condition!");
+                                }
+                                else if (bank.takeMoney(repairCost))
+                                {
+                                    if (house.foundation > 0 && house.foundationHP < 100) house.foundationHP = 100;
+                                    if (house.walls > 0 && house.wallsHP < 100) house.wallsHP = 100;
+                                    if (house.roof > 0 && house.roofHP < 100) house.roofHP = 100;
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine("House fully repaired for ${0:F2}!\n", repairCost);
+                                    Console.ResetColor();
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Not enough money. Repair cost: ${0:F2}", repairCost);
+                                    Console.ResetColor();
+                                }
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("You can only repair at a construction building.");
+                                Console.ResetColor();
+                            }
                             break;
                         default:
                             Console.WriteLine("I don't know what command.");
@@ -403,12 +572,19 @@
                     }
                     
                 }
+                if (!continuePlaying)
+                    break;
+
                 day++;
-                    Console.Clear();
+                Console.Clear();
             }
             
 
-            Console.WriteLine("Thank you for playing Bob the Builder!");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("\n================================");
+            Console.WriteLine("  Thank you for playing!");
+            Console.WriteLine("================================\n");
+            Console.ResetColor();
         }
 
         private void Move(string direction)
@@ -422,7 +598,9 @@
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"You can't go {direction}!");
+                Console.ResetColor();
             }
         }
         private string IsNeighbour(string room)
@@ -445,7 +623,9 @@
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Targeted location not yet discovered.");
+                Console.ResetColor();
             }
         }
         
@@ -524,14 +704,6 @@
             {
                 Console.WriteLine($"Shop '{shopShortDescription}' not found to add material '{material.Name}'.");
             }
-        }
-
-        private void ShowHouse()
-        {
-            Presentation.UI.HouseUI houseUI = new Presentation.UI.HouseUI();
-            Console.Write(houseUI.SetRoof(house.roof));
-            Console.Write(houseUI.SetWalls(house.walls));
-            Console.Write(houseUI.SetFoundation(house.foundation));
         }
         
 

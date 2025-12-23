@@ -9,9 +9,7 @@ public class HouseUITests
     [Test]
     public void SetFoundation_ShouldReturnAsciiForConcrete()
     {
-        HouseUI ui = new HouseUI();
-
-        string ascii = ui.SetFoundation(2);
+        string ascii = HouseUI.SetFoundation(2);
 
         Assert.That(ascii, Does.Contain("████"));
     }
@@ -19,9 +17,7 @@ public class HouseUITests
     [Test]
     public void SetWalls_ShouldReturnAsciiForWood()
     {
-        HouseUI ui = new HouseUI();
-
-        string ascii = ui.SetWalls(1);
+        string ascii = HouseUI.SetWalls(1);
 
         Assert.That(ascii, Does.Contain("╔═╦═╗"));
     }
@@ -29,9 +25,7 @@ public class HouseUITests
     [Test]
     public void SetRoof_ShouldReturnAsciiForTyle()
     {
-        HouseUI ui = new HouseUI();
-
-        string ascii = ui.SetRoof(3);
+        string ascii = HouseUI.SetRoof(3);
 
         Assert.That(ascii, Does.Contain("nununun"));
     }
@@ -44,7 +38,7 @@ public class GameUITests
     {
         var output = ConsoleTestHelper.CaptureOutput(GameUI.PrintWelcome);
 
-        Assert.That(output, Does.Contain("Welcome to Bob the Builder"));
+        Assert.That(output, Does.Contain("WELCOME TO BOB THE BUILDER"));
     }
 
     [Test]
@@ -90,7 +84,7 @@ public class GeneralUiOutputTests
 
         var output = ConsoleTestHelper.CaptureOutput(() => PlayerUI.DisplayInventory(player));
 
-        Assert.That(output, Does.Contain("Inventory for Bob"));
+        Assert.That(output, Does.Contain("Your Inventory"));
     }
 
     [Test]
@@ -121,6 +115,6 @@ public class GeneralUiOutputTests
 
         var output = ConsoleTestHelper.CaptureOutput(() => ConstructionUI.DisplayQuests(quests));
 
-        Assert.That(output, Does.Contain("Requirements"));
+        Assert.That(output, Does.Contain("Materials"));
     }
 }

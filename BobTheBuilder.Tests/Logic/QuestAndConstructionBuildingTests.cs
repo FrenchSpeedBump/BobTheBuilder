@@ -106,7 +106,7 @@ public class ConstructionBuildingTests
         building.AcceptQuest(0, 1, player);
         building.MoneyDeduction(0, bank);
 
-        Assert.That(bank.accountBalance, Is.EqualTo(49750));
+        Assert.That(bank.GetBalance(), Is.EqualTo(2750));
     }
 
     [Test]
