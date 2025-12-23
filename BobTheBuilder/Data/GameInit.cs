@@ -81,22 +81,21 @@
 
             //Material new(string name, string description, double sustainability, double quality, double price)
             // Keep original simple materials and add all materials referenced by quests so names match exactly.
-            Material wood = new("Wood", "A sturdy piece of wood.", 0.8, 0.8, 20);
-            Material bricks = new("Bricks", "A stack of red bricks.", 0.7, 0.7, 15);
-            Material concrete = new("Concrete", "A heavy block of concrete.", 0.6, 0.6, 10);
-            Material glass = new("Glass", "A transparent sheet of glass.", 0.5, 0.5, 5);
+            Material wood = new("Wood", "A sturdy piece of wood.", 0.9, 0.55, 10);
+            Material bricks = new("Bricks", "A stack of red bricks.", 0.7, 0.75, 15);
+            Material concrete = new("Concrete", "A heavy block of concrete.", 0.45, 0.9, 18);
+            Material glass = new("Glass", "A transparent sheet of glass.", 0.8, 0.4, 7);
 
             // Materials used in QuestInit (one-word names must match)
-            Material gravel = new("Gravel", "General gravel for site work.", 0.5, 0.5, 8);
-            Material insulation = new("Insulation", "Insulation material.", 0.6, 0.6, 25);
-            Material pine = new("Pine", "Pine timber and boards.", 0.5, 0.5, 18);
-            Material brick = new("Bricks", "Single standard brick.", 0.5, 0.5, 2);
-            Material shingle = new("Shingle", "Roofing shingle material.", 0.5, 0.5, 12);
-            Material metal = new("Metal", "Metal parts and framing.", 0.6, 0.7, 60);
-            Material recycled = new("Recycled", "Recycled aggregate/materials.", 0.9, 0.9, 60);
-            Material bamboo = new("Bamboo", "Sustainably sourced bamboo.", 0.9, 0.9, 120);
-            Material ecoblock = new("EcoBlock", "Eco-friendly building block.", 0.95, 0.95, 140);
-            Material solar = new("Solar", "Solar tiles and panels.", 0.95, 0.95, 400);
+            Material gravel = new("Gravel", "General gravel for site work.", 0.65, 0.65, 8);
+            Material insulation = new("Insulation", "Insulation material.", 0.55, 0.75, 20);
+            Material pine = new("Pine", "Pine timber and boards.", 0.8, 0.55, 15);
+            Material shingle = new("Shingle", "Roofing shingle material.", 0.6, 0.6, 12);
+            Material metal = new("Metal", "Metal parts and framing.", 0.5, 0.85, 60);
+            Material recycled = new("Recycled", "Recycled aggregate/materials.", 0.95, 0.85, 70);
+            Material bamboo = new("Bamboo", "Sustainably sourced bamboo.", 0.9, 0.5, 120);
+            Material ecoblock = new("EcoBlock", "Eco-friendly building block.", 0.95, 0.9, 90);
+            Material solar = new("Solar", "Solar tiles and panels.", 1, 0.7, 130);
 
             // Add original materials (keep backward compatibility)
             list.Add(("Bob's Materials", wood));
@@ -108,7 +107,6 @@
             list.Add(("Bob's Materials", gravel));
             list.Add(("Bob's Materials", insulation));
             list.Add(("Bob's Materials", pine));
-            list.Add(("Bob's Materials", brick));
             list.Add(("Bob's Materials", shingle));
             list.Add(("Bob's Materials", metal));
             list.Add(("Bob's Materials", recycled));

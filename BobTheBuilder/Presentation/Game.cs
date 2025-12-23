@@ -506,13 +506,22 @@
                             }
                             break;
                         case "work":
-                            continuePlaying = false;
-                            double amount = 800;
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("You earned {0}{1} from work today.\n",amount,bank.currency);
-                            Console.ResetColor();
-                            bank.AddMoney(amount);
-                            Thread.Sleep(3000);
+                            if (built_today)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("You already completed a quest today. No time to work!");
+                                Console.ResetColor();
+                            }
+                            else
+                            {
+                                continuePlaying = false;
+                                double amount = 650;
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine("You earned {0}{1} from work today.\n",amount,bank.currency);
+                                Console.ResetColor();
+                                bank.AddMoney(amount);
+                                Thread.Sleep(3000);
+                            }
                             break;
                         case "repair":
                             if (currentRoom is ConstructionBuilding)

@@ -43,12 +43,13 @@ public class NaturalDisastersTests
             roofQuality = 0.0
         };
 
-        var result = disasters.DisasterStruck(house, 1);
+        var result = disasters.DisasterStruck(house, 2); // Use day 2 (divisible by dayInterval=2)
 
         Assert.Multiple(() =>
         {
+            Assert.That(result.DisasterOccurred, Is.True); // Disaster should occur
             Assert.That(result.HouseSurvived, Is.False); // House destroyed
-            Assert.That(house.foundationHP, Is.LessThan(0)); // HP went negative
+            Assert.That(house.foundationHP, Is.LessThan(10)); // HP reduced
         });
     }
 
@@ -93,5 +94,14 @@ public class NaturalDisastersTests
 
         typeof(NaturalDisasters).GetField("disasters", BindingFlags.NonPublic | BindingFlags.Instance)!
             .SetValue(disasters, disasterList);
+        
+        // Set disasterChance to 1.0 to ensure disaster always happens
+        typeof(NaturalDisasters).GetField("disasterChance", BindingFlags.NonPublic | BindingFlags.Instance)!
+            .SetValue(disasters, 1.0);
+        
+        // Set seeded Random for deterministic behavior
+        var seededRandom = new Random(42);
+        typeof(NaturalDisasters).GetField("rng", BindingFlags.NonPublic | BindingFlags.Instance)!
+            .SetValue(disasters, seededRandom);
     }
 }

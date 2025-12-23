@@ -30,6 +30,7 @@
         List<NaturalDisaster> disasters;
         int dayInterval; //how often should disasters happen
         double disasterChance; //how likely it is to happen
+        private Random rng;
 
         public NaturalDisasters()
         {
@@ -42,6 +43,7 @@
             };
             dayInterval = 2;
             disasterChance = 0.4;
+            rng = new Random();
         }
 
         public DisasterResult DisasterStruck(House house, int day)
@@ -56,7 +58,6 @@
                 RoofDamage = 0
             };
 
-            Random rng = new Random();
             int rand = rng.Next(0, 4);
             NaturalDisaster disaster = disasters[rand];
             if (house.foundation == 0 && house.walls == 0 && house.roof == 0)
