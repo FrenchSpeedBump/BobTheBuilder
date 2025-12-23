@@ -27,7 +27,7 @@ public class StatisticsTests
             Assert.That(stats.GetQuestsCompleted(), Is.EqualTo(1));
             Assert.That(stats.GetAverageSustainability(), Is.EqualTo(0.6));
             Assert.That(stats.GetAverageQuality(), Is.EqualTo(0.7));
-            Assert.That(stats.GetTotalMoneySpent(), Is.EqualTo(130));
+            Assert.That(stats.GetTotalMoneySpent(), Is.EqualTo(100)); // Only quest price, materials tracked separately
         });
     }
 
@@ -41,8 +41,19 @@ public class StatisticsTests
         {
             Assert.That(stats.GetQuestSustainability(quest), Is.EqualTo(0.6));
             Assert.That(stats.GetQuestQuality(quest), Is.EqualTo(0.7));
-            Assert.That(stats.GetQuestTotalPrice(quest), Is.EqualTo(130));
+            Assert.That(stats.GetQuestTotalPrice(quest), Is.EqualTo(100)); // Only quest price, materials tracked separately
         });
+    }
+    
+    [Test]
+    public void RecordItemPurchase_ShouldAddToTotalSpent()
+    {
+        var stats = new Statistics();
+        
+        stats.RecordItemPurchase(50);
+        stats.RecordItemPurchase(30);
+        
+        Assert.That(stats.GetTotalMoneySpent(), Is.EqualTo(80));
     }
 }
 
