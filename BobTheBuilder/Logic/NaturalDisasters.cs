@@ -36,13 +36,13 @@
         {
             disasters = new List<NaturalDisaster>()
             {
-                new NaturalDisaster("flood", 0.5, 0.6, 0),
-                new NaturalDisaster("fire", 0.4, 0.7, 0.6),
-                new NaturalDisaster("tornado", 0.4, 0.6, 0.8),
-                new NaturalDisaster("earthquake", 0.7, 0.5, 0.3)
+                new NaturalDisaster("flood", 0.6, 0.8, 0),
+                new NaturalDisaster("fire", 0.55, 0.75, 0.65),
+                new NaturalDisaster("tornado", 0.4, 0.8, 0.95),
+                new NaturalDisaster("earthquake", 0.75, 0.55, 0.5)
             };
             dayInterval = 2;
-            disasterChance = 0.4;
+            disasterChance = 0.6;
             rng = new Random();
         }
 

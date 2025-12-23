@@ -22,6 +22,11 @@ namespace BobTheBuilder
                 naturalDisasters++;
             }
         }
+
+        public void RecordItemPurchase(double price)
+        {
+            totalMoneySpent += price;
+        }
     
         public double GetAverageSustainability()
         {
@@ -73,12 +78,7 @@ namespace BobTheBuilder
         }
         public double GetQuestTotalPrice(Quest quest)
         {
-            List<double> prices = new List<double>();
-            foreach(Material material in quest.Requirements)
-            {
-                prices.Add(material.Price);
-            }
-            return prices.Sum()+quest.Price;
+            return quest.Price;
         }
     }
 }

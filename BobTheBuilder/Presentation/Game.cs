@@ -117,8 +117,11 @@
                     Console.ResetColor();
                     Console.WriteLine();
                     
-                    day = 10000;
-                    break;
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("Press any key to exit...");
+                    Console.ResetColor();
+                    Console.ReadKey();
+                    return;
                 }
                 if(disasterResult.DisasterOccurred)
                 {
@@ -287,9 +290,11 @@
                                                     Console.ResetColor();
                                                     Console.WriteLine();
                                                     
-                                                    day = 10000;
-                                                    continuePlaying = false;
-                                                    break;
+                                                    Console.ForegroundColor = ConsoleColor.Cyan;
+                                                    Console.WriteLine("Press any key to exit...");
+                                                    Console.ResetColor();
+                                                    Console.ReadKey();
+                                                    return;
                                                 }
                                             }
                                         }
@@ -471,6 +476,7 @@
                                     Room? otherShop = FindRoomByName("Bob's", "Materials", null);
                                     if (buyShop.ShortDescription == "Bob's Materials" && player.BuyMaterial(contentsToBuy, bank))
                                     {
+                                        stats.RecordItemPurchase(contentsToBuy.Price);
                                         Console.ForegroundColor = ConsoleColor.Green;
                                         Console.WriteLine($"Bought {contentsToBuy.Name} for ${contentsToBuy.Price}.\n");
                                         Console.ResetColor();
@@ -479,6 +485,7 @@
                                     {
                                         if (contentsToBuy is Item tool && player.BuyItem(tool, bank, materialShop))
                                         {
+                                            stats.RecordItemPurchase(contentsToBuy.Price);
                                             Console.ForegroundColor = ConsoleColor.Green;
                                             Console.WriteLine($"Bought {contentsToBuy.Name} for ${contentsToBuy.Price}.\n");
                                             Console.ResetColor();
